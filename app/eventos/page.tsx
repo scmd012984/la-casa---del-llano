@@ -223,16 +223,16 @@ export default function EventosPage() {
         </div>
       </section>
 
-      <section className="site-container py-16 sm:py-20 bg-surface-container-lowest border-y border-outline-variant/20">
+      <section className="site-container py-16 sm:py-20 bg-surface-container-lowest site-section-divider-y">
         <CelebrationCombos />
       </section>
 
       <ExperienceGallery />
 
       {/* CTA */}
-      <section className="relative py-24 overflow-hidden wood-pattern">
-        <div className="relative z-10 text-center px-4">
-          <h2 className="font-display text-3xl md:text-5xl mb-6 text-on-surface">
+      <section className="relative py-24 wood-pattern">
+        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
+          <h2 className="font-display text-3xl md:text-5xl mb-6 text-on-surface leading-tight py-1">
             ¿Planeas una rumba privada?
           </h2>
           <p className="text-base text-on-surface-variant mb-10 max-w-xl mx-auto">

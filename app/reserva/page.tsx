@@ -96,7 +96,7 @@ export default async function ReservaPage({ searchParams }: ReservaPageProps) {
       </section>
 
       {/* Combos de celebración */}
-      <section className="py-16 bg-surface-container-lowest border-y border-outline-variant/20">
+      <section className="py-16 bg-surface-container-lowest site-section-divider-y">
         <div className="site-container">
           <CelebrationCombos />
         </div>

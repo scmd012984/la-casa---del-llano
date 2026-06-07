@@ -25,7 +25,7 @@ export default function ThematicNightsCalendar() {
   return (
     <section
       id="noches"
-      className="py-20 md:py-24 bg-surface-container-lowest border-y border-outline-variant/20 scroll-mt-20 wood-pattern section-llano"
+      className="py-20 md:py-24 bg-surface-container-lowest scroll-mt-20 wood-pattern section-llano"
     >
       <div className="site-container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
@@ -80,9 +80,9 @@ export default function ThematicNightsCalendar() {
           })}
         </div>
 
-        <article className="mt-6 rounded-xl card-wood overflow-hidden interactive-card">
+        <article className="mt-6 rounded-xl card-wood interactive-card">
           <div className="grid md:grid-cols-2">
-            <div className="relative h-56 md:h-auto md:min-h-[280px]">
+            <div className="relative h-56 md:h-auto md:min-h-[280px] overflow-hidden rounded-t-xl md:rounded-t-none md:rounded-l-xl">
               <OptimizedImage
                 src={activeNight.image}
                 alt={activeNight.title}
@@ -93,7 +93,7 @@ export default function ThematicNightsCalendar() {
               />
               <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background/80 via-transparent to-transparent" />
             </div>
-            <div className="p-6 md:p-8 flex flex-col justify-center">
+            <div className="card-body-safe flex flex-col justify-center md:!py-8">
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="text-xs text-on-surface-variant font-semibold uppercase tracking-widest">
                   {activeNight.day}

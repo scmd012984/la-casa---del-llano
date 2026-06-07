@@ -75,8 +75,8 @@ export default function Home() {
 
       {/* CTA eventos privados */}
       <section className="site-container py-20 sm:py-24">
-        <div className="relative overflow-hidden rounded-xl card-wood">
-          <div className="relative h-48 md:h-56">
+        <div className="relative rounded-xl card-wood md:min-h-[14rem]">
+          <div className="relative h-48 md:h-56 overflow-hidden rounded-t-[10px] md:rounded-t-xl">
             <OptimizedImage
               src={images.fachada}
               alt="Reservas para eventos privados"
@@ -87,9 +87,9 @@ export default function Home() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
           </div>
-          <div className="relative md:absolute md:inset-0 md:flex md:items-center p-8 md:p-12">
+          <div className="relative md:absolute md:inset-0 md:flex md:items-center card-body-safe md:py-14">
             <div className="max-w-lg">
-              <h2 className="font-display text-3xl text-on-surface mb-3">
+              <h2 className="font-display text-3xl text-on-surface mb-3 leading-snug py-0.5">
                 ¿Planeas un{" "}
                 <span className="title-accent">evento especial</span>?
               </h2>

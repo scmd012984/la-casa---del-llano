@@ -2,57 +2,87 @@
 
 :root {
   /*
-   * Proporción visual ~70 / 30
+   * Proporción visual ~70 / 20 / 10
    * 70% — noche + madera llanera (elegancia rústica, fondo maduro)
-   * 30% — LED (solo botones y CTAs)
+   * 20% — crema / arena (tipografía orgánica, pergamino del llano)
+   * 10% — LED (solo botones y CTAs)
    */
-  --llano-night: #070504;
-  --llano-bg-deep: #0c0908;
-  --llano-bg: #12100e;
-  --llano-surface: #181412;
-  --llano-surface-raised: #211b18;
-  --llano-surface-high: #2a221d;
-  --llano-wood: #362920;
-  --llano-wood-mid: #433328;
-  --llano-wood-light: #524032;
-  --llano-border: rgba(68, 54, 44, 0.58);
-  --llano-text: #e8e0d8;
-  --llano-text-soft: #c4b8ae;
-  --llano-text-muted: #8f8178;
+  /*
+   * Negro carbón / ébano — madera quemada, barra a media luz (no negro puro)
+   */
+  --llano-charcoal: #1a120b;
+  --llano-night: var(--llano-charcoal);
+  --llano-bg-deep: #140e08;
+  --llano-bg: #1f1711;
+  --llano-surface: #271e16;
+  --llano-surface-raised: #302418;
+  --llano-surface-high: #3a2d22;
+  /*
+   * Cuero / roble — barril y madera llanera (cálido, sofisticado)
+   */
+  --llano-leather: #7a4f23;
+  --llano-oak: #966f33;
+  --llano-oak-soft: #ad8650;
+  --llano-wood: var(--llano-leather);
+  --llano-wood-mid: #866032;
+  --llano-wood-light: var(--llano-oak);
+  --llano-border: color-mix(in srgb, var(--llano-leather) 78%, transparent);
+  --llano-border-strong: color-mix(in srgb, var(--llano-oak) 88%, transparent);
+  --llano-divider: color-mix(in srgb, var(--llano-leather) 68%, transparent);
+  --llano-line: 2px;
+  /*
+   * Crema / arena — elegancia orgánica (~20%), lectura sobre fondo oscuro
+   */
+  --llano-sand: #e5d9b6;
+  --llano-cream: #f5ebe0;
+  --llano-text: var(--llano-sand);
+  --llano-text-soft: #d4c8a8;
+  --llano-text-muted: #a89878;
 
-  /* LED — reservado para CTAs (~30% visual) */
-  --led-gold: #ffc94a;
-  --led-gold-hot: #ffe082;
-  --led-gold-deep: #b07810;
-  --led-gold-text: #2a1800;
-  --led-gold-glow: rgba(255, 201, 74, 0.28);
-  --led-gold-glow-strong: rgba(255, 224, 130, 0.38);
+  /* LED ámbar / oro líquido (~10%) — rumba, CTAs, neón decorativo, títulos clave */
+  --led-amber: #ffb703;
+  --led-amber-hot: #ffc933;
+  --led-amber-core: #ff9f1c;
+  --led-amber-deep: #a86800;
+  --led-amber-text: #1a0f00;
+  --led-amber-glow-soft: rgba(255, 183, 3, 0.12);
+  --led-amber-glow: rgba(255, 183, 3, 0.22);
+  --led-amber-glow-strong: rgba(255, 159, 28, 0.4);
+  --led-amber-glow-tube: rgba(255, 183, 3, 0.58);
+  /* Alias legacy */
+  --led-gold: var(--led-amber);
+  --led-gold-hot: var(--led-amber-hot);
+  --led-gold-deep: var(--led-amber-deep);
+  --led-gold-text: var(--led-amber-text);
+  --led-gold-glow: var(--led-amber-glow);
+  --led-gold-glow-strong: var(--led-amber-glow-strong);
+  /* Acento secundario suave — solo badges temáticos puntuales */
   --led-magenta: #ff6eb4;
   --led-magenta-deep: #e84898;
-  --led-magenta-glow: rgba(255, 110, 180, 0.26);
+  --led-magenta-glow: rgba(255, 110, 180, 0.22);
 
-  --background: var(--llano-bg);
+  --background: var(--llano-night);
   --foreground: var(--llano-text);
   --surface: var(--llano-surface);
   --on-surface: var(--llano-text);
   --on-surface-variant: var(--llano-text-muted);
-  --on-background: var(--llano-text);
-  --platinum: #ddd6ce;
-  --platinum-muted: #a89d94;
+  --on-background: var(--llano-cream);
+  --platinum: var(--llano-cream);
+  --platinum-muted: var(--llano-text-soft);
   --primary: #9a7868;
   --primary-container: #3d2a22;
   --secondary: var(--led-gold);
   --secondary-fixed-dim: var(--led-gold-hot);
   --secondary-container: var(--led-gold-deep);
-  --secondary-fixed: #ffecc2;
+  --secondary-fixed: #ffe4a8;
   --on-secondary: var(--led-gold-text);
   --tertiary: var(--led-magenta);
   --tertiary-container: #3a1428;
   --on-tertiary: #fff5fa;
-  --outline-variant: #4a3d36;
+  --outline-variant: #7a5630;
   --surface-container: var(--llano-surface-raised);
   --surface-container-high: var(--llano-surface-high);
-  --surface-container-highest: #322820;
+  --surface-container-highest: #3a2e24;
   --surface-container-low: var(--llano-surface);
   --surface-container-lowest: var(--llano-bg-deep);
   --site-navbar-height: 8.5rem;
@@ -84,15 +114,21 @@
   --color-surface-container-highest: var(--surface-container-highest);
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container-lowest: var(--surface-container-lowest);
-  --color-cream: var(--on-surface);
-  --color-cream-muted: var(--on-surface-variant);
+  --color-cream: var(--llano-cream);
+  --color-cream-muted: var(--llano-text-muted);
+  --color-llano-sand: var(--llano-sand);
+  --color-llano-cream: var(--llano-cream);
   --color-amber: var(--secondary);
   --color-amber-light: var(--secondary-fixed-dim);
   --color-amber-glow: var(--secondary-fixed);
   --color-wood: var(--primary-container);
   --color-wood-dark: var(--surface-container-lowest);
   --color-wood-light: var(--surface-container-high);
-  --color-led-orange: var(--tertiary);
+  --color-llano-leather: var(--llano-leather);
+  --color-llano-oak: var(--llano-oak);
+  --color-led-amber: var(--led-amber);
+  --color-led-amber-hot: var(--led-amber-hot);
+  --color-led-orange: var(--led-amber-core);
   --color-led-gold: var(--secondary-fixed);
   --font-display: var(--font-newsreader);
   --font-body: var(--font-manrope);
@@ -114,7 +150,7 @@ body {
   background-image:
     radial-gradient(
       ellipse 120% 80% at 50% 120%,
-      rgba(0, 0, 0, 0.72),
+      rgba(20, 14, 10, 0.78),
       transparent 58%
     ),
     radial-gradient(
@@ -124,15 +160,15 @@ body {
     ),
     radial-gradient(
       ellipse 55% 40% at 92% 8%,
-      rgba(20, 14, 11, 0.55),
+      rgba(26, 18, 11, 0.55),
       transparent 58%
     ),
     repeating-linear-gradient(
       88deg,
       transparent,
       transparent 4px,
-      rgba(0, 0, 0, 0.022) 4px,
-      rgba(0, 0, 0, 0.022) 5px
+      rgba(26, 18, 11, 0.035) 4px,
+      rgba(26, 18, 11, 0.035) 5px
     ),
     repeating-linear-gradient(
       0deg,
@@ -143,7 +179,7 @@ body {
     ),
     linear-gradient(
       172deg,
-      #1a1512 0%,
+      #221912 0%,
       var(--llano-bg) 38%,
       var(--llano-bg-deep) 72%,
       var(--llano-night) 100%
@@ -197,7 +233,7 @@ html {
   font-weight: 700;
   line-height: 1.12;
   letter-spacing: -0.02em;
-  color: var(--llano-text);
+  color: var(--llano-cream);
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 
@@ -206,25 +242,30 @@ html {
   font-size: clamp(1.625rem, 2.5vw + 0.75rem, 2rem);
   font-weight: 700;
   line-height: 1.2;
-  color: var(--llano-text);
+  color: var(--llano-cream);
+}
+
+h1.type-hero-title,
+h2.type-section-title {
+  color: var(--llano-cream);
 }
 
 .hero-night-veil {
   background:
     radial-gradient(
       ellipse 95% 75% at 50% 100%,
-      rgba(0, 0, 0, 0.78),
+      rgba(20, 14, 10, 0.78),
       transparent 62%
     ),
     linear-gradient(
       to top,
       var(--llano-night) 0%,
-      rgba(7, 5, 4, 0.55) 42%,
+      rgba(26, 18, 11, 0.55) 42%,
       transparent 100%
     ),
     linear-gradient(
       to bottom,
-      rgba(7, 5, 4, 0.62) 0%,
+      rgba(26, 18, 11, 0.62) 0%,
       transparent 38%
     );
   pointer-events: none;
@@ -232,11 +273,46 @@ html {
 
 .section-llano {
   background: color-mix(in srgb, var(--llano-surface) 55%, transparent);
-  border-block: 1px solid color-mix(in srgb, var(--llano-border) 65%, transparent);
+  border-block: var(--llano-line) solid var(--llano-divider);
+}
+
+.site-section-divider-y {
+  border-block: var(--llano-line) solid var(--llano-divider);
+}
+
+.site-section-divider-t {
+  border-top: var(--llano-line) solid var(--llano-divider);
+}
+
+.site-section-divider-y :is(h1, h2, h3, .font-display):first-child,
+.section-llano :is(h1, h2, h3, .type-section-title):first-child {
+  padding-top: 0.12em;
+  line-height: 1.3;
 }
 
 .hero-fullscreen {
   min-height: max(520px, calc(100svh - var(--site-navbar-height) - var(--shell-bottom-offset)));
+}
+
+.hero-fullscreen::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--led-amber) 55%, transparent) 22%,
+    color-mix(in srgb, var(--led-amber-hot) 75%, transparent) 50%,
+    color-mix(in srgb, var(--led-amber) 55%, transparent) 78%,
+    transparent
+  );
+  box-shadow: 0 0 10px var(--led-amber-glow-soft);
+  opacity: 0.42;
 }
 
 @media (min-width: 1024px) {
@@ -263,7 +339,7 @@ html {
     ),
     radial-gradient(
       ellipse 70% 100% at 88% 110%,
-      rgba(0, 0, 0, 0.65),
+      rgba(20, 14, 10, 0.68),
       transparent 52%
     ),
     repeating-linear-gradient(
@@ -275,9 +351,9 @@ html {
     ),
     linear-gradient(
       180deg,
-      #2e2018 0%,
-      #221810 24%,
-      #181210 58%,
+      #3a2a20 0%,
+      #2a2018 24%,
+      #221912 58%,
       var(--llano-night) 100%
     );
   background-blend-mode: soft-light, normal, multiply;
@@ -292,7 +368,7 @@ html {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: #1a0e08;
+  background-color: var(--llano-night);
   background-image:
     radial-gradient(
       ellipse 90% 140% at 12% -20%,
@@ -301,15 +377,15 @@ html {
     ),
     radial-gradient(
       ellipse 70% 100% at 88% 110%,
-      rgba(0, 0, 0, 0.55),
+      rgba(20, 14, 10, 0.58),
       transparent 52%
     ),
     linear-gradient(
       180deg,
       #4a2c18 0%,
       #3a2214 22%,
-      #2a1610 55%,
-      #1a0c08 100%
+      #2a2018 55%,
+      var(--llano-bg-deep) 100%
     );
   background-blend-mode: soft-light, normal, multiply;
   backdrop-filter: blur(10px) saturate(0.85);
@@ -436,16 +512,34 @@ html {
 }
 
 .whatsapp-fab {
-  background: #25d366;
-  color: #ffffff;
+  background: linear-gradient(
+    180deg,
+    var(--led-amber-hot) 0%,
+    var(--led-amber) 45%,
+    var(--led-amber-deep) 100%
+  );
+  color: var(--led-amber-text);
   padding: 0.95rem 1.05rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 240, 200, 0.38),
+    0 4px 16px rgba(0, 0, 0, 0.32),
+    0 0 14px var(--led-amber-glow-soft),
+    0 0 24px var(--led-amber-glow);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+  animation: led-breathe-whatsapp 4s ease-in-out infinite;
 }
 
 .whatsapp-fab:hover {
-  background: #20bd5a;
+  filter: brightness(1.08);
   box-shadow:
-    0 12px 28px rgba(37, 211, 102, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.12) inset;
+    inset 0 1px 0 rgba(255, 240, 200, 0.52),
+    0 8px 24px rgba(0, 0, 0, 0.36),
+    0 0 20px var(--led-amber-glow),
+    0 0 36px var(--led-amber-glow-strong),
+    0 0 56px var(--led-amber-glow-tube);
   transform: translateY(-1px);
 }
 
@@ -506,7 +600,7 @@ html {
 .mobile-bottom-nav-icon {
   font-size: 1.25rem !important;
   line-height: 1 !important;
-  color: #caced6;
+  color: var(--llano-text-soft);
   filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
   transition: color 0.35s ease, filter 0.35s ease;
 }
@@ -533,10 +627,10 @@ html {
 .mobile-bottom-nav-link:hover .mobile-bottom-nav-icon,
 .mobile-bottom-nav-link:focus-visible .mobile-bottom-nav-icon,
 .mobile-bottom-nav-link:active .mobile-bottom-nav-icon {
-  color: #ffffff;
+  color: var(--llano-cream);
   filter:
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.6))
-    drop-shadow(0 0 14px rgba(190, 200, 220, 0.4))
+    drop-shadow(0 0 8px rgba(245, 235, 224, 0.55))
+    drop-shadow(0 0 14px rgba(229, 217, 182, 0.35))
     drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
 }
 
@@ -1274,15 +1368,15 @@ html {
 .nav-brand-wordmark-line .hover-lift-letters__char {
   background-image: linear-gradient(
     110deg,
-    #aeb2bc 0%,
-    #d8dce6 10%,
-    #f4f6fb 22%,
-    #ffffff 36%,
-    #e2e6ee 48%,
-    #ffffff 60%,
-    #eef0f6 74%,
-    #ffffff 88%,
-    #d0d4de 100%
+    #8a7a62 0%,
+    #b5a48a 10%,
+    #d4c8a8 22%,
+    #f5ebe0 36%,
+    #e5d9b6 48%,
+    #f5ebe0 60%,
+    #e8dcc0 74%,
+    #f5ebe0 88%,
+    #b5a48a 100%
   );
   background-size: 280% 100%;
   background-position: 25% center;
@@ -1290,7 +1384,7 @@ html {
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 0.35px rgba(255, 255, 255, 0.35);
+  -webkit-text-stroke: 0.35px rgba(245, 235, 224, 0.35);
   paint-order: stroke fill;
   animation: nav-wordmark-char-shine 3.6s ease-in-out infinite;
 }
@@ -1310,16 +1404,16 @@ html {
   100% {
     filter:
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.92))
-      drop-shadow(0 0 10px rgba(255, 255, 255, 0.42))
-      drop-shadow(0 0 18px rgba(220, 235, 255, 0.28));
+      drop-shadow(0 0 10px rgba(245, 235, 224, 0.38))
+      drop-shadow(0 0 18px rgba(229, 217, 182, 0.24));
   }
 
   50% {
     filter:
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.88))
-      drop-shadow(0 0 18px rgba(255, 255, 255, 0.78))
-      drop-shadow(0 0 32px rgba(255, 255, 255, 0.52))
-      drop-shadow(0 0 44px rgba(190, 210, 255, 0.38));
+      drop-shadow(0 0 18px rgba(245, 235, 224, 0.62))
+      drop-shadow(0 0 32px rgba(229, 217, 182, 0.42))
+      drop-shadow(0 0 44px rgba(212, 200, 168, 0.28));
   }
 }
 
@@ -1343,7 +1437,7 @@ html {
   .nav-brand-wordmark-line .hover-lift-letters {
     filter:
       drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9))
-      drop-shadow(0 0 14px rgba(255, 255, 255, 0.5));
+      drop-shadow(0 0 14px rgba(245, 235, 224, 0.45));
   }
 }
 
@@ -1403,15 +1497,15 @@ html {
 .site-navbar-link .hover-lift-letters__char {
   background-image: linear-gradient(
     110deg,
-    #9ea0a8 0%,
-    #caced6 14%,
-    #eceef4 26%,
-    #ffffff 38%,
-    #d8dce4 50%,
-    #ffffff 62%,
-    #b8bcc6 78%,
-    #e8eaef 92%,
-    #ffffff 100%
+    #8a7a62 0%,
+    #b5a48a 14%,
+    #d4c8a8 26%,
+    #f5ebe0 38%,
+    #e5d9b6 50%,
+    #f5ebe0 62%,
+    #a89878 78%,
+    #e8dcc0 92%,
+    #f5ebe0 100%
   );
   background-size: 220% 100%;
   background-position: 35% center;
@@ -1430,15 +1524,15 @@ html {
   white-space: nowrap;
   background-image: linear-gradient(
     110deg,
-    #9ea0a8 0%,
-    #caced6 14%,
-    #eceef4 26%,
-    #ffffff 38%,
-    #d8dce4 50%,
-    #ffffff 62%,
-    #b8bcc6 78%,
-    #e8eaef 92%,
-    #ffffff 100%
+    #8a7a62 0%,
+    #b5a48a 14%,
+    #d4c8a8 26%,
+    #f5ebe0 38%,
+    #e5d9b6 50%,
+    #f5ebe0 62%,
+    #a89878 78%,
+    #e8dcc0 92%,
+    #f5ebe0 100%
   );
   background-size: 220% 100%;
   background-position: 35% center;
@@ -1474,8 +1568,8 @@ html {
 .mobile-bottom-nav-link:active .mobile-bottom-nav-label {
   animation: nav-platinum-shimmer 1.5s linear infinite;
   filter:
-    drop-shadow(0 0 8px rgba(255, 255, 255, 0.65))
-    drop-shadow(0 0 16px rgba(190, 200, 220, 0.45))
+    drop-shadow(0 0 8px rgba(245, 235, 224, 0.58))
+    drop-shadow(0 0 16px rgba(229, 217, 182, 0.38))
     drop-shadow(0 1px 2px rgba(0, 0, 0, 0.7));
 }
 
@@ -1487,7 +1581,7 @@ html {
   .mobile-bottom-nav-link:active .mobile-bottom-nav-label {
     animation: none;
     filter:
-      drop-shadow(0 0 6px rgba(255, 255, 255, 0.5))
+      drop-shadow(0 0 6px rgba(245, 235, 224, 0.45))
       drop-shadow(0 1px 2px rgba(0, 0, 0, 0.75));
   }
 }
@@ -1506,14 +1600,17 @@ html {
   );
 }
 
-.neon-glow-magenta {
+.neon-glow-magenta,
+.neon-glow-amber {
   text-shadow:
-    0 0 10px rgba(245, 43, 176, 0.7),
-    0 0 20px rgba(245, 43, 176, 0.4);
+    0 0 10px var(--led-amber-glow-strong),
+    0 0 22px color-mix(in srgb, var(--led-amber-core) 45%, transparent);
 }
 
 .neon-glow-stone {
-  text-shadow: 0 0 10px rgba(217, 160, 54, 0.7);
+  text-shadow:
+    0 0 10px var(--led-amber-glow),
+    0 0 18px color-mix(in srgb, var(--led-amber) 35%, transparent);
 }
 
 .brand-platinum {
@@ -1541,10 +1638,10 @@ html {
 
 .interactive-card:hover {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 1px 0 color-mix(in srgb, var(--llano-oak) 20%, transparent),
     0 10px 28px rgba(0, 0, 0, 0.32);
   transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--llano-wood-light) 65%, transparent);
+  border-color: var(--llano-border-strong);
 }
 
 .led-glow {
@@ -1576,7 +1673,7 @@ html {
       transparent 1px,
       transparent 5px
     ),
-    linear-gradient(155deg, #6b4228 0%, #4a2c1a 28%, #2a1610 62%, #1a0c08 100%);
+    linear-gradient(155deg, #6b4228 0%, #4a2c1a 28%, #2a2018 62%, var(--llano-bg-deep) 100%);
   box-shadow:
     inset 0 1px 0 rgba(160, 105, 68, 0.28),
     inset 0 -3px 8px rgba(0, 0, 0, 0.55),
@@ -1709,9 +1806,9 @@ html {
   background:
     linear-gradient(
       158deg,
-      color-mix(in srgb, var(--llano-surface-high) 88%, #000) 0%,
-      var(--llano-surface-raised) 46%,
-      color-mix(in srgb, var(--llano-surface) 92%, #000) 100%
+      color-mix(in srgb, var(--llano-surface-high) 82%, var(--llano-leather)) 0%,
+      color-mix(in srgb, var(--llano-surface-raised) 88%, var(--llano-leather)) 46%,
+      color-mix(in srgb, var(--llano-surface) 90%, var(--llano-leather)) 100%
     ),
     repeating-linear-gradient(
       87deg,
@@ -1727,16 +1824,52 @@ html {
       rgba(255, 255, 255, 0.012) 24px,
       rgba(255, 255, 255, 0.012) 25px
     );
-  border: 1px solid var(--llano-border);
+  border: var(--llano-line) solid var(--llano-border);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.035),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 color-mix(in srgb, var(--llano-oak) 14%, transparent),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.22),
     0 6px 22px rgba(0, 0, 0, 0.28);
+}
+
+/* Espacio interior para que bordes e inset no recorten la tipografía */
+.card-body-safe {
+  position: relative;
+  z-index: 1;
+  padding: clamp(1.75rem, 4vw, 2.5rem) clamp(1.5rem, 3.5vw, 2rem);
+  line-height: 1.55;
+}
+
+.card-body-safe > :is(h1, h2, h3, h4, h5, h6, .font-display):first-child {
+  margin-top: 0;
+  padding-top: 0.12em;
+  line-height: 1.28;
+}
+
+.card-body-safe > :is(h1, h2, h3, h4, h5, h6, .font-display):last-child {
+  padding-bottom: 0.08em;
 }
 
 .title-accent {
   font-style: italic;
-  color: var(--llano-text-soft);
+  color: var(--llano-sand);
+  padding-inline: 0.06em;
+  padding-block: 0.1em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* LED en títulos: fuerte solo en hero, suave en secciones clave */
+.type-hero-title .title-accent {
+  color: var(--led-amber-hot);
+  text-shadow:
+    0 0 10px var(--led-amber-glow),
+    0 0 22px var(--led-amber-glow-strong);
+}
+
+.type-section-title .title-accent,
+.digital-menu-title .title-accent {
+  color: color-mix(in srgb, var(--led-amber-hot) 88%, var(--llano-cream));
+  text-shadow: 0 0 8px var(--led-amber-glow-soft);
 }
 
 .eyebrow-llano {
@@ -1751,7 +1884,7 @@ html {
   display: inline-block;
   padding: 0.3rem 1rem;
   border-radius: 9999px;
-  border: 1px solid var(--llano-border);
+  border: var(--llano-line) solid var(--llano-border);
   background: color-mix(in srgb, var(--llano-surface-raised) 88%, transparent);
   color: var(--llano-text-muted);
   font-size: 0.6875rem;
@@ -1761,8 +1894,8 @@ html {
 }
 
 .stone-outline {
-  border: 1px solid var(--llano-border);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border: var(--llano-line) solid var(--llano-border);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--llano-oak) 18%, transparent);
 }
 
 .link-llano {
@@ -1771,13 +1904,16 @@ html {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--llano-text-muted);
-  border-bottom: 1px solid var(--llano-border);
+  display: inline-block;
+  line-height: 1.45;
+  padding-bottom: 0.22em;
+  border-bottom: var(--llano-line) solid var(--llano-border);
   transition: color 0.2s ease, border-color 0.2s ease;
 }
 
 .link-llano:hover {
-  color: var(--llano-text);
-  border-color: var(--llano-wood-light);
+  color: var(--llano-cream);
+  border-color: var(--llano-oak);
 }
 
 /* Letras que se levantan al pasar el ratón */
@@ -1819,7 +1955,7 @@ html {
   }
 }
 
-/* —— Sistema: LED (solo CTAs) —— */
+/* —— Sistema LED ámbar (~10%): CTAs, neón, títulos clave —— */
 .btn-led {
   display: inline-flex;
   align-items: center;
@@ -1832,62 +1968,70 @@ html {
   cursor: pointer;
   background: linear-gradient(
     180deg,
-    var(--led-gold-hot) 0%,
-    var(--led-gold) 42%,
-    var(--led-gold-deep) 100%
+    var(--led-amber-hot) 0%,
+    var(--led-amber) 42%,
+    var(--led-amber-deep) 100%
   );
-  color: var(--led-gold-text);
+  color: var(--led-amber-text);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.35),
-    0 4px 16px rgba(0, 0, 0, 0.32),
-    0 0 22px var(--led-gold-glow);
+    inset 0 1px 0 rgba(255, 235, 190, 0.38),
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    0 0 10px var(--led-amber-glow-soft);
   transition:
     transform 0.15s ease,
     box-shadow 0.25s ease,
     filter 0.25s ease;
-  animation: led-breathe 3.2s ease-in-out infinite;
+  animation: led-breathe 4s ease-in-out infinite;
 }
 
-.btn-led:hover {
-  filter: brightness(1.07);
+.btn-led:hover,
+.btn-led:focus-visible {
+  filter: brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.45),
-    0 6px 20px rgba(0, 0, 0, 0.36),
-    0 0 32px var(--led-gold-glow-strong);
+    inset 0 1px 0 rgba(255, 240, 205, 0.52),
+    0 6px 20px rgba(0, 0, 0, 0.34),
+    0 0 14px var(--led-amber-glow),
+    0 0 28px var(--led-amber-glow-strong),
+    0 0 48px var(--led-amber-glow-tube);
 }
 
 .btn-led:active {
   transform: scale(0.97);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 190, 0.32),
+    0 2px 10px rgba(0, 0, 0, 0.28),
+    0 0 8px var(--led-amber-glow-soft);
 }
 
 .btn-led--alt {
-  background: color-mix(in srgb, var(--llano-surface-high) 75%, transparent);
-  color: var(--led-magenta);
-  border: 1.5px solid color-mix(in srgb, var(--led-magenta) 55%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 0 20px var(--led-magenta-glow);
-  animation: led-breathe-alt 3.6s ease-in-out infinite;
+  background: color-mix(in srgb, var(--llano-surface-high) 78%, transparent);
+  color: var(--led-amber-hot);
+  border: 1.5px solid color-mix(in srgb, var(--led-amber) 48%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 235, 190, 0.05);
+  animation: none;
 }
 
-.btn-led--alt:hover {
-  background: color-mix(in srgb, var(--led-magenta) 12%, var(--llano-surface-high));
+.btn-led--alt:hover,
+.btn-led--alt:focus-visible {
+  background: color-mix(in srgb, var(--led-amber) 12%, var(--llano-surface-high));
+  color: var(--led-amber-hot);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.06),
-    0 0 28px color-mix(in srgb, var(--led-magenta-glow) 140%, transparent);
+    inset 0 1px 0 rgba(255, 235, 190, 0.1),
+    0 0 14px var(--led-amber-glow-soft),
+    0 0 24px var(--led-amber-glow);
 }
 
 .btn-led--ghost {
   background: color-mix(in srgb, var(--llano-surface-raised) 70%, transparent);
   color: var(--llano-text-muted);
-  border: 1px solid var(--llano-border);
+  border: var(--llano-line) solid var(--llano-border);
   box-shadow: none;
   animation: none;
 }
 
 .btn-led--ghost:hover {
-  color: var(--llano-text);
-  border-color: var(--llano-wood-light);
+  color: var(--llano-cream);
+  border-color: var(--llano-oak);
   filter: none;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -1911,48 +2055,104 @@ html {
   0%,
   100% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 248, 210, 0.35),
-      0 4px 16px rgba(0, 0, 0, 0.32),
-      0 0 20px var(--led-gold-glow);
+      inset 0 1px 0 rgba(255, 235, 190, 0.36),
+      0 4px 14px rgba(0, 0, 0, 0.28),
+      0 0 8px var(--led-amber-glow-soft);
   }
 
   50% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 248, 210, 0.42),
-      0 5px 18px rgba(0, 0, 0, 0.34),
-      0 0 30px var(--led-gold-glow-strong);
+      inset 0 1px 0 rgba(255, 240, 205, 0.44),
+      0 4px 16px rgba(0, 0, 0, 0.3),
+      0 0 14px var(--led-amber-glow),
+      0 0 24px var(--led-amber-glow-strong);
   }
 }
 
-@keyframes led-breathe-alt {
+@keyframes led-breathe-whatsapp {
   0%,
   100% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 0 18px var(--led-magenta-glow);
+      inset 0 1px 0 rgba(255, 240, 200, 0.36),
+      0 4px 16px rgba(0, 0, 0, 0.3),
+      0 0 12px var(--led-amber-glow-soft),
+      0 0 20px var(--led-amber-glow);
   }
 
   50% {
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.07),
-      0 0 26px color-mix(in srgb, var(--led-magenta-glow) 130%, transparent);
+      inset 0 1px 0 rgba(255, 240, 200, 0.44),
+      0 4px 18px rgba(0, 0, 0, 0.32),
+      0 0 16px var(--led-amber-glow),
+      0 0 28px var(--led-amber-glow-strong);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn-led,
-  .btn-led--alt {
+  .btn-led--alt,
+  .whatsapp-fab,
+  .digital-menu-cta,
+  .digital-menu-cta--outline {
     animation: none;
+  }
+
+  .type-hero-title .title-accent,
+  .type-section-title .title-accent,
+  .digital-menu-title .title-accent {
+    text-shadow: none;
+  }
+
+  .hero-fullscreen::after {
+    opacity: 0.28;
+    box-shadow: none;
   }
 }
 
 .amber-border {
-  border: 1px solid color-mix(in srgb, var(--secondary) 28%, transparent);
-  box-shadow: 0 0 20px color-mix(in srgb, var(--secondary) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--led-amber) 28%, transparent);
+  box-shadow: 0 0 12px var(--led-amber-glow-soft);
+}
+
+/* Borde hilo LED en contenedores de carta / menú */
+.led-thread-border {
+  border: 1px solid transparent;
+  background:
+    color-mix(in srgb, var(--llano-surface) 92%, var(--llano-leather)) padding-box,
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--led-amber) 32%, transparent),
+      color-mix(in srgb, var(--llano-oak) 42%, transparent) 48%,
+      color-mix(in srgb, var(--led-amber-core) 28%, transparent)
+    ) border-box;
+  transition:
+    background 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.15s ease;
+}
+
+@media (hover: hover) {
+  .led-thread-border:hover,
+  .led-thread-border:focus-within {
+    background:
+      color-mix(in srgb, var(--llano-surface-high) 88%, var(--llano-leather)) padding-box,
+      linear-gradient(
+        135deg,
+        color-mix(in srgb, var(--led-amber-hot) 78%, transparent),
+        var(--led-amber) 42%,
+        color-mix(in srgb, var(--led-amber-core) 62%, transparent) 68%,
+        color-mix(in srgb, var(--led-amber-hot) 72%, transparent)
+      ) border-box;
+    box-shadow: 0 0 10px var(--led-amber-glow-soft);
+  }
+}
+
+.digital-menu-footer-cta.led-thread-border:hover {
+  box-shadow: 0 0 14px var(--led-amber-glow-soft);
 }
 
 .menu-dots {
-  border-bottom: 2px dotted var(--outline-variant);
+  border-bottom: 3px dotted color-mix(in srgb, var(--llano-oak) 72%, transparent);
   flex-grow: 1;
   margin-bottom: 6px;
   margin-left: 8px;
@@ -1989,7 +2189,7 @@ html {
   font-size: clamp(2rem, 5vw, 3.25rem);
   font-weight: 700;
   line-height: 1.1;
-  color: var(--on-background);
+  color: var(--llano-cream);
   letter-spacing: -0.02em;
   margin-bottom: 0.75rem;
 }
@@ -1997,7 +2197,7 @@ html {
 .digital-menu-lead {
   font-size: 1rem;
   line-height: 1.65;
-  color: var(--on-surface-variant);
+  color: var(--llano-text);
   max-width: 36rem;
   margin-inline: auto;
 }
@@ -2018,39 +2218,42 @@ html {
   font-weight: 700;
   background: linear-gradient(
     180deg,
-    var(--led-gold-hot) 0%,
-    var(--led-gold) 42%,
-    var(--led-gold-deep) 100%
+    var(--led-amber-hot) 0%,
+    var(--led-amber) 42%,
+    var(--led-amber-deep) 100%
   );
-  color: var(--led-gold-text);
+  color: var(--led-amber-text);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.35),
-    0 4px 14px rgba(0, 0, 0, 0.3),
-    0 0 20px var(--led-gold-glow);
+    inset 0 1px 0 rgba(255, 235, 190, 0.38),
+    0 4px 12px rgba(0, 0, 0, 0.28),
+    0 0 10px var(--led-amber-glow-soft);
   transition: transform 0.15s ease, box-shadow 0.25s ease, filter 0.25s ease;
-  animation: led-breathe 3.2s ease-in-out infinite;
 }
 
-.digital-menu-cta:hover {
-  filter: brightness(1.07);
+.digital-menu-cta:hover,
+.digital-menu-cta:focus-visible {
+  filter: brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.42),
-    0 5px 18px rgba(0, 0, 0, 0.34),
-    0 0 28px var(--led-gold-glow-strong);
+    inset 0 1px 0 rgba(255, 240, 205, 0.5),
+    0 5px 16px rgba(0, 0, 0, 0.32),
+    0 0 14px var(--led-amber-glow),
+    0 0 28px var(--led-amber-glow-strong),
+    0 0 44px var(--led-amber-glow-tube);
 }
 
 .digital-menu-cta--outline {
-  background: color-mix(in srgb, var(--llano-surface-high) 75%, transparent);
-  color: var(--led-magenta);
-  border: 1.5px solid color-mix(in srgb, var(--led-magenta) 55%, transparent);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.05),
-    0 0 18px var(--led-magenta-glow);
-  animation: led-breathe-alt 3.6s ease-in-out infinite;
+  background: color-mix(in srgb, var(--llano-surface-high) 78%, transparent);
+  color: var(--led-amber-hot);
+  border: 1.5px solid color-mix(in srgb, var(--led-amber) 48%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 235, 190, 0.05);
 }
 
-.digital-menu-cta--outline:hover {
-  background: color-mix(in srgb, var(--led-magenta) 12%, var(--llano-surface-high));
+.digital-menu-cta--outline:hover,
+.digital-menu-cta--outline:focus-visible {
+  background: color-mix(in srgb, var(--led-amber) 12%, var(--llano-surface-high));
+  box-shadow:
+    0 0 12px var(--led-amber-glow-soft),
+    0 0 22px var(--led-amber-glow);
 }
 
 .digital-menu-toolbar {
@@ -2063,14 +2266,14 @@ html {
   gap: 0.625rem;
   padding: 0.75rem 1rem;
   border-radius: 1rem;
-  background: var(--surface-container);
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 35%, transparent);
+  background: color-mix(in srgb, var(--surface-container) 90%, var(--llano-leather));
+  border: var(--llano-line) solid var(--llano-border);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .digital-menu-search:focus-within {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 55%, transparent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--llano-wood) 18%, transparent);
+  border-color: var(--llano-border-strong);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--llano-oak) 22%, transparent);
 }
 
 .digital-menu-search-icon {
@@ -2114,7 +2317,7 @@ html {
 }
 
 .digital-menu-search-clear:hover {
-  background: color-mix(in srgb, var(--llano-wood) 35%, transparent);
+  background: color-mix(in srgb, var(--llano-leather) 42%, transparent);
   color: var(--on-surface);
 }
 
@@ -2136,7 +2339,7 @@ html {
 
 .digital-menu-empty-icon {
   font-size: 2.5rem !important;
-  color: var(--outline-variant);
+  color: var(--llano-oak-soft);
   margin-bottom: 0.75rem;
 }
 
@@ -2161,7 +2364,7 @@ html {
   display: inline-flex;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
-  border: 1px solid var(--llano-border);
+  border: var(--llano-line) solid var(--llano-border);
   background: color-mix(in srgb, var(--llano-surface-raised) 80%, transparent);
   color: var(--llano-text-muted);
   font-size: 0.8125rem;
@@ -2183,7 +2386,7 @@ html {
   padding: 0.75rem 1rem 0.625rem;
   background: color-mix(in srgb, var(--surface-container-lowest) 92%, transparent);
   backdrop-filter: blur(14px);
-  border-bottom: 1px solid color-mix(in srgb, var(--outline-variant) 35%, transparent);
+  border-bottom: var(--llano-line) solid var(--llano-divider);
 }
 
 @media (min-width: 640px) {
@@ -2222,8 +2425,8 @@ html {
   gap: 0.25rem;
   padding: 0.625rem 0.5rem;
   border-radius: 0.875rem;
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
-  background: var(--surface-container);
+  border: var(--llano-line) solid var(--llano-border);
+  background: color-mix(in srgb, var(--surface-container) 92%, var(--llano-leather));
   color: var(--on-surface-variant);
   font-size: 0.625rem;
   font-weight: 700;
@@ -2247,13 +2450,13 @@ html {
 }
 
 .digital-menu-nav-btn:hover {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 55%, transparent);
+  border-color: var(--llano-border-strong);
   color: var(--on-surface);
 }
 
 .digital-menu-nav-btn--active {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 70%, transparent);
-  background: var(--llano-surface-high);
+  border-color: var(--llano-oak);
+  background: color-mix(in srgb, var(--llano-surface-high) 88%, var(--llano-leather));
   color: var(--on-surface);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
@@ -2278,7 +2481,7 @@ html {
 }
 
 .digital-menu-section + .digital-menu-section {
-  border-top: 1px solid color-mix(in srgb, var(--outline-variant) 25%, transparent);
+  border-top: var(--llano-line) solid var(--llano-divider);
   margin-top: 1.5rem;
   padding-top: 3rem;
 }
@@ -2292,7 +2495,7 @@ html {
 
 .digital-menu-section-icon {
   font-size: 2rem !important;
-  color: var(--llano-text-muted);
+  color: var(--llano-oak-soft);
   flex-shrink: 0;
   margin-top: 0.125rem;
 }
@@ -2301,7 +2504,7 @@ html {
   font-family: var(--font-newsreader), serif;
   font-size: clamp(1.375rem, 3vw, 1.875rem);
   font-weight: 700;
-  color: var(--on-background);
+  color: var(--llano-cream);
   line-height: 1.25;
   margin-bottom: 0.375rem;
 }
@@ -2309,7 +2512,7 @@ html {
 .digital-menu-section-desc {
   font-size: 0.9375rem;
   line-height: 1.55;
-  color: var(--on-surface-variant);
+  color: var(--llano-text-soft);
   max-width: 40rem;
 }
 
@@ -2321,15 +2524,13 @@ html {
   margin-top: 2rem;
   padding: 1.25rem 1.25rem 1rem;
   border-radius: 1rem;
-  background: var(--surface-container);
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
 }
 
 .digital-menu-subtitle {
   font-family: var(--font-newsreader), serif;
   font-size: 1.125rem;
   font-weight: 700;
-  color: var(--secondary-fixed);
+  color: var(--llano-oak-soft);
   margin-bottom: 0.375rem;
 }
 
@@ -2362,20 +2563,18 @@ html {
 }
 
 .digital-menu-card {
-  padding: 1.125rem 1.25rem;
+  padding: 1.375rem 1.375rem 1.25rem;
   border-radius: 1rem;
-  background: var(--surface-container);
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 28%, transparent);
   transition:
     border-color 0.2s ease,
     background 0.2s ease,
-    transform 0.15s ease;
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
 }
 
-.digital-menu-card:hover,
-.digital-menu-card:focus-within {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 45%, transparent);
-  background: var(--llano-surface-high);
+.digital-menu-card.led-thread-border:hover,
+.digital-menu-card.led-thread-border:focus-within {
+  transform: translateY(-1px);
 }
 
 .digital-menu-card-header {
@@ -2390,14 +2589,15 @@ html {
   font-family: var(--font-newsreader), serif;
   font-size: 1.0625rem;
   font-weight: 700;
-  color: var(--on-surface);
-  line-height: 1.3;
+  color: var(--llano-cream);
+  line-height: 1.35;
+  padding-block: 0.06em;
 }
 
 .digital-menu-price {
   font-size: 1rem;
   font-weight: 800;
-  color: var(--llano-text-soft);
+  color: color-mix(in srgb, var(--led-amber-hot) 62%, var(--llano-sand));
   white-space: nowrap;
   flex-shrink: 0;
   font-variant-numeric: tabular-nums;
@@ -2406,7 +2606,7 @@ html {
 .digital-menu-item-desc {
   font-size: 0.875rem;
   line-height: 1.55;
-  color: var(--on-surface-variant);
+  color: var(--llano-text-soft);
   margin-bottom: 0.625rem;
 }
 
@@ -2418,13 +2618,13 @@ html {
   text-transform: uppercase;
   padding: 0.25rem 0.5rem;
   border-radius: 9999px;
-  background: color-mix(in srgb, var(--llano-wood) 35%, transparent);
-  color: var(--llano-text-muted);
-  border: 1px solid color-mix(in srgb, var(--llano-border) 80%, transparent);
+  background: color-mix(in srgb, var(--llano-leather) 38%, transparent);
+  color: var(--llano-oak-soft);
+  border: var(--llano-line) solid color-mix(in srgb, var(--llano-oak) 45%, transparent);
 }
 
 .digital-menu-tag--primary {
-  background: color-mix(in srgb, var(--llano-wood-mid) 40%, transparent);
+  background: color-mix(in srgb, var(--llano-oak) 32%, transparent);
   color: var(--llano-text-soft);
 }
 
@@ -2444,13 +2644,13 @@ html {
   font-family: var(--font-newsreader), serif;
   font-size: 1rem;
   font-weight: 600;
-  color: var(--on-surface);
+  color: var(--llano-cream);
   flex-shrink: 0;
 }
 
 .digital-menu-dots {
   flex: 1;
-  border-bottom: 2px dotted color-mix(in srgb, var(--outline-variant) 70%, transparent);
+  border-bottom: 3px dotted color-mix(in srgb, var(--llano-oak) 72%, transparent);
   min-width: 1rem;
   margin-bottom: 0.25rem;
 }
@@ -2458,7 +2658,7 @@ html {
 .digital-menu-price-row-price {
   font-size: 0.9375rem;
   font-weight: 800;
-  color: var(--secondary);
+  color: color-mix(in srgb, var(--led-amber-hot) 58%, var(--llano-sand));
   font-variant-numeric: tabular-nums;
 }
 
@@ -2483,13 +2683,14 @@ html {
 .digital-menu-tapa {
   border-radius: 1rem;
   overflow: hidden;
-  background: var(--surface-container);
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 28%, transparent);
-  transition: border-color 0.2s ease, transform 0.15s ease;
+  transition:
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
 }
 
-.digital-menu-tapa:hover {
-  border-color: color-mix(in srgb, var(--secondary) 35%, transparent);
+.digital-menu-tapa.led-thread-border:hover {
+  transform: translateY(-1px);
 }
 
 .digital-menu-tapa-image-wrap {
@@ -2527,13 +2728,17 @@ html {
 
 .digital-menu-tapa-body {
   padding: 1rem 1.125rem 1.125rem;
+  background: color-mix(in srgb, var(--llano-surface) 92%, var(--llano-leather));
 }
 
 .digital-menu-footer-cta {
-  padding: 1.5rem 1.25rem;
+  padding: clamp(1.75rem, 4vw, 2.25rem) clamp(1.5rem, 3.5vw, 2rem);
   border-radius: 1rem;
-  background: var(--surface-container);
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 30%, transparent);
+}
+
+.digital-menu-footer-cta :is(h2, h3, .font-display) {
+  line-height: 1.3;
+  padding-block: 0.1em;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2547,7 +2752,7 @@ html {
 
 
 .neon-glow {
-  box-shadow: 0 0 15px -3px color-mix(in srgb, var(--tertiary) 40%, transparent);
+  box-shadow: 0 0 12px -3px var(--led-amber-glow-soft);
 }
 
 .scrollbar-none {
@@ -2627,8 +2832,8 @@ html {
 .celebration-combos-filter {
   padding: 0.4375rem 0.875rem;
   border-radius: 9999px;
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 45%, transparent);
-  background: var(--surface-container);
+  border: var(--llano-line) solid var(--llano-border);
+  background: color-mix(in srgb, var(--surface-container) 92%, var(--llano-leather));
   color: var(--on-surface-variant);
   font-size: 0.6875rem;
   font-weight: 700;
@@ -2648,12 +2853,12 @@ html {
 }
 
 .celebration-combos-filter:hover {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 55%, transparent);
+  border-color: var(--llano-border-strong);
   color: var(--on-surface);
 }
 
 .celebration-combos-filter--active {
-  border-color: color-mix(in srgb, var(--llano-wood-light) 70%, transparent);
+  border-color: var(--llano-oak);
   background: var(--llano-surface-high);
   color: var(--on-surface);
 }
@@ -2681,7 +2886,7 @@ html {
 .celebration-combo-card {
   display: flex;
   flex-direction: column;
-  padding: 1.25rem;
+  padding: 1.5rem;
   border-radius: 1rem;
   background: var(--surface-container-low);
   transition: border-color 0.2s ease, transform 0.15s ease;
@@ -2689,7 +2894,7 @@ html {
 
 @media (min-width: 768px) {
   .celebration-combo-card {
-    padding: 1.5rem;
+    padding: 1.75rem;
   }
 }
 
@@ -2734,7 +2939,8 @@ html {
   font-size: 1.375rem;
   font-weight: 700;
   color: var(--on-surface);
-  line-height: 1.2;
+  line-height: 1.3;
+  padding-block: 0.08em;
   margin-bottom: 0.25rem;
 }
 
@@ -2778,7 +2984,7 @@ html {
 
 .celebration-combo-meta-item .material-symbols-outlined {
   font-size: 1rem !important;
-  color: var(--secondary);
+  color: var(--llano-oak-soft);
 }
 
 .celebration-combo-ideal {
@@ -2854,34 +3060,39 @@ html {
 .celebration-combo-cta--secondary {
   background: linear-gradient(
     180deg,
-    var(--led-gold-hot) 0%,
-    var(--led-gold) 42%,
-    var(--led-gold-deep) 100%
+    var(--led-amber-hot) 0%,
+    var(--led-amber) 42%,
+    var(--led-amber-deep) 100%
   );
-  color: var(--led-gold-text);
+  color: var(--led-amber-text);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.35),
-    0 0 20px var(--led-gold-glow);
-  animation: led-breathe 3.2s ease-in-out infinite;
+    inset 0 1px 0 rgba(255, 235, 190, 0.38),
+    0 0 10px var(--led-amber-glow-soft);
 }
 
-.celebration-combo-cta--secondary:hover {
-  filter: brightness(1.07);
+.celebration-combo-cta--secondary:hover,
+.celebration-combo-cta--secondary:focus-visible {
+  filter: brightness(1.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 248, 210, 0.42),
-    0 0 28px var(--led-gold-glow-strong);
+    inset 0 1px 0 rgba(255, 240, 205, 0.5),
+    0 0 14px var(--led-amber-glow),
+    0 0 28px var(--led-amber-glow-strong),
+    0 0 44px var(--led-amber-glow-tube);
 }
 
 .celebration-combo-cta--tertiary {
-  background: color-mix(in srgb, var(--llano-surface-high) 75%, transparent);
-  color: var(--led-magenta);
-  border: 1.5px solid color-mix(in srgb, var(--led-magenta) 55%, transparent);
-  box-shadow: 0 0 18px var(--led-magenta-glow);
-  animation: led-breathe-alt 3.6s ease-in-out infinite;
+  background: color-mix(in srgb, var(--llano-surface-high) 78%, transparent);
+  color: var(--led-amber-hot);
+  border: 1.5px solid color-mix(in srgb, var(--led-amber) 48%, transparent);
+  box-shadow: none;
 }
 
-.celebration-combo-cta--tertiary:hover {
-  background: color-mix(in srgb, var(--led-magenta) 12%, var(--llano-surface-high));
+.celebration-combo-cta--tertiary:hover,
+.celebration-combo-cta--tertiary:focus-visible {
+  background: color-mix(in srgb, var(--led-amber) 12%, var(--llano-surface-high));
+  box-shadow:
+    0 0 12px var(--led-amber-glow-soft),
+    0 0 22px var(--led-amber-glow);
 }
 
 .celebration-combos-empty {
@@ -3079,9 +3290,9 @@ html {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 1.25rem;
+  padding: 1.375rem 1.25rem 1.25rem;
   border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
+  border: var(--llano-line) solid color-mix(in srgb, var(--outline-variant) 40%, transparent);
   background: var(--surface-container-low);
   box-shadow: 0 8px 24px color-mix(in srgb, #000 12%, transparent);
 }
@@ -3090,6 +3301,15 @@ html {
 .payment-accent--tertiary,
 .payment-accent--primary {
   border-top: 3px solid color-mix(in srgb, var(--llano-wood-light) 75%, transparent);
+  padding-top: 1.5rem;
+}
+
+.payment-method-card-title {
+  font-family: var(--font-newsreader), serif;
+  font-size: 1.125rem;
+  color: var(--on-surface);
+  line-height: 1.35;
+  padding-top: 0.08em;
 }
 
 .payment-method-card-head {
@@ -3101,12 +3321,6 @@ html {
 .payment-method-card-logo {
   width: 3.25rem;
   height: 3.25rem;
-}
-
-.payment-method-card-title {
-  font-family: var(--font-newsreader), serif;
-  font-size: 1.125rem;
-  color: var(--on-surface);
 }
 
 .payment-method-card-tagline {

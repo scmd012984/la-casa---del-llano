@@ -40,7 +40,7 @@ export default function MenuPage() {
           <PaymentMethodsPanel variant="full" />
         </div>
 
-        <section className="digital-menu-footer-cta mt-16 md:mt-20">
+        <section className="digital-menu-footer-cta led-thread-border mt-16 md:mt-20">
           <h2 className="font-display text-xl md:text-2xl text-on-surface mb-2">
             ¿Reservas para un evento con barra y catering?
           </h2>

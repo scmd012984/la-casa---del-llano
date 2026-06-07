@@ -58,7 +58,7 @@ function MenuCard({
   tagVariant?: "tertiary" | "primary";
 }) {
   return (
-    <article className="digital-menu-card group">
+    <article className="digital-menu-card led-thread-border group">
       <div className="digital-menu-card-header">
         <h3 className="digital-menu-item-name">{name}</h3>
         <span className="digital-menu-price">{price}</span>
@@ -393,7 +393,7 @@ export default function DigitalMenu() {
           )}
 
           {filteredBarra.length > 0 && (
-            <div className="digital-menu-subsection digital-menu-subsection--list">
+            <div className="digital-menu-subsection digital-menu-subsection--list led-thread-border">
               <h3 className="digital-menu-subtitle">Clásicos de barra</h3>
               <div className="digital-menu-list">
                 {filteredBarra.map((item) => (
@@ -431,7 +431,7 @@ export default function DigitalMenu() {
 
           <div className="digital-menu-tapas-grid">
             {filteredTapas.map((item) => (
-              <article key={item.name} className="digital-menu-tapa group">
+              <article key={item.name} className="digital-menu-tapa led-thread-border group">
                 <div className="digital-menu-tapa-image-wrap">
                   <OptimizedImage
                     src={item.image}

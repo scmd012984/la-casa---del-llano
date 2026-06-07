@@ -4,7 +4,7 @@ import { navLinks, restaurantInfo, siteArchitecture } from "@/lib/data";
 
 export default function Footer() {
   return (
-    <footer className="site-footer bg-surface-container-lowest py-12 border-t border-outline-variant/30 wood-pattern">
+    <footer className="site-footer bg-surface-container-lowest py-12 site-section-divider-t wood-pattern">
       <div className="site-container grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 md:col-span-1">
           <div className="font-display text-2xl text-on-surface">
@@ -86,7 +86,7 @@ export default function Footer() {
           </a>
         </div>
       </div>
-      <div className="site-container mt-10 pt-8 border-t border-outline-variant/20">
+      <div className="site-container mt-10 pt-8 site-section-divider-t">
         <PaymentMethodsPanel variant="strip" />
       </div>
     </footer>
