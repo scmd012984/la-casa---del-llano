@@ -129,6 +129,7 @@ export const siteArchitecture = {
         { id: "hero", label: "Hero y CTAs rápidos" },
         { id: "event-types", label: "Tipos de reserva" },
         { id: "celebraciones", label: "Combos Platino, Rumbero y más", anchor: "celebraciones" },
+        { id: "metodos-pago", label: "Métodos de pago", anchor: "metodos-pago" },
         { id: "form", label: "Formulario WhatsApp", anchor: "formulario-reserva" },
       ],
     },
@@ -182,10 +183,7 @@ export const heroContent = {
   },
   video: {
     poster: stitchEventosImages.hero,
-    sources: [
-      { src: "/videos/hero.webm", type: "video/webm" },
-      { src: "/videos/hero.mp4", type: "video/mp4" },
-    ],
+    sources: [] as const,
   },
 } as const;
 
@@ -394,7 +392,7 @@ export const operatingSchedule = {
   days: "Martes a domingo",
   closedDay: "Lunes cerrado",
   hours: tascaHours,
-  tuesdayNote: "Los martes la tasca abre sin noche temática",
+  tuesdayNote: "Martes a jueves: ambiente musical rumbero en la tasca",
 } as const;
 
 export const weeklyNights = [
@@ -402,27 +400,44 @@ export const weeklyNights = [
     id: "martes",
     day: "Martes",
     dayShort: "MAR",
-    title: "Sin noche temática",
+    title: "Ambiente Musical Rumbero",
     description:
-      "Tasca abierta con tragos, tapas y buen ambiente. Día ideal para pasar en mesa sin evento programado.",
+      "Arranca la semana con rumba, buena música y tragos en la tasca. Ambiente rumbero para compartir en mesa con tapas y coctelería.",
     time: tascaHours,
-    tag: "Tasca",
-    icon: "storefront",
+    tag: "Rumba",
+    icon: "nightlife",
     accent: "secondary",
-    image: images.terraza,
-    href: "/menu",
-    thematic: false,
-    ctaLabel: "Ver carta digital",
+    image: images.rumba,
+    href: "/reserva?tipo=vip#formulario-reserva",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
+  },
+  {
+    id: "miercoles",
+    day: "Miércoles",
+    dayShort: "MIÉ",
+    title: "Ambiente Musical Rumbero",
+    description:
+      "Mitad de semana con música rumbera, salsa y merengue. Coctelería de autor y el calor de la tasca para desconectar entre semana.",
+    time: tascaHours,
+    tag: "Rumba",
+    icon: "nightlife",
+    accent: "secondary",
+    image: images.rumba,
+    href: "/reserva?tipo=vip#formulario-reserva",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
   },
   {
     id: "jueves",
     day: "Jueves",
     dayShort: "JUE",
-    title: "Noche de Damas",
+    title: "Noche de Dama",
     description:
-      "Noche para ellas con promos en coctelería, rumba y ambiente VIP. Ideal para salir en grupo.",
-    time: "8:00 p. m. – 2:00 a. m.",
-    tag: "Damas",
+      "Ambiente musical rumbero con noche especial para ellas: primera copa gratis (cerveza o coctel), promos en coctelería, rumba y ambiente VIP. Ideal para salir en grupo.",
+    time: tascaHours,
+    tag: "Rumba",
+    tags: ["Rumba", "Noche de Dama"] as const,
     icon: "female",
     accent: "tertiary",
     image: images.rumba,
@@ -434,11 +449,12 @@ export const weeklyNights = [
     id: "viernes",
     day: "Viernes",
     dayShort: "VIE",
-    title: "Noche de Karaoke",
+    title: "Noche de Rumba y Karaoke",
     description:
-      "Escenario profesional, luces LED y noches para cantar. Perfecto para cumpleaños y celebraciones.",
-    time: "8:00 p. m. – 2:00 a. m.",
-    tag: "Karaoke",
+      "Rumba en la pista y escenario profesional para cantar. Luces LED, coctelería y noches perfectas para cumpleaños y celebraciones.",
+    time: tascaHours,
+    tag: "Rumba",
+    tags: ["Rumba", "Karaoke"] as const,
     icon: "mic_external_on",
     accent: "tertiary",
     image: images.karaoke,
@@ -453,7 +469,7 @@ export const weeklyNights = [
     title: "DJ Invitado",
     description:
       "La noche más intensa: DJ especial por temporada, pista llena y tragos de primera.",
-    time: "9:00 p. m. – 3:00 a. m.",
+    time: tascaHours,
     tag: "DJ",
     icon: "headphones",
     accent: "secondary",
@@ -469,7 +485,7 @@ export const weeklyNights = [
     title: "Rumba Criolla",
     description:
       "Cierra el fin de semana con salsa, merengue y karaoke. Coctelería y tapas para compartir.",
-    time: "7:00 p. m. – 1:00 a. m.",
+    time: "4:00 p. m. – 3:00 a. m.",
     tag: "Rumba",
     icon: "nightlife",
     accent: "secondary",
@@ -608,6 +624,31 @@ export const celebrationCombos = [
   },
 ] as const;
 
+export const celebrationExtras = [
+  { id: "decoracion", label: "Decoración temática" },
+  { id: "torta", label: "Torta / pastel de celebración" },
+  { id: "botellas-premium", label: "Servicio de botellas premium" },
+  { id: "catering-ampliado", label: "Catering / tapas ampliado" },
+  { id: "karaoke-extendido", label: "Karaoke extendido" },
+  { id: "dj-invitado", label: "DJ invitado" },
+  { id: "espumante", label: "Espumante / brindis especial" },
+  { id: "fotografia", label: "Espacio para fotos y brindis" },
+] as const;
+
+export type CelebrationExtraId = (typeof celebrationExtras)[number]["id"];
+
+export const quotePackageOptions = [
+  ...celebrationCombos.map((combo) => ({
+    id: combo.id,
+    label: combo.name,
+  })),
+  { id: "personalizado", label: "Paquete a medida / Aún no sé" },
+] as const;
+
+export type QuotePackageId =
+  | CelebrationComboId
+  | "personalizado";
+
 /** @deprecated Usar celebrationCombos */
 export const privateEventPackages = celebrationCombos.map((combo) => ({
   title: combo.name,
@@ -637,10 +678,10 @@ export const restaurantInfo = {
       width: 1024,
       height: 719,
     },
-    src: "/images/logo-navbar.png",
+    src: "/images/eslogan-principal.png",
     alt: "La Casa del Llano 2014",
-    width: 152,
-    height: 152,
+    width: 1024,
+    height: 719,
     wordmarkTop: "LA CASA DEL",
     wordmarkBottom: "LLANO 2014",
     wordmark: "LA CASA DEL LLANO 2014",
@@ -649,6 +690,7 @@ export const restaurantInfo = {
   location: "Casco Colonial, La Guaira, Venezuela",
   address: "Av. Urdaneta, Casco Histórico, La Guaira 1160",
   phone: "+58 212-355-0000",
+  email: "reservas@lacasadelallano.com",
   hours: `Martes a domingo: ${tascaHours}`,
   description:
     "En el Casco Colonial de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos de primera. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",

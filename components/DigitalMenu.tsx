@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   baldesCerveza,
@@ -433,11 +433,12 @@ export default function DigitalMenu() {
             {filteredTapas.map((item) => (
               <article key={item.name} className="digital-menu-tapa group">
                 <div className="digital-menu-tapa-image-wrap">
-                  <Image
+                  <OptimizedImage
                     src={item.image}
                     alt={item.name}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    qualityPreset="thumb"
+                    sizes={IMAGE_SIZES.menuThumb}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {item.badge && (

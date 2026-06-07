@@ -1,13 +1,25 @@
-import { eventReservationTypes, restaurantInfo } from "./data";
+import {
+  celebrationCombos,
+  eventReservationTypes,
+  quotePackageOptions,
+  restaurantInfo,
+} from "./data";
 
-type ReservationPayload = {
-  eventType: string;
+export type QuoteFormPayload = {
   name: string;
   phone: string;
   date: string;
   time: string;
   guests: string;
+  celebrationType: string;
+  packageId: string;
+  extras: string[];
   notes: string;
+};
+
+/** @deprecated Usar QuoteFormPayload */
+type ReservationPayload = QuoteFormPayload & {
+  eventType: string;
   bottleService: boolean;
   foodService: boolean;
 };
@@ -17,34 +29,58 @@ export function buildWhatsAppUrl(message: string) {
   return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
 }
 
-export function buildReservationMessage(data: ReservationPayload) {
-  const typeLabel =
-    eventReservationTypes.find((t) => t.id === data.eventType)?.label ??
-    data.eventType;
+export function buildQuoteMessage(data: QuoteFormPayload) {
+  const packageLabel =
+    quotePackageOptions.find((pkg) => pkg.id === data.packageId)?.label ??
+    data.packageId;
 
-  const services = [
-    data.bottleService ? "✓ Servicio de botellas" : null,
-    data.foodService ? "✓ Catering / comida" : null,
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const comboDetail = celebrationCombos.find((combo) => combo.id === data.packageId);
+
+  const extrasBlock =
+    data.extras.length > 0
+      ? `\n*Extras solicitados:*\n${data.extras.map((extra) => `✓ ${extra}`).join("\n")}`
+      : null;
+
+  const timeLine = data.time ? `*Hora aproximada:* ${data.time}` : null;
 
   return [
-    `*Reserva — ${restaurantInfo.name}*`,
+    `*Cotización — ${restaurantInfo.name}*`,
     "",
-    `*Tipo:* ${typeLabel}`,
+    `*Tipo de celebración:* ${data.celebrationType}`,
+    `*Paquete de preferencia:* ${packageLabel}`,
+    comboDetail ? `_(${comboDetail.tagline})_` : null,
+    `*Fecha del evento:* ${data.date}`,
+    timeLine,
+    `*Personas estimadas:* ${data.guests}`,
+    extrasBlock,
+    `\n*Contacto:*`,
     `*Nombre:* ${data.name}`,
     `*Teléfono:* ${data.phone}`,
-    `*Fecha:* ${data.date}`,
-    `*Hora:* ${data.time}`,
-    `*Personas:* ${data.guests}`,
-    services ? `\n*Servicios adicionales:*\n${services}` : null,
-    data.notes ? `\n*Detalles:*\n${data.notes}` : null,
+    data.notes ? `\n*Notas adicionales:*\n${data.notes}` : null,
     "",
     "Enviado desde la web. ¡Gracias!",
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+/** @deprecated Usar buildQuoteMessage */
+export function buildReservationMessage(data: ReservationPayload) {
+  const typeLabel =
+    eventReservationTypes.find((t) => t.id === data.eventType)?.label ??
+    data.eventType;
+
+  return buildQuoteMessage({
+    name: data.name,
+    phone: data.phone,
+    date: data.date,
+    time: data.time,
+    guests: data.guests,
+    celebrationType: typeLabel,
+    packageId: data.packageId || "personalizado",
+    extras: data.extras,
+    notes: data.notes,
+  });
 }
 
 export function buildQuickReservationMessage(

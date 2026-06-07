@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import DigitalMenu from "@/components/DigitalMenu";
+import PaymentMethodsPanel from "@/components/PaymentMethodsPanel";
 import { conversionCTAs } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -34,6 +35,10 @@ export default function MenuPage() {
         </header>
 
         <DigitalMenu />
+
+        <div className="mt-14 md:mt-16">
+          <PaymentMethodsPanel variant="full" />
+        </div>
 
         <section className="digital-menu-footer-cta mt-16 md:mt-20">
           <h2 className="font-display text-xl md:text-2xl text-on-surface mb-2">

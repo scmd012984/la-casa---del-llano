@@ -42,7 +42,7 @@ export function NeonPulse() {
           Math.random() * 0.1
         ).toString();
       });
-    }, 100);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);

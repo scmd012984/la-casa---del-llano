@@ -1,4 +1,4 @@
-import Image from "next/image";
+import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import { socialProof } from "@/lib/data";
 
 function StarRating({ rating }: { rating: number }) {
@@ -8,7 +8,7 @@ function StarRating({ rating }: { rating: number }) {
         <span
           key={i}
           className={`material-symbols-outlined text-base ${
-            i < rating ? "text-secondary" : "text-on-surface-variant/30"
+            i < rating ? "text-platinum-muted" : "text-on-surface-variant/30"
           }`}
           style={{ fontVariationSettings: "'FILL' 1" }}
         >
@@ -25,9 +25,7 @@ export default function SocialProof() {
   return (
     <section className="site-container py-16 sm:py-20 md:py-24">
       <div className="text-center mb-10">
-        <p className="text-tertiary text-xs uppercase tracking-widest mb-2 font-semibold">
-          En la Casa
-        </p>
+        <p className="eyebrow-llano mb-2">En la Casa</p>
         <h2 className="font-display text-3xl md:text-4xl text-on-surface mb-2">
           {headline}
         </h2>
@@ -41,9 +39,9 @@ export default function SocialProof() {
               href={instagram.profileUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-on-surface hover:text-tertiary transition-colors"
+              className="inline-flex items-center gap-2 text-on-surface hover:text-platinum transition-colors"
             >
-              <span className="material-symbols-outlined text-tertiary">
+              <span className="material-symbols-outlined text-on-surface-variant">
                 photo_camera
               </span>
               <span className="font-semibold">{instagram.handle}</span>
@@ -63,11 +61,12 @@ export default function SocialProof() {
                 rel="noopener noreferrer"
                 className="group relative aspect-square rounded-lg overflow-hidden stone-outline"
               >
-                <Image
+                <OptimizedImage
                   src={photo.src}
                   alt={photo.alt}
                   fill
-                  sizes="(max-width: 1024px) 33vw, 16vw"
+                  qualityPreset="thumb"
+                  sizes={IMAGE_SIZES.gallery}
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-background/0 group-hover:bg-background/30 transition-colors flex items-center justify-center">
@@ -86,7 +85,9 @@ export default function SocialProof() {
 
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <span className="material-symbols-outlined text-secondary">reviews</span>
+            <span className="material-symbols-outlined text-on-surface-variant">
+              reviews
+            </span>
             <h3 className="font-display text-xl text-on-surface">
               Opiniones en Google
             </h3>
@@ -95,7 +96,7 @@ export default function SocialProof() {
             {googleReviews.map((review) => (
               <blockquote
                 key={review.author}
-                className="rounded-xl stone-outline bg-surface-container-low p-5"
+                className="rounded-xl card-wood p-5"
               >
                 <div className="flex items-center justify-between gap-3 mb-2">
                   <div>

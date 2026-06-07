@@ -1,6 +1,6 @@
-import Image from "next/image";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
+import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import CelebrationCombos from "@/components/CelebrationCombos";
 import ExperienceGallery from "@/components/ExperienceGallery";
 import HeroWelcome from "@/components/HeroWelcome";
@@ -11,13 +11,18 @@ import {
   conversionCTAs,
   restaurantInfo,
 } from "@/lib/data";
-import { stitchEventosImages } from "@/lib/stitch-images";
+import { images } from "@/lib/images";
+
+const ScrollRevealCards = dynamic(
+  () =>
+    import("@/components/StitchAnimations").then((mod) => mod.ScrollRevealCards),
+  { loading: () => null },
+);
 
 export default function Home() {
   return (
     <div>
       <ScrollRevealCards />
-      <NeonPulse />
 
       <HeroWelcome />
 
@@ -34,7 +39,7 @@ export default function Home() {
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="type-section-title text-on-surface mb-2">
             Rumba, música y{" "}
-            <span className="text-secondary italic">tragos selectos</span>
+            <span className="title-accent">tragos selectos</span>
           </h2>
           <p className="text-base text-on-surface-variant max-w-xl mx-auto">
             DJs especiales por temporadas, karaoke, coctelería y reservas para
@@ -47,18 +52,18 @@ export default function Home() {
             <Link
               key={pillar.title}
               href={pillar.href}
-              className="group bg-surface-container-low stone-outline rounded-xl p-6 interactive-card hover:bg-surface-container-high transition-all"
+              className="group card-wood rounded-xl p-6 interactive-card hover:bg-surface-container-high transition-all"
             >
-              <span className="material-symbols-outlined text-secondary text-3xl mb-4 block">
+              <span className="material-symbols-outlined text-on-surface-variant text-3xl mb-4 block">
                 {pillar.icon}
               </span>
-              <h3 className="font-display text-xl text-on-surface mb-2 group-hover:text-secondary transition-colors">
+              <h3 className="font-display text-xl text-on-surface mb-2">
                 {pillar.title}
               </h3>
               <p className="text-sm text-on-surface-variant mb-4">
                 {pillar.description}
               </p>
-              <span className="text-xs text-tertiary font-semibold uppercase tracking-wider">
+              <span className="text-xs text-on-surface-variant font-semibold uppercase tracking-wider">
                 {pillar.cta} →
               </span>
             </Link>
@@ -70,13 +75,14 @@ export default function Home() {
 
       {/* CTA eventos privados */}
       <section className="site-container py-20 sm:py-24">
-        <div className="relative overflow-hidden rounded-xl stone-outline bg-surface-container-high">
+        <div className="relative overflow-hidden rounded-xl card-wood">
           <div className="relative h-48 md:h-56">
-            <Image
-              src={stitchEventosImages.hero}
+            <OptimizedImage
+              src={images.fachada}
               alt="Reservas para eventos privados"
               fill
-              sizes="100vw"
+              qualityPreset="content"
+              sizes={IMAGE_SIZES.section}
               className="object-cover opacity-40"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
@@ -85,7 +91,7 @@ export default function Home() {
             <div className="max-w-lg">
               <h2 className="font-display text-3xl text-on-surface mb-3">
                 ¿Planeas un{" "}
-                <span className="text-secondary italic">evento especial</span>?
+                <span className="title-accent">evento especial</span>?
               </h2>
               <p className="text-base text-on-surface-variant mb-6">
                 Cumpleaños, ascensos, despedidas, bodas y celebraciones
@@ -94,19 +100,19 @@ export default function Home() {
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={conversionCTAs.evento.href}
-                  className="bg-secondary text-on-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary-container transition-colors"
+                  className="btn-led btn-led--md"
                 >
                   {conversionCTAs.evento.label}
                 </Link>
                 <Link
                   href={conversionCTAs.vip.href}
-                  className="border border-tertiary text-tertiary px-8 py-3 rounded-full font-semibold hover:bg-tertiary/10 transition-colors"
+                  className="btn-led btn-led--alt btn-led--md"
                 >
                   {conversionCTAs.vip.label}
                 </Link>
                 <Link
                   href="/menu"
-                  className="border border-outline-variant text-on-surface-variant px-8 py-3 rounded-full font-semibold hover:text-secondary hover:border-secondary transition-colors"
+                  className="btn-led btn-led--ghost btn-led--md"
                 >
                   Ver Carta Digital
                 </Link>
@@ -122,7 +128,7 @@ export default function Home() {
         className="site-container scroll-mt-20 py-20 sm:py-24"
       >
         <h2 className="type-section-title text-on-surface mb-4 text-center">
-          En el <span className="text-secondary italic">Casco Colonial</span>
+          En el <span className="title-accent">Casco Colonial</span>
         </h2>
         <p className="text-center text-on-surface-variant mb-10 text-sm">
           {restaurantInfo.hours} · {restaurantInfo.location}
@@ -142,7 +148,7 @@ export default function Home() {
               href="https://maps.google.com/?q=La+Guaira+Venezuela+Casco+Colonial"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mt-3 text-sm text-tertiary hover:text-secondary transition-colors underline"
+              className="link-llano inline-block mt-3"
             >
               Abrir en Google Maps
             </a>

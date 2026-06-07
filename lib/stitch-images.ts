@@ -1,19 +1,17 @@
 import { images } from "./images";
 
+/** Imágenes locales — sin CDN externo (WPO móvil VE) */
 export const stitchEventosImages = {
-  hero:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuC5BLiLEdPxUIuW5lqeNipTmuVjBB3ldzT4E9Do0_1GQ9LbICCARdh_MpdWqZzmMhMYYrPh5wK212sptvOFytVV2O4GGwKwy9Yg_L8uBNIr38kx3fOBvBi0myjaUQzrOfosRDoREzy-B7KfvTJFNoqgIBkBi_5ZLIWdmIsu0roh8yHHIqNEUsZwwsr9XEK9OuJlNYSTseQKvrH4U3EvAyOVT-_b398WhMxdHuyj8BS59lyzGZGcVHCCy_8Uwb_ecEENncivJqbBXwTb",
-  karaoke:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB1gfmGp0T4BzvVm2rUXOG69KxsE9-UHLoMzHsdp2umv52rPTSaOUsQ9eUcdVGaTqczDL8GOo7wo5tFDpJchXWyLvrE-Dwd_Q5jCFxuzsllKJYa9ZMN3o5QOSy4z7btK8XF535DUoIA02JCuTbuI4vNvZTKCvHoF29tsCAgcg_fsmDyPmBt5Vh7MlqdoovEIe0QdZwkM39BKnULfmWOi33h5bRaoXZ-sWVSmoBBYoesyFz17-CmmRWGjKeQazVIpYUSR0cPL0nNyGze",
-  arpa:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBEoLBrZZsWif3ZgQUqsgvO0i_O10jvJnY8ECJviKV3GhBWnY5tyNy8ibo7otiYhLlvpNmGM-UV-42tEG6wghkTCivDTGEJlZtS_QziHLJzMAFrmt2Dg4IRLD0ZrYhv6dp7ZqqRB1lbVtiaS4BPJPyFCD_giFnzYw37JX_nY-jxW5c_lGNEuabPEVtcnEslPL-93h9SP8MoAffGsOPBqlfOtyr7G1H4CIT5xEsy55__sXEvvU4IjNnHkZndkHJwtGb0xQZMoA58j3cg",
+  hero: images.fachada,
+  karaoke: images.karaoke,
+  arpa: images.arpa,
 } as const;
 
 export const stitchImages = {
-  fachada: stitchEventosImages.hero,
-  hero: stitchEventosImages.hero,
-  karaoke: stitchEventosImages.karaoke,
-  arpa: stitchEventosImages.arpa,
+  fachada: images.fachada,
+  hero: images.fachada,
+  karaoke: images.karaoke,
+  arpa: images.arpa,
   gastronomia: images.gastronomia,
   empanadas: images.empanadas,
   tequenos: images.tequenos,

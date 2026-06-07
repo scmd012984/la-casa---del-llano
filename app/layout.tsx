@@ -1,22 +1,29 @@
-import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import type { Metadata, Viewport } from "next";
 import ConversionFab from "@/components/ConversionFab";
 import Footer from "@/components/Footer";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import Navbar from "@/components/Navbar";
 import { restaurantInfo } from "@/lib/data";
+import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
+
+const MATERIAL_SYMBOLS_HREF =
+  "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap";
 
 const newsreader = Newsreader({
   variable: "--font-newsreader",
   subsets: ["latin"],
+  weight: ["400", "700"],
   display: "swap",
+  preload: false,
 });
 
 const manrope = Manrope({
   variable: "--font-manrope",
   subsets: ["latin"],
+  weight: ["400", "600", "700"],
   display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -25,6 +32,12 @@ export const metadata: Metadata = {
     template: `%s | ${restaurantInfo.name}`,
   },
   description: restaurantInfo.shortDescription,
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0c0908",
 };
 
 export default function RootLayout({
@@ -37,7 +50,16 @@ export default function RootLayout({
       lang="es"
       className={`${newsreader.variable} ${manrope.variable} site-page-bg dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col text-foreground selection:bg-tertiary selection:text-on-tertiary site-shell">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="stylesheet" href={MATERIAL_SYMBOLS_HREF} />
+      </head>
+      <body className="min-h-full flex flex-col text-foreground selection:bg-primary-container selection:text-on-surface site-shell">
         <Navbar />
         <main className="flex-1 site-main">{children}</main>
         <Footer />

@@ -1,6 +1,7 @@
 "use client";
 
-import Image from "next/image";
+import HoverLiftLetters from "@/components/HoverLiftLetters";
+import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -10,38 +11,40 @@ import {
 } from "@/lib/data";
 
 const accentClasses = {
-  secondary: "border-secondary bg-secondary/10 text-secondary",
-  tertiary: "border-tertiary bg-tertiary/10 text-tertiary",
+  secondary:
+    "border-outline-variant bg-surface-container-high text-on-surface",
+  tertiary:
+    "border-outline-variant bg-surface-container-high text-on-surface",
 } as const;
 
 export default function ThematicNightsCalendar() {
-  const [activeId, setActiveId] = useState<WeeklyNightId>(weeklyNights[1].id);
+  const [activeId, setActiveId] = useState<WeeklyNightId>("jueves");
   const activeNight =
     weeklyNights.find((n) => n.id === activeId) ?? weeklyNights[0];
 
   return (
     <section
       id="noches"
-      className="py-20 md:py-24 bg-surface-container-lowest border-y border-outline-variant/20 scroll-mt-20"
+      className="py-20 md:py-24 bg-surface-container-lowest border-y border-outline-variant/20 scroll-mt-20 wood-pattern section-llano"
     >
       <div className="site-container">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
-            <p className="text-secondary text-xs uppercase tracking-widest mb-2 font-semibold">
-              Cartelera Semanal
+            <p className="eyebrow-llano mb-2 hover-lift-letters-wrap">
+              <HoverLiftLetters text="Cartelera Semanal" />
             </p>
-            <h2 className="font-display text-3xl text-on-surface">
-              Noches <span className="text-tertiary italic">Temáticas</span>
+            <h2 className="font-display text-3xl text-on-surface hover-lift-letters-wrap">
+              <HoverLiftLetters text="Noches " />
+              <span className="title-accent">
+                <HoverLiftLetters text="Temáticas" />
+              </span>
             </h2>
             <p className="text-sm text-on-surface-variant mt-2">
               {operatingSchedule.days}, {operatingSchedule.hours}.{" "}
               {operatingSchedule.closedDay}. {operatingSchedule.tuesdayNote}.
             </p>
           </div>
-          <Link
-            href="/eventos"
-            className="text-secondary border-b border-secondary pb-1 text-xs font-semibold uppercase tracking-widest hover:text-tertiary hover:border-tertiary transition-colors"
-          >
+          <Link href="/eventos" className="link-llano">
             Ver cartelera completa →
           </Link>
         </div>
@@ -56,14 +59,14 @@ export default function ThematicNightsCalendar() {
                 key={night.id}
                 type="button"
                 onClick={() => setActiveId(night.id)}
-                className={`shrink-0 min-w-[4.5rem] rounded-xl border px-3 py-4 text-center transition-all ${
+                className={`night-day-btn shrink-0 min-w-[4.5rem] rounded-xl border px-3 py-4 text-center transition-all ${
                   isActive
-                    ? `${accent} shadow-[0_0_20px_rgba(217,160,54,0.15)] scale-[1.02]`
-                    : "border-outline-variant/40 bg-surface-container-low text-on-surface-variant hover:border-secondary/50"
+                    ? `${accent} shadow-[0_8px_20px_rgba(0,0,0,0.28)] scale-[1.02]`
+                    : "border-outline-variant/40 bg-surface-container-low text-on-surface-variant hover:border-outline-variant"
                 }`}
               >
                 <span className="block text-[10px] font-bold tracking-widest">
-                  {night.dayShort}
+                  <HoverLiftLetters text={night.dayShort} />
                 </span>
                 <span
                   className={`material-symbols-outlined text-xl mt-1 ${
@@ -77,50 +80,55 @@ export default function ThematicNightsCalendar() {
           })}
         </div>
 
-        <article className="mt-6 rounded-xl stone-outline bg-surface-container overflow-hidden interactive-card">
+        <article className="mt-6 rounded-xl card-wood overflow-hidden interactive-card">
           <div className="grid md:grid-cols-2">
             <div className="relative h-56 md:h-auto md:min-h-[280px]">
-              <Image
+              <OptimizedImage
                 src={activeNight.image}
                 alt={activeNight.title}
                 fill
-                sizes="(max-width: 768px) 100vw, 50vw"
+                qualityPreset="content"
+                sizes={IMAGE_SIZES.card}
                 className="object-cover"
-                priority={activeNight.id === weeklyNights[1].id}
               />
               <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-background/80 via-transparent to-transparent" />
             </div>
             <div className="p-6 md:p-8 flex flex-col justify-center">
               <div className="flex flex-wrap items-center gap-2 mb-3">
-                <span className="text-xs text-tertiary font-semibold uppercase tracking-widest">
+                <span className="text-xs text-on-surface-variant font-semibold uppercase tracking-widest">
                   {activeNight.day}
                 </span>
-                <span
-                  className={`text-xs px-2 py-0.5 rounded-full border ${
-                    accentClasses[
-                      activeNight.accent as keyof typeof accentClasses
-                    ]
-                  }`}
-                >
-                  {activeNight.tag}
-                </span>
+                {"tags" in activeNight && activeNight.tags ? (
+                  activeNight.tags.map((badge) => (
+                    <span
+                      key={badge}
+                      className="badge-llano !py-0.5 !px-2 !text-[10px]"
+                    >
+                      {badge}
+                    </span>
+                  ))
+                ) : (
+                  <span className="badge-llano !py-0.5 !px-2 !text-[10px]">
+                    {activeNight.tag}
+                  </span>
+                )}
               </div>
-              <h3 className="font-display text-2xl md:text-3xl text-on-surface mb-3">
-                {activeNight.title}
+              <h3 className="font-display text-2xl md:text-3xl text-on-surface mb-3 hover-lift-letters-wrap">
+                <HoverLiftLetters text={activeNight.title} />
               </h3>
               <p className="text-sm text-on-surface-variant mb-4 leading-relaxed">
                 {activeNight.description}
               </p>
-              <p className="text-sm text-secondary font-semibold mb-6">
+              <p className="text-sm text-on-surface-variant font-semibold mb-6">
                 {activeNight.time}
               </p>
               <Link
                 href={activeNight.href}
-                className={`inline-flex items-center gap-2 self-start px-6 py-2.5 rounded-full text-sm font-semibold transition-colors ${
+                className={
                   activeNight.thematic
-                    ? "bg-secondary text-on-secondary hover:bg-secondary-container"
-                    : "border border-outline-variant text-on-surface hover:border-secondary hover:text-secondary"
-                }`}
+                    ? "btn-led btn-led--sm self-start"
+                    : "btn-led btn-led--ghost btn-led--sm self-start"
+                }
               >
                 {activeNight.ctaLabel}
                 <span className="material-symbols-outlined text-base">

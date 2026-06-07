@@ -18,10 +18,8 @@ const celebrationFilterMap: Record<string, CelebrationComboId[]> = {
 };
 
 const accentClasses = {
-  secondary:
-    "celebration-combo-card--secondary border-secondary/35 bg-secondary/5",
-  tertiary:
-    "celebration-combo-card--tertiary border-tertiary/35 bg-tertiary/5",
+  secondary: "card-wood celebration-combo-card--secondary",
+  tertiary: "card-wood celebration-combo-card--tertiary",
 } as const;
 
 type CelebrationCombosProps = {
@@ -93,7 +91,7 @@ export default function CelebrationCombos({
         {visibleCombos.map((combo) => (
           <article
             key={combo.id}
-            className={`celebration-combo-card stone-outline ${accentClasses[combo.accent]}`}
+            className={`celebration-combo-card ${accentClasses[combo.accent]}`}
           >
             <div className="celebration-combo-card-top">
               <span className="material-symbols-outlined celebration-combo-icon">
