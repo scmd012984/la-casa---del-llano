@@ -6,7 +6,7 @@ export const conversionCTAs = {
     label: "Reservar Mesa VIP",
     href: "/reserva?tipo=vip#formulario-reserva",
     whatsappType: "vip" as const,
-    description: "Mesa exclusiva con servicio preferencial y botellas premium.",
+    description: "Mesa exclusiva con servicio preferencial y botellas selectas.",
   },
   evento: {
     label: "Reservar Evento Privado",
@@ -24,6 +24,7 @@ export const audiovisualHighlights = [
     subtitle: "Luces LED y energía tropical",
     thumbnail: stitchEventosImages.karaoke,
     type: "reel" as const,
+    typeLabel: "Clip",
   },
   {
     id: "karaoke-vivo",
@@ -31,35 +32,234 @@ export const audiovisualHighlights = [
     subtitle: "Escenario y noches temáticas",
     thumbnail: stitchEventosImages.karaoke,
     type: "video" as const,
+    typeLabel: "Video",
   },
   {
     id: "dj-temporada",
     title: "DJs por Temporada",
-    subtitle: "Sets exclusivos cada fin de semana",
+    subtitle: "Sesiones exclusivas cada fin de semana",
     thumbnail: stitchEventosImages.hero,
     type: "reel" as const,
+    typeLabel: "Clip",
   },
   {
     id: "ambiente-vip",
     title: "Experiencia VIP",
-    subtitle: "Mesa premium y servicio de botellas",
+    subtitle: "Mesa selecta y servicio de botellas",
     thumbnail: stitchEventosImages.hero,
     type: "video" as const,
+    typeLabel: "Video",
   },
 ] as const;
 
-export const navLinks = [
-  { href: "/", label: "Inicio" },
-  { href: "/eventos", label: "Eventos" },
-  { href: "/menu", label: "Tragos y Tapas" },
-  { href: "/reserva", label: "Reservas" },
-] as const;
+export const siteArchitecture = {
+  principle:
+    "4 rutas limpias. Inicio modular. Todo lo demás es componente, ancla o CTA — no página nueva.",
+  model: "modular-landing",
+  maxSections: 4,
+  approach: "mobile-first",
+  globalShell: ["navbar", "mobileBottomNav", "conversionFab", "footer"] as const,
+  sections: [
+    {
+      id: "inicio",
+      href: "/",
+      label: "Inicio",
+      mobileLabel: "Inicio",
+      icon: "home",
+      role: "Landing modular",
+      objective: "Marca, ambiente audiovisual, cartelera y ubicación",
+      stitchScreen: "SCREEN_15",
+      modules: [
+        { id: "hero", label: "Hero con video de bienvenida" },
+        { id: "thematic-nights", label: "Calendario noches temáticas", anchor: "noches" },
+        { id: "social-proof", label: "Instagram y reseñas Google" },
+        { id: "celebraciones", label: "Combos de eventos y celebraciones", anchor: "celebraciones" },
+        { id: "business-pillars", label: "Pilares del negocio" },
+        { id: "experience-gallery", label: "Galería audiovisual" },
+        { id: "private-events-cta", label: "CTA eventos privados" },
+        { id: "location", label: "Mapa y ubicación", anchor: "ubicacion" },
+      ],
+    },
+    {
+      id: "eventos",
+      href: "/eventos",
+      label: "Eventos",
+      mobileLabel: "Rumba",
+      icon: "nightlife",
+      role: "Entretenimiento",
+      objective: "Proyectar la rumba, karaoke y DJs por temporadas",
+      stitchScreen: "SCREEN_17",
+      modules: [
+        { id: "hero", label: "Hero de eventos" },
+        { id: "bento", label: "Karaoke, pista y música en vivo" },
+        { id: "cartelera", label: "Calendario de eventos" },
+        { id: "celebraciones", label: "Combos de celebraciones", anchor: "celebraciones" },
+        { id: "experience-gallery", label: "Galería audiovisual" },
+        { id: "conversion-cta", label: "CTA reservas VIP y eventos" },
+      ],
+    },
+    {
+      id: "menu",
+      href: "/menu",
+      label: "Tragos y Tapas",
+      mobileLabel: "Tragos",
+      icon: "local_bar",
+      role: "Carta digital",
+      objective: "Consulta rápida de tragos, tapas y botellas VIP",
+      stitchScreen: "SCREEN_16",
+      modules: [
+        { id: "hero", label: "Hero y CTAs" },
+        { id: "digital-menu", label: "Carta web interactiva" },
+        { id: "botellas", label: "Botellas y baldes de cerveza", anchor: "botellas" },
+        { id: "cocteleria", label: "Coctelería de autor", anchor: "cocteleria" },
+        { id: "tapas", label: "Tapas para compartir", anchor: "tapas" },
+        { id: "conversion-cta", label: "CTA reservas" },
+      ],
+    },
+    {
+      id: "reserva",
+      href: "/reserva",
+      label: "Reservas",
+      mobileLabel: "Reservas",
+      icon: "event_available",
+      role: "Conversión",
+      objective: "Mesa VIP y eventos privados con confirmación por WhatsApp",
+      stitchScreen: "SCREEN_2",
+      modules: [
+        { id: "hero", label: "Hero y CTAs rápidos" },
+        { id: "event-types", label: "Tipos de reserva" },
+        { id: "celebraciones", label: "Combos Platino, Rumbero y más", anchor: "celebraciones" },
+        { id: "form", label: "Formulario WhatsApp", anchor: "formulario-reserva" },
+      ],
+    },
+  ],
+  anchors: [
+    {
+      id: "ubicacion",
+      label: "Ubicación",
+      href: "/#ubicacion",
+      sectionId: "inicio",
+    },
+  ],
+} as const;
+
+export type SiteSectionId =
+  (typeof siteArchitecture.sections)[number]["id"];
+
+export const navLinks = siteArchitecture.sections.map(({ href, label }) => ({
+  href,
+  label,
+}));
+
+/** Etiquetas cortas solo para la barra superior (desktop/tablet). */
+export const navbarLinks = siteArchitecture.sections.map((section) => ({
+  href: section.href,
+  label: section.id === "menu" ? section.mobileLabel : section.label,
+}));
+
+export const navbarCTAs = {
+  evento: {
+    label: "Evento Privado",
+    href: conversionCTAs.evento.href,
+  },
+  vip: {
+    label: "Reservar VIP",
+    href: conversionCTAs.vip.href,
+  },
+} as const;
+
+export function isNavSectionActive(pathname: string, href: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(`${href}/`);
+}
+
+export const heroContent = {
+  slogan: "Ven y disfruta del sabor llanero",
+  sloganAccent: "platos criollos, rumba y coctelería de la casa",
+  cta: {
+    label: "Reservar tu Mesa / Cumpleaños",
+    href: "/reserva?tipo=cumpleanos#formulario-reserva",
+  },
+  video: {
+    poster: stitchEventosImages.hero,
+    sources: [
+      { src: "/videos/hero.webm", type: "video/webm" },
+      { src: "/videos/hero.mp4", type: "video/mp4" },
+    ],
+  },
+} as const;
+
+export const socialProof = {
+  headline: "¿Te pillamos este fin de semana?",
+  subheadline: "Así se vive la rumba en La Casa del Llano",
+  instagram: {
+    handle: "@lacasadelllano2014",
+    profileUrl: "https://instagram.com/lacasadelllano2014",
+    feedMode: "gallery" as const,
+    photos: [
+      {
+        src: stitchEventosImages.karaoke,
+        alt: "Karaoke en vivo en La Casa del Llano",
+      },
+      {
+        src: stitchEventosImages.hero,
+        alt: "Ambiente rumbero con luces LED",
+      },
+      {
+        src: stitchEventosImages.arpa,
+        alt: "Música en vivo y coctelería",
+      },
+      {
+        src: audiovisualHighlights[0].thumbnail,
+        alt: "Rumba en la pista",
+      },
+      {
+        src: audiovisualHighlights[3].thumbnail,
+        alt: "Experiencia VIP",
+      },
+      {
+        src: stitchEventosImages.karaoke,
+        alt: "Noche de celebración",
+      },
+    ],
+  },
+  googleReviews: [
+    {
+      author: "María G.",
+      rating: 5,
+      text: "Celebramos un cumpleaños increíble. Karaoke, buena música y tragos de primera. Volveremos sin duda.",
+      source: "Google Mi Negocio",
+      date: "Hace 2 semanas",
+    },
+    {
+      author: "Carlos R.",
+      rating: 5,
+      text: "El mejor ambiente nocturno de La Guaira. La zona VIP vale totalmente la pena para un grupo grande.",
+      source: "Google Mi Negocio",
+      date: "Hace 1 mes",
+    },
+    {
+      author: "Andrea P.",
+      rating: 5,
+      text: "La Noche de Damas los jueves es una locura. Buen DJ, coctelería criolla y servicio excelente.",
+      source: "Google Mi Negocio",
+      date: "Hace 3 semanas",
+    },
+    {
+      author: "Luis M.",
+      rating: 5,
+      text: "Reservamos para una despedida y todo salió perfecto: mesa, botellas y karaoke. 10/10.",
+      source: "Google Mi Negocio",
+      date: "Hace 1 mes",
+    },
+  ],
+} as const;
 
 export const targetAudience = {
   title: "Para todas las edades",
   subtitle: "Entretenimiento nocturno en Venezuela",
   description:
-    "Un espacio energético en La Guaira para quienes buscan rumba, buena música y celebrar fechas especiales. Ambiente vibrante, tragos premium y la mejor vibra del Casco Colonial.",
+    "Un espacio energético en La Guaira para quienes buscan rumba, buena música y celebrar fechas especiales. Ambiente vibrante, tragos de primera y la mejor vibra del Casco Colonial.",
   familyPolicy:
     "Menores de edad bienvenidos únicamente con acompañamiento de familiar directo y responsable.",
   celebrations: [
@@ -99,19 +299,19 @@ export const businessPillars = [
   },
   {
     icon: "local_bar",
-    title: "Bebidas Premium",
+    title: "Bebidas Selectas",
     description:
-      "Coctelería criolla, ron venezolano de autor y tragos premium para brindar en un ambiente vibrante.",
+      "Coctelería criolla, ron venezolano de autor y tragos de primera para brindar en un ambiente vibrante.",
     href: "/menu",
-    cta: "Ver tragos premium",
+    cta: "Ver tragos selectos",
   },
   {
     icon: "celebration",
     title: "Tu Celebración",
     description:
-      "Reservas para cumpleaños, ascensos, despedidas, bodas y todo tipo de eventos especiales.",
-    href: "/reserva",
-    cta: "Cotizar evento",
+      "Combos Rumbero, Platino y Corporativo para cumpleaños, bodas, despedidas y eventos especiales.",
+    href: "/#celebraciones",
+    cta: "Ver combos",
   },
 ] as const;
 
@@ -121,28 +321,28 @@ export const eventReservationTypes = [
     label: "Mesa Estándar",
     icon: "table_restaurant",
     description:
-      "Reserva tu mesa para disfrutar de tragos premium, tapas y entretenimiento nocturno.",
+      "Reserva tu mesa para disfrutar de tragos selectos, tapas y entretenimiento nocturno.",
   },
   {
     id: "vip",
     label: "Zona VIP",
     icon: "diamond",
     description:
-      "Mesa exclusiva con servicio preferencial, botellas premium y la mejor vista del escenario.",
+      "Mesa exclusiva con servicio preferencial, botellas selectas y la mejor vista del escenario.",
   },
   {
     id: "cumpleanos",
     label: "Cumpleaños",
     icon: "cake",
     description:
-      "Celebra con decoración, comida, servicio de botellas, karaoke y barra premium.",
+      "Celebra con decoración, comida, servicio de botellas, karaoke y barra selecta.",
   },
   {
     id: "boda",
     label: "Boda / Aniversario",
     icon: "favorite",
     description:
-      "Brinda por el amor con ambiente romántico, coctelería premium y música en vivo o DJ.",
+      "Brinda por el amor con ambiente romántico, coctelería selecta y música en vivo o DJ.",
   },
   {
     id: "despedida",
@@ -156,7 +356,7 @@ export const eventReservationTypes = [
     label: "Ascenso / Logro",
     icon: "workspace_premium",
     description:
-      "Celebra tu ascenso o logro profesional con un evento a tu medida y barra premium.",
+      "Celebra tu ascenso o logro profesional con un evento a tu medida y barra selecta.",
   },
   {
     id: "karaoke",
@@ -188,87 +388,235 @@ export const eventReservationTypes = [
   },
 ] as const;
 
+export const tascaHours = "4:00 p. m. – 5:00 a. m." as const;
+
+export const operatingSchedule = {
+  days: "Martes a domingo",
+  closedDay: "Lunes cerrado",
+  hours: tascaHours,
+  tuesdayNote: "Los martes la tasca abre sin noche temática",
+} as const;
+
 export const weeklyNights = [
   {
+    id: "martes",
+    day: "Martes",
+    dayShort: "MAR",
+    title: "Sin noche temática",
+    description:
+      "Tasca abierta con tragos, tapas y buen ambiente. Día ideal para pasar en mesa sin evento programado.",
+    time: tascaHours,
+    tag: "Tasca",
+    icon: "storefront",
+    accent: "secondary",
+    image: images.terraza,
+    href: "/menu",
+    thematic: false,
+    ctaLabel: "Ver carta digital",
+  },
+  {
+    id: "jueves",
     day: "Jueves",
-    title: "Karaoke Night",
+    dayShort: "JUE",
+    title: "Noche de Damas",
     description:
-      "Noche temática de karaoke con escenario profesional. Ideal para celebrar cumpleaños y fechas especiales.",
-    time: "8:00 PM – 2:00 AM",
-    tag: "Karaoke",
-    image: images.karaoke,
+      "Noche para ellas con promos en coctelería, rumba y ambiente VIP. Ideal para salir en grupo.",
+    time: "8:00 p. m. – 2:00 a. m.",
+    tag: "Damas",
+    icon: "female",
+    accent: "tertiary",
+    image: images.rumba,
+    href: "/reserva?tipo=vip#formulario-reserva",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
   },
   {
+    id: "viernes",
     day: "Viernes",
-    title: "Rumba Tropical + DJ",
+    dayShort: "VIE",
+    title: "Noche de Karaoke",
     description:
-      "DJ en cabina, salsa, merengue y luces LED. Ambiente energético que no se detiene.",
-    time: "9:00 PM – 3:00 AM",
-    tag: "Disco",
-    image: images.rumba,
+      "Escenario profesional, luces LED y noches para cantar. Perfecto para cumpleaños y celebraciones.",
+    time: "8:00 p. m. – 2:00 a. m.",
+    tag: "Karaoke",
+    icon: "mic_external_on",
+    accent: "tertiary",
+    image: images.karaoke,
+    href: "/reserva?tipo=karaoke#formulario-reserva",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
   },
   {
+    id: "sabado",
     day: "Sábado",
-    title: "Noche Premium VIP",
+    dayShort: "SÁB",
+    title: "DJ Invitado",
     description:
-      "La noche más intensa: DJs especiales por temporada, karaoke y tragos premium.",
-    time: "9:00 PM – 3:00 AM",
-    tag: "VIP",
+      "La noche más intensa: DJ especial por temporada, pista llena y tragos de primera.",
+    time: "9:00 p. m. – 3:00 a. m.",
+    tag: "DJ",
+    icon: "headphones",
+    accent: "secondary",
     image: images.rumba,
+    href: "/eventos",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
   },
   {
-    day: "Miércoles",
-    title: "Música en Vivo",
+    id: "domingo",
+    day: "Domingo",
+    dayShort: "DOM",
+    title: "Rumba Criolla",
     description:
-      "Arpa llanera y conjunto en vivo con coctelería criolla. Buen ambiente musical para empezar la semana.",
-    time: "7:00 PM – 12:00 AM",
-    tag: "En Vivo",
-    image: images.arpa,
+      "Cierra el fin de semana con salsa, merengue y karaoke. Coctelería y tapas para compartir.",
+    time: "7:00 p. m. – 1:00 a. m.",
+    tag: "Rumba",
+    icon: "nightlife",
+    accent: "secondary",
+    image: images.rumba,
+    href: "/menu",
+    thematic: true,
+    ctaLabel: "Reservar esta noche",
   },
 ] as const;
 
-export const privateEventPackages = [
+export type WeeklyNightId = (typeof weeklyNights)[number]["id"];
+
+export const celebrationCombosModule = {
+  id: "celebraciones",
+  eyebrow: "El motor del negocio",
+  title: "Eventos Especiales y Celebraciones",
+  description:
+    "Diseñamos la rumba perfecta para tu ocasión: cumpleaños, eventos corporativos, bodas, despedidas y ascensos. Elige un combo y lo personalizamos contigo.",
+  familyPolicy:
+    "Menores de edad bienvenidos únicamente con acompañamiento de familiar directo y responsable.",
+  celebrationTypes: [
+    "Cumpleaños",
+    "Eventos corporativos",
+    "Bodas y aniversarios",
+    "Despedidas",
+    "Ascensos",
+    "Celebraciones familiares",
+  ],
+} as const;
+
+export type CelebrationComboId = "rumbero" | "platino" | "corporativo" | "familiar";
+
+export const celebrationCombos = [
   {
-    title: "Paquete Cumpleaños",
+    id: "rumbero" as const,
+    name: "Combo Rumbero",
+    tier: "Más pedido",
+    tagline: "Rumba, karaoke y picoteo para armar la fiesta",
+    description:
+      "El combo ideal para cumpleaños, despedidas y ascensos. Ambiente vibrante, barra lista y el escenario encendido para que tu gente cante y baile sin parar.",
+    idealFor: ["Cumpleaños", "Despedidas", "Ascensos", "Rumbas con amigos"],
+    guests: "20 – 50 personas",
     includes: [
-      "Mesa decorada",
-      "Torta y catering de tapas",
-      "Servicio de botellas premium (10 pax)",
-      "Karaoke 2 horas",
+      "Espacio reservado con decoración temática",
+      "Karaoke 2 horas en escenario profesional",
+      "Baldes de cerveza o barra estándar",
+      "Catering de tapas (tequeños, empanadas, picoteo)",
+      "DJ set o playlist de la casa",
+      "Servicio de mesa y hielo incluido",
     ],
+    highlight: "Karaoke + barra + tapas",
+    reservationType: "cumpleanos",
+    accent: "tertiary" as const,
+    icon: "celebration",
   },
   {
-    title: "Paquete Boda / Aniversario",
-    includes: [
-      "Decoración romántica",
-      "Coctelería premium",
-      "DJ o música en vivo",
-      "Mesa VIP para los novios",
+    id: "platino" as const,
+    name: "Combo Platino",
+    tier: "Premium VIP",
+    tagline: "La experiencia completa con botellas selectas y servicio exclusivo",
+    description:
+      "Nuestro paquete estrella para quienes quieren brillar: botellas premium, coctelería de autor, decoración VIP y entretenimiento extendido para bodas, aniversarios y cumpleaños especiales.",
+    idealFor: [
+      "Cumpleaños VIP",
+      "Bodas y aniversarios",
+      "Brindis ejecutivos",
+      "Celebraciones premium",
     ],
+    guests: "30 – 80 personas",
+    includes: [
+      "Mesa o zona VIP decorada",
+      "Servicio de botellas selectas (Ron 1796, Diplomático, espumante)",
+      "Coctelería de autor y barra premium",
+      "Karaoke 3 horas + DJ invitado por temporada",
+      "Catering completo de tapas y platos para compartir",
+      "Torta de celebración y personal dedicado",
+    ],
+    highlight: "Botellas VIP + DJ + catering completo",
+    reservationType: "vip",
+    accent: "secondary" as const,
+    icon: "diamond",
   },
   {
-    title: "Paquete Despedida / Ascenso",
-    includes: [
-      "Espacio reservado",
-      "Servicio de botellas por horas",
-      "Karaoke y DJ",
-      "Catering de comida y tapas",
+    id: "corporativo" as const,
+    name: "Combo Corporativo",
+    tier: "Empresas",
+    tagline: "Team building, cierres de año y lanzamientos con estilo",
+    description:
+      "Paquete pensado para empresas: espacio organizado, barra por horas, catering adaptable y opción de karaoke o DJ para premiar al equipo o cerrar un proyecto con rumba.",
+    idealFor: [
+      "Eventos corporativos",
+      "Fin de año empresarial",
+      "Lanzamientos",
+      "Ascensos y logros del equipo",
     ],
+    guests: "25 – 120 personas",
+    includes: [
+      "Espacio semi-privado o reservado para la empresa",
+      "Barra selecta por horas (ron, cerveza, coctelería)",
+      "Catering de tapas o coffee break extendido",
+      "Karaoke o DJ opcional para dinámica de equipo",
+      "Micrófono y escenario para palabras de agradecimiento",
+      "Cotización y facturación corporativa",
+    ],
+    highlight: "Barra por horas + espacio empresarial",
+    reservationType: "ascenso",
+    accent: "secondary" as const,
+    icon: "corporate_fare",
   },
   {
-    title: "Rumba Privada",
-    includes: [
-      "Local exclusivo",
-      "DJ invitado o karaoke",
-      "Barra libre premium",
-      "Personal dedicado",
+    id: "familiar" as const,
+    name: "Combo Familiar",
+    tier: "Íntimo",
+    tagline: "Celebraciones en familia con ambiente acogedor",
+    description:
+      "Para reuniones familiares, aniversarios íntimos o fechas especiales en mesa. Comida compartida, tragos selectos y karaoke opcional en un ambiente cálido del Casco Colonial.",
+    idealFor: [
+      "Celebraciones familiares",
+      "Aniversarios íntimos",
+      "Reuniones multigeneracionales",
+      "Comuniones y fechas especiales",
     ],
+    guests: "10 – 25 personas",
+    includes: [
+      "Mesa grande reservada",
+      "Carta de tapas y coctelería de autor",
+      "Servicio de botellas a la mesa (a la carta)",
+      "Karaoke 1 hora opcional para la familia",
+      "Ambiente con acompañamiento responsable para menores",
+      "Atención personalizada del equipo de sala",
+    ],
+    highlight: "Mesa familiar + tapas + ambiente acogedor",
+    reservationType: "familiar",
+    accent: "tertiary" as const,
+    icon: "family_restroom",
   },
 ] as const;
+
+/** @deprecated Usar celebrationCombos */
+export const privateEventPackages = celebrationCombos.map((combo) => ({
+  title: combo.name,
+  includes: combo.includes,
+}));
 
 export const specialties = [
   "Reserva inmediata por WhatsApp",
-  "Mesas VIP con servicio de botellas premium",
+  "Mesas VIP con servicio de botellas selectas",
   "Eventos privados con comida y catering",
   "Carta digital de tragos y tapas",
   "Ambiente rumbero con DJs y karaoke en vivo",
@@ -276,24 +624,42 @@ export const specialties = [
 
 export const restaurantInfo = {
   name: "La Casa del Llano 2014",
+  logo: {
+    emblem: {
+      src: "/images/logo-emblem-notext.png",
+      alt: "Emblema La Casa del Llano",
+      width: 323,
+      height: 208,
+    },
+    icon: {
+      src: "/images/eslogan-principal.png",
+      alt: "La Casa del Llano 2014",
+      width: 1024,
+      height: 719,
+    },
+    src: "/images/logo-navbar.png",
+    alt: "La Casa del Llano 2014",
+    width: 152,
+    height: 152,
+    wordmarkTop: "LA CASA DEL",
+    wordmarkBottom: "LLANO 2014",
+    wordmark: "LA CASA DEL LLANO 2014",
+  },
   tagline: "Tasca · Disco · Karaoke",
   location: "Casco Colonial, La Guaira, Venezuela",
   address: "Av. Urdaneta, Casco Histórico, La Guaira 1160",
   phone: "+58 212-355-0000",
-  hours: "Mié – Dom: 7:00 PM – 3:00 AM",
+  hours: `Martes a domingo: ${tascaHours}`,
   description:
-    "En el Casco Colonial de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos premium. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",
+    "En el Casco Colonial de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos de primera. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",
   shortDescription:
-    "Reserva mesa VIP y eventos privados en La Guaira. Rumba, karaoke, carta digital de tragos y tapas, y servicio de botellas premium.",
+    "Reserva mesa VIP y eventos privados en La Guaira. Rumba, karaoke, carta digital de tragos y tapas, y servicio de botellas selectas.",
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.8!2d-66.934!3d10.601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a3b8f8f8f8f8f%3A0x0!2sLa%20Guaira%2C%20Venezuela!5e0!3m2!1ses!2sve!4v1700000000000!5m2!1ses!2sve",
 } as const;
 
-export const stitchScreens = {
-  inicio: "SCREEN_15",
-  menu: "SCREEN_16",
-  eventos: "SCREEN_17",
-  reserva: "SCREEN_2",
-} as const;
+export const stitchScreens = Object.fromEntries(
+  siteArchitecture.sections.map((s) => [s.id, s.stitchScreen])
+) as Record<SiteSectionId, string>;
 
 export type { ImageKey };

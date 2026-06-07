@@ -1,107 +1,40 @@
 import Image from "next/image";
 import Link from "next/link";
-import MobileBottomNav from "@/components/MobileBottomNav";
 import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
+import CelebrationCombos from "@/components/CelebrationCombos";
 import ExperienceGallery from "@/components/ExperienceGallery";
+import HeroWelcome from "@/components/HeroWelcome";
+import SocialProof from "@/components/SocialProof";
+import ThematicNightsCalendar from "@/components/ThematicNightsCalendar";
 import {
   businessPillars,
   conversionCTAs,
   restaurantInfo,
-  targetAudience,
-  weeklyNights,
 } from "@/lib/data";
 import { stitchEventosImages } from "@/lib/stitch-images";
 
 export default function Home() {
   return (
-    <div className="pb-20 md:pb-0">
+    <div>
       <ScrollRevealCards />
       <NeonPulse />
 
-      {/* Hero — Tasca Disco Karaoke */}
-      <header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src={stitchEventosImages.karaoke}
-            alt="Ambiente nocturno en La Casa del Llano"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover opacity-50 grayscale-[0.15]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/70" />
-          <div className="absolute inset-0 grain-texture" />
-          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-tertiary/25 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
-        </div>
+      <HeroWelcome />
 
-        <div className="relative z-10 text-center px-4 md:px-16 max-w-4xl">
-          <span className="inline-block mb-4 px-4 py-1 bg-tertiary-container text-tertiary rounded-full text-xs uppercase tracking-widest border border-tertiary/30 font-semibold">
-            {restaurantInfo.tagline}
-          </span>
-          <h1 className="font-display text-4xl md:text-[56px] md:leading-[64px] font-bold mb-6 leading-tight">
-            Entretenimiento Nocturno con{" "}
-            <span className="text-tertiary neon-glow-magenta italic">
-              Energía
-            </span>
-          </h1>
-          <p className="text-base text-on-surface-variant mb-8 max-w-2xl mx-auto leading-relaxed">
-            {restaurantInfo.description}
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Link
-              href={conversionCTAs.vip.href}
-              className="bg-secondary text-on-secondary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:shadow-[0_0_20px_rgba(217,160,54,0.5)] active:scale-95"
-            >
-              {conversionCTAs.vip.label}
-            </Link>
-            <Link
-              href={conversionCTAs.evento.href}
-              className="bg-transparent border border-tertiary text-tertiary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-tertiary/10 active:scale-95"
-            >
-              {conversionCTAs.evento.label}
-            </Link>
-          </div>
-          <p className="text-xs text-on-surface-variant/80 mt-4">
-            Confirmación inmediata por WhatsApp · Comida y servicio de botellas
-          </p>
-        </div>
-      </header>
+      <ThematicNightsCalendar />
 
-      {/* Público objetivo */}
-      <section className="py-20 px-4 md:px-16 max-w-[1280px] mx-auto">
-        <div className="rounded-xl stone-outline bg-surface-container-low p-8 md:p-12 text-center">
-          <p className="text-secondary text-xs uppercase tracking-widest mb-2 font-semibold">
-            {targetAudience.subtitle}
-          </p>
-          <h2 className="font-display text-3xl text-on-surface mb-4">
-            {targetAudience.title}
-          </h2>
-          <p className="text-base text-on-surface-variant max-w-2xl mx-auto mb-6">
-            {targetAudience.description}
-          </p>
-          <p className="text-sm text-tertiary font-medium mb-6">
-            {targetAudience.familyPolicy}
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {targetAudience.celebrations.map((item) => (
-              <span
-                key={item}
-                className="px-4 py-1.5 bg-primary-container text-secondary rounded-full text-xs font-semibold border border-secondary/20"
-              >
-                {item}
-              </span>
-            ))}
-          </div>
-        </div>
+      <SocialProof />
+
+      <section className="site-container py-16 sm:py-20">
+        <CelebrationCombos />
       </section>
 
       {/* Pilares del negocio */}
-      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl text-on-surface mb-2">
+      <section className="site-container py-20 sm:py-24">
+        <div className="text-center mb-12 sm:mb-16">
+          <h2 className="type-section-title text-on-surface mb-2">
             Rumba, música y{" "}
-            <span className="text-secondary italic">tragos premium</span>
+            <span className="text-secondary italic">tragos selectos</span>
           </h2>
           <p className="text-base text-on-surface-variant max-w-xl mx-auto">
             DJs especiales por temporadas, karaoke, coctelería y reservas para
@@ -135,69 +68,9 @@ export default function Home() {
 
       <ExperienceGallery />
 
-      {/* Noches de la semana */}
-      <section className="py-24 bg-surface-container-lowest border-y border-outline-variant/20">
-        <div className="px-4 md:px-16 max-w-[1280px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
-            <div>
-              <p className="text-secondary text-xs uppercase tracking-widest mb-2 font-semibold">
-                Cartelera Semanal
-              </p>
-              <h2 className="font-display text-3xl text-on-surface">
-                Noches <span className="text-tertiary italic">Temáticas</span>
-              </h2>
-            </div>
-            <Link
-              href="/eventos"
-              className="text-secondary border-b border-secondary pb-1 text-xs font-semibold uppercase tracking-widest hover:text-tertiary hover:border-tertiary transition-colors"
-            >
-              Ver cartelera completa →
-            </Link>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {weeklyNights.map((night) => (
-              <div
-                key={night.title}
-                className="group flex gap-4 p-5 rounded-xl bg-surface border border-outline-variant/30 hover:border-secondary transition-all interactive-card"
-              >
-                <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden">
-                  <Image
-                    src={night.image}
-                    alt={night.title}
-                    fill
-                    sizes="96px"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-xs text-tertiary font-semibold uppercase">
-                      {night.day}
-                    </span>
-                    <span className="text-xs px-2 py-0.5 bg-secondary/20 text-secondary rounded-full">
-                      {night.tag}
-                    </span>
-                  </div>
-                  <h3 className="font-display text-lg text-on-surface group-hover:text-secondary transition-colors">
-                    {night.title}
-                  </h3>
-                  <p className="text-sm text-on-surface-variant mt-1 line-clamp-2">
-                    {night.description}
-                  </p>
-                  <p className="text-xs text-secondary mt-2 font-semibold">
-                    {night.time}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA eventos privados */}
-      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
-        <div className="relative rounded-xl overflow-hidden stone-outline bg-surface-container-high">
+      <section className="site-container py-20 sm:py-24">
+        <div className="relative overflow-hidden rounded-xl stone-outline bg-surface-container-high">
           <div className="relative h-48 md:h-56">
             <Image
               src={stitchEventosImages.hero}
@@ -246,9 +119,9 @@ export default function Home() {
       {/* Ubicación */}
       <section
         id="ubicacion"
-        className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto scroll-mt-20"
+        className="site-container scroll-mt-20 py-20 sm:py-24"
       >
-        <h2 className="font-display text-3xl text-on-surface text-center mb-4">
+        <h2 className="type-section-title text-on-surface mb-4 text-center">
           En el <span className="text-secondary italic">Casco Colonial</span>
         </h2>
         <p className="text-center text-on-surface-variant mb-10 text-sm">
@@ -276,8 +149,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <MobileBottomNav />
     </div>
   );
 }

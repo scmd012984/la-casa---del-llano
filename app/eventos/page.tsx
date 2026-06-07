@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import CelebrationCombos from "@/components/CelebrationCombos";
 import ExperienceGallery from "@/components/ExperienceGallery";
-import MobileBottomNav from "@/components/MobileBottomNav";
 import { conversionCTAs } from "@/lib/data";
 import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
 import {
@@ -18,12 +18,12 @@ export const metadata: Metadata = {
 
 export default function EventosPage() {
   return (
-    <div className="pb-20 md:pb-0">
+    <div>
       <ScrollRevealCards />
       <NeonPulse />
 
       {/* Hero */}
-      <header className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+      <header className="hero-fullscreen relative flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={stitchEventosImages.hero}
@@ -39,11 +39,11 @@ export default function EventosPage() {
           <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
         </div>
 
-        <div className="relative z-10 text-center px-4 md:px-16 max-w-4xl">
+        <div className="site-container relative z-10 max-w-4xl py-10 text-center md:py-14">
           <span className="inline-block mb-4 px-4 py-1 bg-primary-container text-tertiary rounded-full text-xs uppercase tracking-widest border border-tertiary/30 font-semibold">
             Rumba Guaireña
           </span>
-          <h1 className="font-display text-4xl md:text-[56px] md:leading-[64px] font-bold mb-6 leading-tight tracking-tight">
+          <h1 className="type-hero-title mb-6">
             Noches de Sabor y{" "}
             <span className="text-tertiary neon-glow-magenta italic">
               Tradición
@@ -51,7 +51,7 @@ export default function EventosPage() {
           </h1>
           <p className="text-base text-on-surface-variant mb-8 max-w-2xl mx-auto leading-relaxed">
             Ambiente energético para todas las edades en Venezuela. DJs
-            especiales por temporadas, karaoke, música en vivo y tragos premium
+            especiales por temporadas, karaoke, música en vivo y tragos de primera
             para celebrar cumpleaños, ascensos, despedidas, bodas y más.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
@@ -72,13 +72,13 @@ export default function EventosPage() {
       </header>
 
       {/* Bento */}
-      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
+      <section className="site-container py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Karaoke */}
           <div className="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/30 h-[400px] interactive-card">
             <Image
               src={stitchEventosImages.karaoke}
-              alt="Karaoke Nights - escenario profesional con luces LED"
+              alt="Noches de karaoke — escenario profesional con luces LED"
               fill
               sizes="(max-width: 768px) 100vw, 66vw"
               className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -86,12 +86,12 @@ export default function EventosPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent" />
             <div className="absolute bottom-0 left-0 p-8">
               <h3 className="font-display text-2xl text-tertiary mb-2 neon-glow-magenta">
-                Karaoke Nights
+                Noches de Karaoke
               </h3>
               <p className="text-base text-on-surface-variant max-w-md">
                 Libera el artista que llevas dentro en nuestro escenario
-                profesional con el mejor sonido de la costa. Todos los jueves
-                desde las 8:00 PM.
+                profesional con el mejor sonido de la costa. Todos los viernes
+                desde las 8:00 p. m.
               </p>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function EventosPage() {
                 </h3>
                 <p className="text-base text-on-surface-variant">
                   Amplio espacio diseñado para que el baile no se detenga. Desde
-                  joropo hasta los hits del momento.
+                  joropo hasta los éxitos del momento.
                 </p>
               </div>
               <div className="mt-4">
@@ -148,7 +148,7 @@ export default function EventosPage() {
                 <p className="text-base text-on-surface-variant mb-6">
                   Disfruta de las mejores agrupaciones de música llanera y
                   conjuntos locales. Una experiencia sensorial completa entre
-                  cortes de carne Premium y arpa, cuatro y maracas.
+                  cortes de carne selecta y arpa, cuatro y maracas.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <span className="px-3 py-1 bg-tertiary-container text-tertiary rounded text-xs font-semibold">
@@ -169,7 +169,7 @@ export default function EventosPage() {
         id="cartelera"
         className="py-24 bg-surface-container-lowest scroll-mt-20"
       >
-        <div className="px-4 md:px-16 max-w-[1280px] mx-auto">
+        <div className="site-container">
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
             <div>
               <h2 className="font-display text-3xl text-on-surface mb-2">
@@ -185,7 +185,7 @@ export default function EventosPage() {
               type="button"
               className="text-secondary border-b border-secondary pb-1 text-xs font-semibold uppercase tracking-widest hover:text-tertiary hover:border-tertiary transition-colors"
             >
-              Descargar Calendario PDF
+              Descargar calendario en PDF
             </button>
           </div>
 
@@ -232,6 +232,10 @@ export default function EventosPage() {
         </div>
       </section>
 
+      <section className="site-container py-16 sm:py-20 bg-surface-container-lowest border-y border-outline-variant/20">
+        <CelebrationCombos />
+      </section>
+
       <ExperienceGallery />
 
       {/* CTA */}
@@ -248,7 +252,7 @@ export default function EventosPage() {
           <p className="text-base text-on-surface-variant mb-10 max-w-xl mx-auto">
             Reserva para cumpleaños, ascensos, despedidas, bodas y celebraciones
             familiares. Menores con acompañamiento responsable. Paquetes todo
-            incluido con barra premium.
+            incluido con barra selecta.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -267,7 +271,6 @@ export default function EventosPage() {
         </div>
       </section>
 
-      <MobileBottomNav />
     </div>
   );
 }

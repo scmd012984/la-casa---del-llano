@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { navLinks, restaurantInfo } from "@/lib/data";
+import { navLinks, restaurantInfo, siteArchitecture } from "@/lib/data";
 
 export default function Footer() {
   return (
-    <footer className="bg-surface-container-lowest py-12 border-t border-primary-container">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-4 md:px-16 max-w-[1280px] mx-auto">
+    <footer className="site-footer bg-surface-container-lowest py-12 border-t border-primary-container">
+      <div className="site-container grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-4 md:col-span-1">
           <div className="font-display text-2xl text-on-surface">
             {restaurantInfo.name.replace(" 2014", "")}
@@ -31,12 +31,15 @@ export default function Footer() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/#ubicacion"
-            className="text-base text-on-surface-variant hover:text-secondary transition-colors"
-          >
-            Ubicación
-          </Link>
+          {siteArchitecture.anchors.map((anchor) => (
+            <Link
+              key={anchor.id}
+              href={anchor.href}
+              className="text-base text-on-surface-variant hover:text-secondary transition-colors"
+            >
+              {anchor.label}
+            </Link>
+          ))}
         </div>
 
         <div className="flex flex-col gap-2">
@@ -56,7 +59,7 @@ export default function Footer() {
             href="/reserva"
             className="text-base text-on-surface-variant hover:text-tertiary transition-colors"
           >
-            Reservar Evento
+            Reservar evento
           </Link>
         </div>
 

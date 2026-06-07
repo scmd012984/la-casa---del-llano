@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { eventReservationTypes } from "@/lib/data";
+import { celebrationCombos, eventReservationTypes } from "@/lib/data";
 import { buildReservationMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const inputClass =
@@ -10,6 +10,10 @@ const inputClass =
 
 function isValidEventType(id: string | null) {
   return id !== null && eventReservationTypes.some((t) => t.id === id);
+}
+
+function isValidComboId(id: string | null) {
+  return id !== null && celebrationCombos.some((combo) => combo.id === id);
 }
 
 type ReservationFormProps = {
@@ -21,14 +25,32 @@ export default function ReservationForm({
 }: ReservationFormProps) {
   const searchParams = useSearchParams();
   const tipoParam = searchParams.get("tipo");
-  const initialType = isValidEventType(tipoParam) ? tipoParam! : defaultEventType;
+  const comboParam = searchParams.get("combo");
+  const selectedCombo = isValidComboId(comboParam)
+    ? celebrationCombos.find((combo) => combo.id === comboParam)
+    : undefined;
+  const initialType = isValidEventType(tipoParam)
+    ? tipoParam!
+    : selectedCombo?.reservationType ?? defaultEventType;
 
   const [eventType, setEventType] = useState(initialType);
   const [bottleService, setBottleService] = useState(
-    initialType === "vip" || initialType === "cumpleanos" || initialType === "rumba-privada"
+    initialType === "vip" ||
+      initialType === "cumpleanos" ||
+      initialType === "rumba-privada" ||
+      selectedCombo?.id === "platino" ||
+      selectedCombo?.id === "corporativo",
   );
   const [foodService, setFoodService] = useState(
-    initialType === "cumpleanos" || initialType === "rumba-privada" || initialType === "familiar"
+    initialType === "cumpleanos" ||
+      initialType === "rumba-privada" ||
+      initialType === "familiar" ||
+      Boolean(selectedCombo),
+  );
+  const [notes, setNotes] = useState(
+    selectedCombo
+      ? `Interesado en ${selectedCombo.name}. ${selectedCombo.tagline}.`
+      : "",
   );
   const today = new Date().toISOString().split("T")[0];
 
@@ -44,7 +66,7 @@ export default function ReservationForm({
       date: String(formData.get("date") ?? ""),
       time: String(formData.get("time") ?? ""),
       guests: String(formData.get("guests") ?? ""),
-      notes: String(formData.get("notes") ?? ""),
+      notes,
       bottleService,
       foodService,
     });
@@ -63,6 +85,15 @@ export default function ReservationForm({
         Al enviar, abrimos WhatsApp con tu solicitud lista para confirmar al
         instante.
       </div>
+
+      {selectedCombo && (
+        <div className="rounded-lg bg-secondary/10 border border-secondary/30 px-4 py-3 text-sm text-on-surface">
+          <span className="material-symbols-outlined text-secondary text-base align-middle mr-1">
+            diamond
+          </span>
+          Combo seleccionado: <strong>{selectedCombo.name}</strong>
+        </div>
+      )}
 
       <div>
         <label htmlFor="eventType" className="block text-sm text-on-surface-variant mb-1.5">
@@ -101,7 +132,7 @@ export default function ReservationForm({
             className="w-4 h-4 rounded border-outline-variant accent-secondary"
           />
           <span className="text-sm text-on-surface">
-            Servicio de botellas premium
+            Servicio de botellas selectas
           </span>
         </label>
         <label className="flex items-center gap-3 cursor-pointer">
@@ -189,6 +220,8 @@ export default function ReservationForm({
           id="notes"
           name="notes"
           rows={4}
+          value={notes}
+          onChange={(e) => setNotes(e.target.value)}
           className={`${inputClass} resize-none`}
           placeholder="Tipo de celebración, botellas preferidas, menú de tapas, karaoke, decoración..."
         />

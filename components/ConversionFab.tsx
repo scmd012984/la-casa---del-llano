@@ -21,12 +21,12 @@ export default function ConversionFab() {
   );
 
   return (
-    <div className="fixed bottom-24 md:bottom-8 right-4 md:right-8 z-40 flex flex-col items-end gap-2">
+    <div className="conversion-fab fixed md:bottom-8 right-4 md:right-8 z-40 flex flex-col items-end gap-2">
       <a
         href={eventoWhatsApp}
         target="_blank"
         rel="noopener noreferrer"
-        className="hidden sm:flex items-center gap-2 bg-surface-container-highest text-on-surface px-4 py-2 rounded-full text-xs font-semibold border border-outline-variant/40 shadow-lg hover:border-tertiary hover:text-tertiary transition-all"
+        className="hidden lg:flex items-center gap-2 bg-surface-container-highest text-on-surface px-4 py-2 rounded-full text-xs font-semibold border border-outline-variant/40 shadow-lg hover:border-tertiary hover:text-tertiary transition-all"
       >
         <span className="material-symbols-outlined text-base">celebration</span>
         Evento Privado
@@ -36,11 +36,11 @@ export default function ConversionFab() {
           href={vipWhatsApp}
           target="_blank"
           rel="noopener noreferrer"
-          className="hidden sm:flex items-center gap-2 bg-surface-container-highest text-on-surface px-4 py-2 rounded-full text-xs font-semibold border border-secondary/30 shadow-lg hover:border-secondary hover:text-secondary transition-all"
+          className="hidden lg:flex items-center gap-2 bg-surface-container-highest text-on-surface px-4 py-2 rounded-full text-xs font-semibold border border-secondary/30 shadow-lg hover:border-secondary hover:text-secondary transition-all"
           aria-label="Reservar VIP por WhatsApp"
         >
           <span className="material-symbols-outlined text-base">chat</span>
-          WhatsApp VIP
+          Reservar por WhatsApp
         </a>
         <Link
           href={conversionCTAs.vip.href}

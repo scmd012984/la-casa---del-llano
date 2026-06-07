@@ -4,7 +4,7 @@ import { audiovisualHighlights, conversionCTAs } from "@/lib/data";
 
 export default function ExperienceGallery() {
   return (
-    <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
+    <section className="site-container py-20 sm:py-24">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
         <div>
           <p className="text-tertiary text-xs uppercase tracking-widest mb-2 font-semibold">
@@ -49,7 +49,7 @@ export default function ExperienceGallery() {
             </div>
             <div className="absolute bottom-0 left-0 right-0 p-4">
               <span className="text-[10px] uppercase tracking-widest text-tertiary font-semibold">
-                {item.type === "reel" ? "Reel" : "Video"}
+                {item.typeLabel}
               </span>
               <h3 className="font-display text-lg text-on-surface mt-1">
                 {item.title}

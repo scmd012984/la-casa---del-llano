@@ -1,58 +1,102 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { conversionCTAs, navLinks, restaurantInfo } from "@/lib/data";
+import {
+  isNavSectionActive,
+  navbarCTAs,
+  navbarLinks,
+  restaurantInfo,
+} from "@/lib/data";
+
+const brandStars = [
+  { top: "48%", delay: "0s" },
+  { top: "40%", delay: "-2.5s" },
+  { top: "34%", delay: "-5s" },
+  { top: "30%", delay: "-7.5s" },
+  { top: "30%", delay: "-10s" },
+  { top: "34%", delay: "-12.5s" },
+  { top: "40%", delay: "-15s" },
+  { top: "48%", delay: "-17.5s" },
+];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { logo } = restaurantInfo;
 
   return (
-    <nav className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-md">
-      <div className="flex justify-between items-center px-4 md:px-16 py-4 max-w-[1280px] mx-auto">
-        <Link href="/" className="group">
-          <span className="font-display text-2xl text-secondary tracking-tighter group-hover:text-secondary-fixed-dim transition-colors block">
-            {restaurantInfo.name.replace(" 2014", "")}
-          </span>
-          <span className="text-[10px] text-on-surface-variant uppercase tracking-widest hidden sm:block">
-            {restaurantInfo.tagline}
-          </span>
+    <nav className="site-glass site-navbar sticky top-0 z-50">
+      <div className="site-navbar-inner">
+        <Link
+          href="/"
+          className="nav-brand-lockup group"
+          aria-label={restaurantInfo.name}
+        >
+          <div className="nav-brand-wrap">
+            <div className="nav-brand-flag-breeze" aria-hidden>
+              <span className="nav-brand-flag-wave nav-brand-flag-wave--yellow" />
+              <span className="nav-brand-flag-wave nav-brand-flag-wave--blue" />
+              <span className="nav-brand-flag-wave nav-brand-flag-wave--red" />
+              <div className="nav-brand-flag-stars">
+                {brandStars.map((star, index) => (
+                  <span
+                    key={index}
+                    className="nav-brand-flag-star"
+                    style={{ top: star.top, animationDelay: star.delay }}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="nav-brand-content">
+              <div className="nav-logo-wood-ring shrink-0">
+                <div className="nav-logo-shine relative h-[4.25rem] w-[4.25rem] overflow-hidden rounded-full bg-surface-container-lowest sm:h-[5.25rem] sm:w-[5.25rem] md:h-[6.25rem] md:w-[6.25rem]">
+                  <Image
+                    src={logo.icon.src}
+                    alt={logo.icon.alt}
+                    width={logo.icon.width}
+                    height={logo.icon.height}
+                    priority
+                    unoptimized
+                    className="nav-logo-image h-full w-full object-cover object-[center_42%]"
+                  />
+                </div>
+              </div>
+              <span className="nav-brand-wordmark">
+                <span className="site-navbar-link nav-brand-wordmark-line">
+                  {logo.wordmarkTop}
+                </span>
+                <span className="site-navbar-link nav-brand-wordmark-line">
+                  {logo.wordmarkBottom}
+                </span>
+              </span>
+            </div>
+          </div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((item) => {
-            const isActive = pathname === item.href;
+        <div className="site-navbar-navlinks shrink-0 items-center">
+          {navbarLinks.map((item) => {
+            const isActive = isNavSectionActive(pathname, item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`text-base transition-colors ${
-                  isActive
-                    ? "text-secondary-fixed font-bold border-b-2 border-secondary"
-                    : "text-on-surface-variant hover:text-secondary"
-                }`}
+                className="site-navbar-link"
+                aria-current={isActive ? "page" : undefined}
               >
                 {item.label}
               </Link>
             );
           })}
-          <Link
-            href={conversionCTAs.evento.href}
-            className="text-on-surface-variant hover:text-secondary text-sm font-semibold transition-colors"
-          >
-            Evento Privado
+          <Link href={navbarCTAs.evento.href} className="site-navbar-link">
+            <span className="site-nav-label-long">{navbarCTAs.evento.label}</span>
+            <span className="site-nav-label-short">Evento</span>
           </Link>
-          <Link
-            href={conversionCTAs.vip.href}
-            className="bg-secondary text-on-secondary px-6 py-2 text-base rounded-full scale-95 active:scale-90 transition-transform hover:text-tertiary duration-300"
-          >
-            {conversionCTAs.vip.label}
+          <Link href={navbarCTAs.vip.href} className="site-navbar-link">
+            <span className="site-nav-label-long">{navbarCTAs.vip.label}</span>
+            <span className="site-nav-label-short">Reservar</span>
           </Link>
         </div>
-
-        <Link href={conversionCTAs.vip.href} className="md:hidden text-secondary">
-          <span className="material-symbols-outlined">diamond</span>
-        </Link>
       </div>
     </nav>
   );
