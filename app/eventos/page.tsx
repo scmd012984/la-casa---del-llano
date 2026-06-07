@@ -1,0 +1,268 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import MobileBottomNav from "@/components/MobileBottomNav";
+import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
+import {
+  stitchEventosImages,
+  stitchUpcomingEvents,
+} from "@/lib/stitch-images";
+
+export const metadata: Metadata = {
+  title: "Eventos y Karaoke",
+  description:
+    "Karaoke, música en vivo, arpa llanera y rumba tropical en La Casa del Llano, La Guaira.",
+};
+
+export default function EventosPage() {
+  return (
+    <div className="pb-20 md:pb-0">
+      <ScrollRevealCards />
+      <NeonPulse />
+
+      {/* Hero */}
+      <header className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src={stitchEventosImages.hero}
+            alt="Decoración temática de La Casa del Llano"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover opacity-60 grayscale-[0.3]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+          <div className="absolute inset-0 grain-texture" />
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-tertiary/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
+        </div>
+
+        <div className="relative z-10 text-center px-4 md:px-16 max-w-4xl">
+          <span className="inline-block mb-4 px-4 py-1 bg-primary-container text-tertiary rounded-full text-xs uppercase tracking-widest border border-tertiary/30 font-semibold">
+            Rumba Guaireña
+          </span>
+          <h1 className="font-display text-4xl md:text-[56px] md:leading-[64px] font-bold mb-6 leading-tight tracking-tight">
+            Noches de Sabor y{" "}
+            <span className="text-tertiary neon-glow-magenta italic">
+              Tradición
+            </span>
+          </h1>
+          <p className="text-base text-on-surface-variant mb-8 max-w-2xl mx-auto leading-relaxed">
+            Donde la brisa del mar se encuentra con el espíritu del llano. Vive
+            las noches más vibrantes con karaoke, música en vivo y el mejor
+            ambiente de La Guaira.
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="#cartelera"
+              className="bg-secondary text-on-secondary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:shadow-[0_0_20px_rgba(217,160,54,0.5)] active:scale-95"
+            >
+              Ver Calendario
+            </a>
+            <Link
+              href="/reserva"
+              className="bg-transparent border border-secondary text-secondary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-secondary/10 active:scale-95"
+            >
+              Reservar VIP
+            </Link>
+          </div>
+        </div>
+      </header>
+
+      {/* Bento */}
+      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {/* Karaoke */}
+          <div className="md:col-span-8 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/30 h-[400px] interactive-card">
+            <Image
+              src={stitchEventosImages.karaoke}
+              alt="Karaoke Nights - escenario profesional con luces LED"
+              fill
+              sizes="(max-width: 768px) 100vw, 66vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 p-8">
+              <h3 className="font-display text-2xl text-tertiary mb-2 neon-glow-magenta">
+                Karaoke Nights
+              </h3>
+              <p className="text-base text-on-surface-variant max-w-md">
+                Libera el artista que llevas dentro en nuestro escenario
+                profesional con el mejor sonido de la costa. Todos los jueves
+                desde las 8:00 PM.
+              </p>
+            </div>
+          </div>
+
+          {/* Pista de Baile */}
+          <div className="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/30 h-[400px] interactive-card">
+            <div className="p-8 flex flex-col h-full justify-between">
+              <div>
+                <div className="w-12 h-12 bg-secondary/10 flex items-center justify-center rounded-lg mb-6 border border-secondary/30">
+                  <span className="material-symbols-outlined text-secondary">
+                    theater_comedy
+                  </span>
+                </div>
+                <h3 className="font-display text-2xl text-on-surface mb-4">
+                  Pista de Baile
+                </h3>
+                <p className="text-base text-on-surface-variant">
+                  Amplio espacio diseñado para que el baile no se detenga. Desde
+                  joropo hasta los hits del momento.
+                </p>
+              </div>
+              <div className="mt-4">
+                <span className="text-xs text-secondary uppercase tracking-widest font-semibold">
+                  +200m² de rumba
+                </span>
+              </div>
+            </div>
+            <div className="absolute -right-10 -bottom-10 opacity-10 group-hover:opacity-20 transition-opacity duration-500 pointer-events-none">
+              <span
+                className="material-symbols-outlined text-[160px]"
+                style={{ fontVariationSettings: "'FILL' 1" }}
+              >
+                music_note
+              </span>
+            </div>
+          </div>
+
+          {/* Música en Vivo */}
+          <div className="md:col-span-12 group relative overflow-hidden rounded-xl bg-surface-container-highest border border-secondary/20 h-[300px] interactive-card">
+            <div className="flex flex-col md:flex-row h-full">
+              <div className="relative md:w-1/3 h-48 md:h-full">
+                <Image
+                  src={stitchEventosImages.arpa}
+                  alt="Música en vivo - arpa llanera"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-8 md:w-2/3 flex flex-col justify-center bg-surface-container-high/50 backdrop-blur-sm">
+                <h3 className="font-display text-2xl text-secondary mb-2">
+                  Música en Vivo los Fines de Semana
+                </h3>
+                <p className="text-base text-on-surface-variant mb-6">
+                  Disfruta de las mejores agrupaciones de música llanera y
+                  conjuntos locales. Una experiencia sensorial completa entre
+                  cortes de carne Premium y arpa, cuatro y maracas.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <span className="px-3 py-1 bg-tertiary-container text-tertiary rounded text-xs font-semibold">
+                    Viernes: Rumba Tropical
+                  </span>
+                  <span className="px-3 py-1 bg-secondary-container text-secondary-fixed rounded text-xs font-semibold">
+                    Sábado: Tarde Llanera
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cartelera */}
+      <section
+        id="cartelera"
+        className="py-24 bg-surface-container-lowest scroll-mt-20"
+      >
+        <div className="px-4 md:px-16 max-w-[1280px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+            <div>
+              <h2 className="font-display text-3xl text-on-surface mb-2">
+                Cartelera de{" "}
+                <span className="text-secondary italic">Espectáculos</span>
+              </h2>
+              <p className="text-base text-on-surface-variant">
+                No te pierdas de los próximos grandes momentos en La Casa del
+                Llano.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="text-secondary border-b border-secondary pb-1 text-xs font-semibold uppercase tracking-widest hover:text-tertiary hover:border-tertiary transition-colors"
+            >
+              Descargar Calendario PDF
+            </button>
+          </div>
+
+          <div className="space-y-6">
+            {stitchUpcomingEvents.map((event) => (
+              <div
+                key={event.title}
+                className="group flex items-center p-6 rounded-xl bg-surface border-b border-outline-variant/30 hover:border-secondary transition-all"
+              >
+                <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-primary-container rounded-lg border border-primary/20">
+                  <span className="text-xs text-tertiary uppercase font-semibold">
+                    {event.month}
+                  </span>
+                  <span className="font-display text-2xl leading-none">
+                    {event.day}
+                  </span>
+                </div>
+                <div className="ml-4 md:ml-8 flex-grow min-w-0">
+                  <h4 className="font-display text-xl text-on-surface group-hover:text-secondary transition-colors">
+                    {event.title}
+                  </h4>
+                  <p className="text-sm text-on-surface-variant">
+                    {event.description}
+                  </p>
+                </div>
+                <div className="hidden md:flex flex-col items-end mr-8 shrink-0">
+                  <span className="text-base text-secondary">{event.time}</span>
+                  <span
+                    className={`text-xs uppercase tracking-tighter font-semibold ${
+                      event.badgeVariant === "tertiary"
+                        ? "text-tertiary"
+                        : "text-on-surface-variant"
+                    }`}
+                  >
+                    {event.badge}
+                  </span>
+                </div>
+                <span className="material-symbols-outlined text-secondary opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
+                  arrow_forward
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="relative py-24 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="w-full h-full bg-surface-container-high border-y border-secondary/10" />
+          <div className="absolute top-1/2 left-1/4 w-[500px] h-[200px] bg-tertiary/10 rotate-12 blur-[100px]" />
+          <div className="absolute bottom-0 right-1/4 w-[500px] h-[200px] bg-secondary/5 -rotate-12 blur-[100px]" />
+        </div>
+        <div className="relative z-10 text-center px-4">
+          <h2 className="font-display text-3xl md:text-5xl mb-6">
+            ¿Planeas una rumba privada?
+          </h2>
+          <p className="text-base text-on-surface-variant mb-10 max-w-xl mx-auto">
+            Nuestro espacio está disponible para cumpleaños, eventos corporativos
+            y celebraciones familiares con paquetes todo incluido.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/reserva"
+              className="bg-secondary text-on-secondary px-10 py-4 rounded-full text-lg font-semibold hover:bg-secondary-container transition-all"
+            >
+              Cotizar Evento
+            </Link>
+            <Link
+              href="/reserva"
+              className="bg-transparent border border-tertiary text-tertiary px-10 py-4 rounded-full text-lg font-semibold hover:bg-tertiary/5 transition-all"
+            >
+              Ver Paquetes VIP
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <MobileBottomNav />
+    </div>
+  );
+}
