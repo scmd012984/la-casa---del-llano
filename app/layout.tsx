@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Newsreader } from "next/font/google";
+import ConversionFab from "@/components/ConversionFab";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { restaurantInfo } from "@/lib/data";
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     default: restaurantInfo.name,
     template: `%s | ${restaurantInfo.name}`,
   },
-  description: restaurantInfo.description,
+  description: restaurantInfo.shortDescription,
 };
 
 export default function RootLayout({
@@ -39,6 +40,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ConversionFab />
       </body>
     </html>
   );

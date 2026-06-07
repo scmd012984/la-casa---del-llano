@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import ExperienceGallery from "@/components/ExperienceGallery";
 import MobileBottomNav from "@/components/MobileBottomNav";
+import { conversionCTAs } from "@/lib/data";
 import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
 import {
   stitchEventosImages,
@@ -9,9 +11,9 @@ import {
 } from "@/lib/stitch-images";
 
 export const metadata: Metadata = {
-  title: "Eventos y Karaoke",
+  title: "Eventos, Rumba y Karaoke",
   description:
-    "Karaoke, música en vivo, arpa llanera y rumba tropical en La Casa del Llano, La Guaira.",
+    "Entretenimiento nocturno en La Guaira, Venezuela. DJs especiales por temporadas, karaoke, rumba tropical y reservas para cumpleaños, bodas y despedidas.",
 };
 
 export default function EventosPage() {
@@ -48,9 +50,9 @@ export default function EventosPage() {
             </span>
           </h1>
           <p className="text-base text-on-surface-variant mb-8 max-w-2xl mx-auto leading-relaxed">
-            Donde la brisa del mar se encuentra con el espíritu del llano. Vive
-            las noches más vibrantes con karaoke, música en vivo y el mejor
-            ambiente de La Guaira.
+            Ambiente energético para todas las edades en Venezuela. DJs
+            especiales por temporadas, karaoke, música en vivo y tragos premium
+            para celebrar cumpleaños, ascensos, despedidas, bodas y más.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <a
@@ -60,10 +62,10 @@ export default function EventosPage() {
               Ver Calendario
             </a>
             <Link
-              href="/reserva"
+              href={conversionCTAs.vip.href}
               className="bg-transparent border border-secondary text-secondary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-secondary/10 active:scale-95"
             >
-              Reservar VIP
+              {conversionCTAs.vip.label}
             </Link>
           </div>
         </div>
@@ -230,6 +232,8 @@ export default function EventosPage() {
         </div>
       </section>
 
+      <ExperienceGallery />
+
       {/* CTA */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -242,21 +246,22 @@ export default function EventosPage() {
             ¿Planeas una rumba privada?
           </h2>
           <p className="text-base text-on-surface-variant mb-10 max-w-xl mx-auto">
-            Nuestro espacio está disponible para cumpleaños, eventos corporativos
-            y celebraciones familiares con paquetes todo incluido.
+            Reserva para cumpleaños, ascensos, despedidas, bodas y celebraciones
+            familiares. Menores con acompañamiento responsable. Paquetes todo
+            incluido con barra premium.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/reserva"
+              href={conversionCTAs.evento.href}
               className="bg-secondary text-on-secondary px-10 py-4 rounded-full text-lg font-semibold hover:bg-secondary-container transition-all"
             >
-              Cotizar Evento
+              {conversionCTAs.evento.label}
             </Link>
             <Link
-              href="/reserva"
+              href={conversionCTAs.vip.href}
               className="bg-transparent border border-tertiary text-tertiary px-10 py-4 rounded-full text-lg font-semibold hover:bg-tertiary/5 transition-all"
             >
-              Ver Paquetes VIP
+              {conversionCTAs.vip.label}
             </Link>
           </div>
         </div>

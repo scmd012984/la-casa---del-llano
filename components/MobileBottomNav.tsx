@@ -9,36 +9,17 @@ const items: {
   icon: string;
   match?: (path: string) => boolean;
 }[] = [
-  {
-    href: "/menu",
-    label: "Menú",
-    icon: "restaurant_menu",
-    match: (p) => p === "/menu",
-  },
-  {
-    href: "/eventos",
-    label: "Eventos",
-    icon: "event",
-    match: (p) => p === "/eventos",
-  },
-  {
-    href: "/reserva",
-    label: "Reservas",
-    icon: "calendar_month",
-    match: (p) => p === "/reserva",
-  },
-  {
-    href: "/#ubicacion",
-    label: "Ubicación",
-    icon: "map",
-  },
+  { href: "/", label: "Inicio", icon: "home", match: (p) => p === "/" },
+  { href: "/eventos", label: "Rumba", icon: "nightlife", match: (p) => p === "/eventos" },
+  { href: "/menu", label: "Tragos", icon: "local_bar", match: (p) => p === "/menu" },
+  { href: "/reserva", label: "Reservas", icon: "event_available", match: (p) => p === "/reserva" },
 ];
 
 export default function MobileBottomNav() {
   const pathname = usePathname();
 
   return (
-    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-lg border-t border-outline-variant/20 z-[100] px-6 py-3">
+    <div className="md:hidden fixed bottom-0 left-0 right-0 bg-surface/95 backdrop-blur-lg border-t border-outline-variant/20 z-[100] px-4 py-3">
       <div className="flex justify-between items-center">
         {items.map((item) => {
           const isActive = item.match ? item.match(pathname) : pathname === item.href;
@@ -51,11 +32,9 @@ export default function MobileBottomNav() {
               }`}
             >
               <span
-                className="material-symbols-outlined"
+                className="material-symbols-outlined text-[22px]"
                 style={
-                  isActive
-                    ? { fontVariationSettings: "'FILL' 1" }
-                    : undefined
+                  isActive ? { fontVariationSettings: "'FILL' 1" } : undefined
                 }
               >
                 {item.icon}

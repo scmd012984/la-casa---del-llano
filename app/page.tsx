@@ -2,8 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { NeonPulse, ScrollRevealCards } from "@/components/StitchAnimations";
-import { restaurantInfo } from "@/lib/data";
-import { stitchImages } from "@/lib/stitch-images";
+import ExperienceGallery from "@/components/ExperienceGallery";
+import {
+  businessPillars,
+  conversionCTAs,
+  restaurantInfo,
+  targetAudience,
+  weeklyNights,
+} from "@/lib/data";
+import { stitchEventosImages } from "@/lib/stitch-images";
 
 export default function Home() {
   return (
@@ -11,156 +18,242 @@ export default function Home() {
       <ScrollRevealCards />
       <NeonPulse />
 
-      {/* SCREEN_15 — Hero / Fachada */}
-      <header className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+      {/* Hero — Tasca Disco Karaoke */}
+      <header className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src={stitchImages.fachada}
-            alt="Fachada de La Casa del Llano en el Casco Colonial de La Guaira"
+            src={stitchEventosImages.karaoke}
+            alt="Ambiente nocturno en La Casa del Llano"
             fill
             priority
             sizes="100vw"
-            className="object-cover opacity-60 grayscale-[0.2]"
+            className="object-cover opacity-50 grayscale-[0.15]"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/60" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-background/70" />
           <div className="absolute inset-0 grain-texture" />
-          <div className="absolute top-1/3 -left-20 w-96 h-96 bg-secondary/15 rounded-full blur-[120px]" />
-          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-tertiary/15 rounded-full blur-[120px]" />
+          <div className="absolute top-1/4 -left-20 w-96 h-96 bg-tertiary/25 rounded-full blur-[120px]" />
+          <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
         </div>
 
         <div className="relative z-10 text-center px-4 md:px-16 max-w-4xl">
-          <span className="inline-block mb-4 px-4 py-1 bg-primary-container text-secondary rounded-full text-xs uppercase tracking-widest border border-secondary/30 font-semibold">
-            Casco Histórico · La Guaira
+          <span className="inline-block mb-4 px-4 py-1 bg-tertiary-container text-tertiary rounded-full text-xs uppercase tracking-widest border border-tertiary/30 font-semibold">
+            {restaurantInfo.tagline}
           </span>
           <h1 className="font-display text-4xl md:text-[56px] md:leading-[64px] font-bold mb-6 leading-tight">
-            {restaurantInfo.name}
+            Entretenimiento Nocturno con{" "}
+            <span className="text-tertiary neon-glow-magenta italic">
+              Energía
+            </span>
           </h1>
           <p className="text-base text-on-surface-variant mb-8 max-w-2xl mx-auto leading-relaxed">
             {restaurantInfo.description}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Link
-              href="/menu"
+              href={conversionCTAs.vip.href}
               className="bg-secondary text-on-secondary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:shadow-[0_0_20px_rgba(217,160,54,0.5)] active:scale-95"
             >
-              Ver Menú de Tapas
+              {conversionCTAs.vip.label}
             </Link>
             <Link
-              href="/eventos"
+              href={conversionCTAs.evento.href}
               className="bg-transparent border border-tertiary text-tertiary px-8 py-4 rounded-full text-lg font-semibold transition-all hover:bg-tertiary/10 active:scale-95"
             >
-              Eventos y Rumba
+              {conversionCTAs.evento.label}
             </Link>
           </div>
+          <p className="text-xs text-on-surface-variant/80 mt-4">
+            Confirmación inmediata por WhatsApp · Comida y servicio de botellas
+          </p>
         </div>
       </header>
 
-      {/* Atmósfera dual: gastronomía + rumba */}
-      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="font-display text-3xl text-on-surface mb-2">
-            Dos almas, <span className="text-secondary italic">un solo hogar</span>
-          </h2>
-          <p className="text-base text-on-surface-variant max-w-xl mx-auto">
-            Gastronomía criolla de día, rumba y karaoke cuando cae la noche.
+      {/* Público objetivo */}
+      <section className="py-20 px-4 md:px-16 max-w-[1280px] mx-auto">
+        <div className="rounded-xl stone-outline bg-surface-container-low p-8 md:p-12 text-center">
+          <p className="text-secondary text-xs uppercase tracking-widest mb-2 font-semibold">
+            {targetAudience.subtitle}
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          <div className="md:col-span-7 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/30 h-[380px] interactive-card">
-            <Image
-              src={stitchImages.gastronomia}
-              alt="Gastronomía criolla venezolana"
-              fill
-              sizes="(max-width: 768px) 100vw, 58vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/30 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <div className="w-10 h-10 bg-secondary/10 flex items-center justify-center rounded-lg mb-4 border border-secondary/30">
-                <span className="material-symbols-outlined text-secondary">
-                  restaurant
-                </span>
-              </div>
-              <h3 className="font-display text-2xl text-secondary mb-2 neon-glow-stone">
-                Gastronomía Criolla
-              </h3>
-              <p className="text-base text-on-surface-variant max-w-md">
-                Empanadas, tequeños, camarones al ajillo y carne frita. Recetas
-                familiares desde 2014.
-              </p>
-              <Link
-                href="/menu"
-                className="inline-block mt-4 text-sm text-secondary font-semibold hover:text-tertiary transition-colors"
+          <h2 className="font-display text-3xl text-on-surface mb-4">
+            {targetAudience.title}
+          </h2>
+          <p className="text-base text-on-surface-variant max-w-2xl mx-auto mb-6">
+            {targetAudience.description}
+          </p>
+          <p className="text-sm text-tertiary font-medium mb-6">
+            {targetAudience.familyPolicy}
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {targetAudience.celebrations.map((item) => (
+              <span
+                key={item}
+                className="px-4 py-1.5 bg-primary-container text-secondary rounded-full text-xs font-semibold border border-secondary/20"
               >
-                Ver catálogo de tapas →
-              </Link>
-            </div>
-          </div>
-
-          <div className="md:col-span-5 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/30 h-[380px] interactive-card">
-            <Image
-              src={stitchImages.karaoke}
-              alt="Noches de rumba y karaoke"
-              fill
-              sizes="(max-width: 768px) 100vw, 42vw"
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-surface-container via-surface-container/20 to-transparent" />
-            <div className="absolute bottom-0 left-0 p-8">
-              <h3 className="font-display text-2xl text-tertiary mb-2 neon-glow-magenta">
-                Rumba y Karaoke
-              </h3>
-              <p className="text-base text-on-surface-variant">
-                Luces LED, arpa llanera y las mejores noches del puerto.
-              </p>
-              <Link
-                href="/eventos"
-                className="inline-block mt-4 text-sm text-tertiary font-semibold hover:text-secondary transition-colors"
-              >
-                Ver eventos →
-              </Link>
-            </div>
+                {item}
+              </span>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Historia */}
-      <section className="py-24 bg-surface-container-lowest border-y border-outline-variant/20">
-        <div className="px-4 md:px-16 max-w-[1280px] mx-auto grid gap-10 lg:grid-cols-2 items-center">
-          <div className="relative aspect-[4/3] rounded-xl overflow-hidden border border-outline-variant/30 interactive-card">
-            <Image
-              src={stitchImages.terraza}
-              alt="Terraza y ambiente familiar"
-              fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-          <div>
-            <h2 className="font-display text-3xl text-on-surface mb-4">
-              Nuestra <span className="text-secondary italic">Historia</span>
-            </h2>
-            <p className="text-base text-on-surface-variant leading-relaxed mb-6">
-              Fundada en 2014 en el Casco Histórico de La Guaira, nuestra tasca
-              nació del sueño de una familia llanera que quiso traer el calor del
-              llano y la brisa del mar Caribe a un mismo lugar.
-            </p>
+      {/* Pilares del negocio */}
+      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="font-display text-3xl text-on-surface mb-2">
+            Rumba, música y{" "}
+            <span className="text-secondary italic">tragos premium</span>
+          </h2>
+          <p className="text-base text-on-surface-variant max-w-xl mx-auto">
+            DJs especiales por temporadas, karaoke, coctelería y reservas para
+            celebrar en La Guaira, Venezuela.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+          {businessPillars.map((pillar) => (
             <Link
-              href="/reserva"
-              className="inline-block bg-secondary text-on-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary-container transition-colors"
+              key={pillar.title}
+              href={pillar.href}
+              className="group bg-surface-container-low stone-outline rounded-xl p-6 interactive-card hover:bg-surface-container-high transition-all"
             >
-              Reserva tu Mesa
+              <span className="material-symbols-outlined text-secondary text-3xl mb-4 block">
+                {pillar.icon}
+              </span>
+              <h3 className="font-display text-xl text-on-surface mb-2 group-hover:text-secondary transition-colors">
+                {pillar.title}
+              </h3>
+              <p className="text-sm text-on-surface-variant mb-4">
+                {pillar.description}
+              </p>
+              <span className="text-xs text-tertiary font-semibold uppercase tracking-wider">
+                {pillar.cta} →
+              </span>
             </Link>
+          ))}
+        </div>
+      </section>
+
+      <ExperienceGallery />
+
+      {/* Noches de la semana */}
+      <section className="py-24 bg-surface-container-lowest border-y border-outline-variant/20">
+        <div className="px-4 md:px-16 max-w-[1280px] mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 gap-4">
+            <div>
+              <p className="text-secondary text-xs uppercase tracking-widest mb-2 font-semibold">
+                Cartelera Semanal
+              </p>
+              <h2 className="font-display text-3xl text-on-surface">
+                Noches <span className="text-tertiary italic">Temáticas</span>
+              </h2>
+            </div>
+            <Link
+              href="/eventos"
+              className="text-secondary border-b border-secondary pb-1 text-xs font-semibold uppercase tracking-widest hover:text-tertiary hover:border-tertiary transition-colors"
+            >
+              Ver cartelera completa →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {weeklyNights.map((night) => (
+              <div
+                key={night.title}
+                className="group flex gap-4 p-5 rounded-xl bg-surface border border-outline-variant/30 hover:border-secondary transition-all interactive-card"
+              >
+                <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden">
+                  <Image
+                    src={night.image}
+                    alt={night.title}
+                    fill
+                    sizes="96px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-xs text-tertiary font-semibold uppercase">
+                      {night.day}
+                    </span>
+                    <span className="text-xs px-2 py-0.5 bg-secondary/20 text-secondary rounded-full">
+                      {night.tag}
+                    </span>
+                  </div>
+                  <h3 className="font-display text-lg text-on-surface group-hover:text-secondary transition-colors">
+                    {night.title}
+                  </h3>
+                  <p className="text-sm text-on-surface-variant mt-1 line-clamp-2">
+                    {night.description}
+                  </p>
+                  <p className="text-xs text-secondary mt-2 font-semibold">
+                    {night.time}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA eventos privados */}
+      <section className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto">
+        <div className="relative rounded-xl overflow-hidden stone-outline bg-surface-container-high">
+          <div className="relative h-48 md:h-56">
+            <Image
+              src={stitchEventosImages.hero}
+              alt="Reservas para eventos privados"
+              fill
+              sizes="100vw"
+              className="object-cover opacity-40"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent" />
+          </div>
+          <div className="relative md:absolute md:inset-0 md:flex md:items-center p-8 md:p-12">
+            <div className="max-w-lg">
+              <h2 className="font-display text-3xl text-on-surface mb-3">
+                ¿Planeas un{" "}
+                <span className="text-secondary italic">evento especial</span>?
+              </h2>
+              <p className="text-base text-on-surface-variant mb-6">
+                Cumpleaños, ascensos, despedidas, bodas y celebraciones
+                familiares. Reservamos para todo tipo de eventos en Venezuela.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={conversionCTAs.evento.href}
+                  className="bg-secondary text-on-secondary px-8 py-3 rounded-full font-semibold hover:bg-secondary-container transition-colors"
+                >
+                  {conversionCTAs.evento.label}
+                </Link>
+                <Link
+                  href={conversionCTAs.vip.href}
+                  className="border border-tertiary text-tertiary px-8 py-3 rounded-full font-semibold hover:bg-tertiary/10 transition-colors"
+                >
+                  {conversionCTAs.vip.label}
+                </Link>
+                <Link
+                  href="/menu"
+                  className="border border-outline-variant text-on-surface-variant px-8 py-3 rounded-full font-semibold hover:text-secondary hover:border-secondary transition-colors"
+                >
+                  Ver Carta Digital
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Ubicación */}
-      <section id="ubicacion" className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto scroll-mt-20">
-        <h2 className="font-display text-3xl text-on-surface text-center mb-10">
-          Ubicación en el <span className="text-secondary italic">Casco Colonial</span>
+      <section
+        id="ubicacion"
+        className="py-24 px-4 md:px-16 max-w-[1280px] mx-auto scroll-mt-20"
+      >
+        <h2 className="font-display text-3xl text-on-surface text-center mb-4">
+          En el <span className="text-secondary italic">Casco Colonial</span>
         </h2>
+        <p className="text-center text-on-surface-variant mb-10 text-sm">
+          {restaurantInfo.hours} · {restaurantInfo.location}
+        </p>
         <div className="rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container">
           <iframe
             title="Mapa de La Casa del Llano 2014"
@@ -171,9 +264,6 @@ export default function Home() {
             allowFullScreen
           />
           <div className="p-6 text-center bg-surface-container-high">
-            <p className="text-secondary font-semibold mb-1">
-              {restaurantInfo.location}
-            </p>
             <p className="text-sm text-on-surface-variant">{restaurantInfo.address}</p>
             <a
               href="https://maps.google.com/?q=La+Guaira+Venezuela+Casco+Colonial"

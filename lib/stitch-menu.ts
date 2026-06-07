@@ -15,6 +15,101 @@ export const stitchMenuImages = {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuAx28mPxW_mYZlklRa562X-gUEZBqFVOjq5Zff-86zDq7aypxvMtwySlXKoWaa7PXxT5Dre0kwHwxAUDEqzB7GrXrqwp05Yy1RCKAlZ8GuZjH-nsLWwjq4UjiLLmBe1WysuHxBXaWdShT8FO83U18fx0vJ4vvvvnWfS3GtW7VmNg68NHXG6SkY_jfjwqVaLH7mTGhXRwZ2vP-kDuevi8ykn0SyGbFakd388CH_Gnitrgf-CxGYiZ1S-7hCmXaGufJjuB32k5rlWvP0_",
 } as const;
 
+export const cocteleria = [
+  {
+    name: "Sangría del Llano",
+    price: "$25.00",
+    description: "Jarra para compartir. Vino tinto, frutas tropicales y un toque de ron criollo.",
+    tag: "Para compartir",
+  },
+  {
+    name: "Mojito Guaireño",
+    price: "$8.00",
+    description: "Ron blanco, hierbabuena fresca, lima y soda. Refrescante para la pista.",
+    tag: "Clásico",
+  },
+  {
+    name: "Ron Criollo Sour",
+    price: "$10.00",
+    description: "Santa Teresa, limón, amargo de angostura y espuma de clara.",
+    tag: "Signature",
+  },
+  {
+    name: "Margarita de la Casa",
+    price: "$9.00",
+    description: "Tequila, triple sec y sal de rim con ají dulce. Picante y elegante.",
+    tag: "Popular",
+  },
+  {
+    name: "Cuba Libre Premium",
+    price: "$7.00",
+    description: "Ron añejo, cola artesanal y lima fresca. El trago de la rumba.",
+    tag: null,
+  },
+  {
+    name: "Tizana con Ron",
+    price: "$8.00",
+    description: "Tizana guaireña con shot de ron. Dulce, tropical y potente.",
+    tag: null,
+  },
+] as const;
+
+export const menuSections = [
+  { id: "cocteleria", label: "Coctelería", icon: "liquor" },
+  { id: "tragos", label: "Tragos", icon: "local_bar" },
+  { id: "tapas", label: "Tapas", icon: "restaurant_menu" },
+  { id: "botellas", label: "Botellas VIP", icon: "wine_bar" },
+] as const;
+
+export const serviciosBotellas = [
+  {
+    name: "Ron Santa Teresa 1796",
+    price: "Consultar",
+    description: "Servicio de mesa con hielo, mezcladores y copas premium.",
+    tag: "Premium",
+  },
+  {
+    name: "Ron Diplomático Reserva",
+    price: "Consultar",
+    description: "Botella para compartir en mesa VIP o evento privado.",
+    tag: "VIP",
+  },
+  {
+    name: "Vodka Premium",
+    price: "Consultar",
+    description: "Ideal para despedidas, cumpleaños y celebraciones.",
+    tag: null,
+  },
+  {
+    name: "Whisky Selection",
+    price: "Consultar",
+    description: "Selección de etiquetas importadas para brindis exclusivos.",
+    tag: null,
+  },
+  {
+    name: "Champagne / Espumante",
+    price: "Consultar",
+    description: "Para bodas, aniversarios y fechas especiales.",
+    tag: "Celebración",
+  },
+  {
+    name: "Paquete Barra Botellas",
+    price: "Cotizar",
+    description:
+      "Combo de botellas + tapas para eventos privados. Consulta con reservas.",
+    tag: "Eventos",
+  },
+] as const;
+
+export const tragosBarra = [
+  { name: "Ron Añejo Selection", price: "$12.00" },
+  { name: "Papelón con Limón", price: "$4.00" },
+  { name: "Cerveza Nacional", price: "$3.50" },
+  { name: "Tizana Guaireña", price: "$6.00" },
+  { name: "Agua Mineral", price: "$2.50" },
+  { name: "Chicha con Ron", price: "$7.00" },
+] as const;
+
 type TapaItem = {
   name: string;
   price: string;
@@ -30,7 +125,7 @@ export const tapasTradicionales: TapaItem[] = [
     description:
       "Masa de maíz crujiente rellena de carne mechada sazonada con el secreto del Llano.",
     image: stitchMenuImages.empanadaCarne,
-    badge: { text: "Popular", variant: "tertiary" as const },
+    badge: { text: "Popular", variant: "tertiary" },
   },
   {
     name: "Tequeños Guaireños",
@@ -38,7 +133,7 @@ export const tapasTradicionales: TapaItem[] = [
     description:
       "Deditos de queso envueltos en masa artesanal, fritos hasta el punto perfecto de oro.",
     image: stitchMenuImages.tequenos,
-    badge: { text: "Live Music Special", variant: "primary" as const },
+    badge: { text: "Karaoke Night", variant: "primary" },
   },
   {
     name: "Empanada de Queso",
@@ -48,12 +143,3 @@ export const tapasTradicionales: TapaItem[] = [
     image: stitchMenuImages.empanadaQueso,
   },
 ];
-
-export const bebidasRumba = [
-  { name: "Papelón con Limón", price: "$4.00" },
-  { name: "Cerveza Nacional", price: "$3.50" },
-  { name: "Ron Añejo Selection", price: "$12.00" },
-  { name: "Sangría del Llano", price: "$25.00" },
-  { name: "Agua Mineral", price: "$2.50" },
-  { name: "Tizana Guaireña", price: "$6.00" },
-] as const;
