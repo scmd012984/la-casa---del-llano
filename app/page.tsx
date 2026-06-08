@@ -2,16 +2,25 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import CelebrationCombos from "@/components/CelebrationCombos";
+import ClientQuoteStrip from "@/components/ClientQuoteStrip";
 import ExperienceGallery from "@/components/ExperienceGallery";
 import HeroWelcome from "@/components/HeroWelcome";
+import LocationActions from "@/components/LocationActions";
+import MinorsPolicyNotice from "@/components/MinorsPolicyNotice";
+import ReservationFAQ from "@/components/ReservationFAQ";
 import SocialProof from "@/components/SocialProof";
 import ThematicNightsCalendar from "@/components/ThematicNightsCalendar";
+import TonightAtLaCasa from "@/components/TonightAtLaCasa";
 import {
   businessPillars,
   conversionCTAs,
   restaurantInfo,
 } from "@/lib/data";
 import { images } from "@/lib/images";
+
+const SeasonalBanner = dynamic(() => import("@/components/SeasonalBanner"), {
+  loading: () => null,
+});
 
 const ScrollRevealCards = dynamic(
   () =>
@@ -24,11 +33,19 @@ export default function Home() {
     <div>
       <ScrollRevealCards />
 
+      <SeasonalBanner />
+
       <HeroWelcome />
+
+      <TonightAtLaCasa />
+
+      <ClientQuoteStrip />
 
       <ThematicNightsCalendar />
 
       <SocialProof />
+
+      <ExperienceGallery />
 
       <section className="site-container py-16 sm:py-20">
         <CelebrationCombos />
@@ -71,8 +88,6 @@ export default function Home() {
         </div>
       </section>
 
-      <ExperienceGallery />
-
       {/* CTA eventos privados */}
       <section className="site-container py-20 sm:py-24">
         <div className="relative rounded-xl card-wood md:min-h-[14rem]">
@@ -93,10 +108,11 @@ export default function Home() {
                 ¿Planeas un{" "}
                 <span className="title-accent">evento especial</span>?
               </h2>
-              <p className="text-base text-on-surface-variant mb-6">
+              <p className="text-base text-on-surface-variant mb-4">
                 Cumpleaños, ascensos, despedidas, bodas y celebraciones
                 familiares. Reservamos para todo tipo de eventos en Venezuela.
               </p>
+              <MinorsPolicyNotice className="mb-6" />
               <div className="flex flex-wrap gap-4">
                 <Link
                   href={conversionCTAs.evento.href}
@@ -122,6 +138,8 @@ export default function Home() {
         </div>
       </section>
 
+      <ReservationFAQ />
+
       {/* Ubicación */}
       <section
         id="ubicacion"
@@ -130,10 +148,11 @@ export default function Home() {
         <h2 className="type-section-title text-on-surface mb-4 text-center">
           En el <span className="title-accent">Casco Colonial</span>
         </h2>
-        <p className="text-center text-on-surface-variant mb-10 text-sm">
+        <p className="text-center text-on-surface-variant mb-6 text-sm">
           {restaurantInfo.hours} · {restaurantInfo.location}
         </p>
-        <div className="rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container">
+        <LocationActions />
+        <div className="rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container mt-8">
           <iframe
             title="Mapa de La Casa del Llano 2014"
             src={restaurantInfo.mapEmbedUrl}
@@ -144,14 +163,6 @@ export default function Home() {
           />
           <div className="p-6 text-center bg-surface-container-high">
             <p className="text-sm text-on-surface-variant">{restaurantInfo.address}</p>
-            <a
-              href="https://maps.google.com/?q=La+Guaira+Venezuela+Casco+Colonial"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-llano inline-block mt-3"
-            >
-              Abrir en Google Maps
-            </a>
           </div>
         </div>
       </section>

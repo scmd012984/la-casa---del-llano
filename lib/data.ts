@@ -19,6 +19,15 @@ export const conversionCTAs = {
 
 export const audiovisualHighlights = [
   {
+    id: "bienvenida",
+    title: "Mensaje de bienvenida",
+    subtitle: "Los esperamos con los brazos abiertos",
+    thumbnail: "/videos/bienvenida-poster.jpg",
+    type: "video" as const,
+    typeLabel: "Bienvenida",
+    featured: true,
+  },
+  {
     id: "rumba-pista",
     title: "Rumba en la Pista",
     subtitle: "Luces LED y energía tropical",
@@ -181,10 +190,6 @@ export const heroContent = {
     label: "Reservar tu Mesa / Cumpleaños",
     href: "/reserva?tipo=cumpleanos#formulario-reserva",
   },
-  video: {
-    poster: stitchEventosImages.hero,
-    sources: [] as const,
-  },
 } as const;
 
 export const socialProof = {
@@ -251,6 +256,50 @@ export const socialProof = {
       date: "Hace 1 mes",
     },
   ],
+} as const;
+
+/** Citas cortas para la franja de confianza (inicio). */
+export const clientQuotes = socialProof.googleReviews.slice(0, 3).map((review) => ({
+  text: review.text,
+  author: review.author,
+  rating: review.rating,
+}));
+
+export const reservationFaq = [
+  {
+    id: "vip-includes",
+    question: "¿Qué incluye la mesa VIP?",
+    answer:
+      "Mesa reservada en zona preferencial, servicio de botellas selectas y atención prioritaria. Los tragos y tapas se eligen de la carta digital o con el equipo de sala.",
+  },
+  {
+    id: "minors",
+    question: "¿Pueden entrar menores de edad?",
+    answer:
+      "Sí, únicamente con acompañamiento de familiar directo y responsable. El local es para todas las edades con ambiente nocturno responsable.",
+  },
+  {
+    id: "deposit",
+    question: "¿Se requiere depósito o anticipo?",
+    answer:
+      "Para mesa VIP y eventos privados puede solicitarse confirmación por WhatsApp. Te indicamos disponibilidad, mínimo de consumo y formas de pago al reservar.",
+  },
+  {
+    id: "deadline",
+    question: "¿Hasta cuándo puedo reservar?",
+    answer:
+      "Recomendamos reservar con al menos 24–48 horas de anticipación para cumpleaños y eventos. Para mesa VIP el mismo día, escríbenos por WhatsApp según disponibilidad.",
+  },
+] as const;
+
+/** Banner temporal editable desde data.ts — cambia id al actualizar el mensaje. */
+export const seasonalBanner = {
+  enabled: true,
+  id: "temporada-jun-2026",
+  eyebrow: "Esta temporada",
+  message: "Karaoke en vivo, DJs invitados y noches temáticas cada fin de semana.",
+  ctaLabel: "Reservar mesa",
+  ctaHref: "/reserva?tipo=vip#formulario-reserva",
 } as const;
 
 export const targetAudience = {
@@ -695,7 +744,16 @@ export const restaurantInfo = {
   description:
     "En el Casco Colonial de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos de primera. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",
   shortDescription:
-    "Reserva mesa VIP y eventos privados en La Guaira. Rumba, karaoke, carta digital de tragos y tapas, y servicio de botellas selectas.",
+    "Disco, karaoke y tasca en La Guaira, Venezuela. Reserva mesa VIP y eventos privados con tragos, tapas y servicio de botellas en el Casco Colonial.",
+  seoKeywords: [
+    "La Casa del Llano",
+    "disco La Guaira",
+    "karaoke La Guaira",
+    "mesa VIP",
+    "eventos privados",
+    "Casco Colonial",
+    "rumba Venezuela",
+  ],
   mapEmbedUrl:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.8!2d-66.934!3d10.601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a3b8f8f8f8f8f%3A0x0!2sLa%20Guaira%2C%20Venezuela!5e0!3m2!1ses!2sve!4v1700000000000!5m2!1ses!2sve",
 } as const;

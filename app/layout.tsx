@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import ConversionFab from "@/components/ConversionFab";
 import Footer from "@/components/Footer";
+import LocalBusinessJsonLd from "@/components/LocalBusinessJsonLd";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import Navbar from "@/components/Navbar";
 import { restaurantInfo } from "@/lib/data";
@@ -28,10 +29,32 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: {
-    default: restaurantInfo.name,
+    default: `${restaurantInfo.name} · Disco y Karaoke en La Guaira`,
     template: `%s | ${restaurantInfo.name}`,
   },
   description: restaurantInfo.shortDescription,
+  keywords: [...restaurantInfo.seoKeywords],
+  applicationName: restaurantInfo.name,
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "La Casa del Llano",
+    statusBarStyle: "black-translucent",
+  },
+  openGraph: {
+    type: "website",
+    locale: "es_VE",
+    siteName: restaurantInfo.name,
+    title: `${restaurantInfo.name} · Disco y Karaoke en La Guaira`,
+    description: restaurantInfo.shortDescription,
+    images: [{ url: restaurantInfo.logo.src, alt: restaurantInfo.logo.alt }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${restaurantInfo.name} · Disco y Karaoke en La Guaira`,
+    description: restaurantInfo.shortDescription,
+    images: [restaurantInfo.logo.src],
+  },
 };
 
 export const viewport: Viewport = {
@@ -58,6 +81,8 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link rel="stylesheet" href={MATERIAL_SYMBOLS_HREF} />
+        <link rel="apple-touch-icon" href="/images/logo-icon.png" />
+        <LocalBusinessJsonLd />
       </head>
       <body className="min-h-full flex flex-col text-foreground selection:bg-primary-container selection:text-on-surface site-shell">
         <Navbar />

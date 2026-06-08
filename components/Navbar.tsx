@@ -12,14 +12,16 @@ import {
 } from "@/lib/data";
 
 const brandStars = [
-  { top: "48%", delay: "0s" },
-  { top: "40%", delay: "-2.5s" },
-  { top: "34%", delay: "-5s" },
-  { top: "30%", delay: "-7.5s" },
-  { top: "30%", delay: "-10s" },
-  { top: "34%", delay: "-12.5s" },
-  { top: "40%", delay: "-15s" },
-  { top: "48%", delay: "-17.5s" },
+  { top: "34%", left: "3%" },
+  { top: "38%", left: "7%" },
+  { top: "36%", left: "12%" },
+  { top: "32%", left: "26%" },
+  { top: "30%", left: "40%" },
+  { top: "30%", left: "54%" },
+  { top: "32%", left: "68%" },
+  { top: "36%", left: "82%" },
+  { top: "40%", left: "94%" },
+  { top: "34%", left: "48%" },
 ];
 
 export default function Navbar() {
@@ -36,42 +38,15 @@ export default function Navbar() {
         >
           <div className="nav-brand-wrap">
             <div className="nav-brand-flag-breeze" aria-hidden>
-              <div className="nav-brand-flag-beam nav-brand-flag-beam--right" aria-hidden>
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--back" />
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--front" />
-                <span className="nav-brand-flag-beam-core" />
-              </div>
-              <div className="nav-brand-flag-beam nav-brand-flag-beam--left" aria-hidden>
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--back" />
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--front" />
-                <span className="nav-brand-flag-beam-core" />
-              </div>
-              <div
-                className="nav-brand-flag-beam nav-brand-flag-beam--top nav-brand-flag-beam--vertical"
-                aria-hidden
-              >
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--back" />
-                <span className="nav-brand-flag-beam-layer nav-brand-flag-beam-layer--front" />
-                <span className="nav-brand-flag-beam-core" />
-              </div>
               <div className="nav-brand-flag-sheet nav-brand-flag-sheet--back" />
               <div className="nav-brand-flag-sheet nav-brand-flag-sheet--front" />
               <div className="nav-brand-flag-stars-field">
-                <div className="nav-brand-flag-stars nav-brand-flag-stars--back">
-                  {brandStars.map((star, index) => (
-                    <span
-                      key={`back-${index}`}
-                      className="nav-brand-flag-star nav-brand-flag-star--back"
-                      style={{ top: star.top, animationDelay: star.delay }}
-                    />
-                  ))}
-                </div>
                 <div className="nav-brand-flag-stars nav-brand-flag-stars--front">
                   {brandStars.map((star, index) => (
                     <span
-                      key={`front-${index}`}
+                      key={index}
                       className="nav-brand-flag-star nav-brand-flag-star--front"
-                      style={{ top: star.top, animationDelay: star.delay }}
+                      style={{ top: star.top, left: star.left }}
                     />
                   ))}
                 </div>
@@ -90,7 +65,7 @@ export default function Navbar() {
                       qualityPreset="logo"
                       sizes={IMAGE_SIZES.logo}
                       localKey="eslogan-principal"
-                      className="nav-logo-image h-full w-full object-cover object-[center_42%]"
+                      className="nav-logo-image h-full w-full object-contain object-center"
                     />
                   </div>
                 </div>

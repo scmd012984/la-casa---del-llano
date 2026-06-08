@@ -1,5 +1,6 @@
 import Link from "next/link";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
+import MinorsPolicyNotice from "@/components/MinorsPolicyNotice";
 import { conversionCTAs, restaurantInfo } from "@/lib/data";
 import { images } from "@/lib/images";
 
@@ -20,33 +21,45 @@ export default function HeroWelcome() {
         <div className="absolute inset-0 grain-texture" />
         <div className="absolute inset-0 hero-night-veil" />
       </div>
-
-      <div className="site-container relative z-10 max-w-4xl py-10 text-center md:py-14">
-        <span className="badge-llano mb-4">{restaurantInfo.tagline}</span>
-        <h1 className="type-hero-title mb-6 text-on-surface">
-          Entretenimiento Nocturno con{" "}
-          <span className="title-accent">Energía</span>
-        </h1>
-        <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-on-surface-variant sm:text-base md:text-lg">
-          {restaurantInfo.description}
-        </p>
-        <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
-          <Link
-            href={conversionCTAs.vip.href}
-            className="btn-led btn-led--lg"
-          >
-            {conversionCTAs.vip.label}
-          </Link>
-          <Link
-            href={conversionCTAs.evento.href}
-            className="btn-led btn-led--alt btn-led--lg"
-          >
-            {conversionCTAs.evento.label}
-          </Link>
+      <div className="relative z-10 w-full">
+        <div className="hero-enter site-container max-w-4xl py-10 text-center md:py-14">
+          <div className="hero-brand-lockup mb-6">
+            <OptimizedImage
+              src="/images/logo-eslogan-light.png"
+              alt={restaurantInfo.name}
+              width={640}
+              height={220}
+              priority
+              qualityPreset="logo"
+              sizes="(max-width: 640px) 72vw, 320px"
+              localKey="logo-eslogan-light"
+              className="hero-brand-logo mx-auto h-auto w-[min(320px,72vw)]"
+            />
+            <span className="badge-llano mt-4 inline-flex">{restaurantInfo.tagline}</span>
+          </div>
+          <h1 className="type-hero-title mb-6 text-on-surface">
+            Entretenimiento Nocturno con{" "}
+            <span className="title-accent">Energía</span>
+          </h1>
+          <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-on-surface-variant sm:text-base md:text-lg">
+            {restaurantInfo.description}
+          </p>
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+            <Link href={conversionCTAs.vip.href} className="btn-led btn-led--lg">
+              {conversionCTAs.vip.label}
+            </Link>
+            <Link
+              href={conversionCTAs.evento.href}
+              className="btn-led btn-led--alt btn-led--lg"
+            >
+              {conversionCTAs.evento.label}
+            </Link>
+          </div>
+          <p className="mt-4 text-xs text-on-surface-variant/80">
+            Confirmación inmediata por WhatsApp · Comida y servicio de botellas
+          </p>
+          <MinorsPolicyNotice className="mt-3 max-w-xl mx-auto text-center" />
         </div>
-        <p className="mt-4 text-xs text-on-surface-variant/80">
-          Confirmación inmediata por WhatsApp · Comida y servicio de botellas
-        </p>
       </div>
     </header>
   );

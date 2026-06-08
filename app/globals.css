@@ -271,6 +271,189 @@ h2.type-section-title {
   pointer-events: none;
 }
 
+.hero-brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.hero-brand-logo {
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.45));
+}
+
+.hero-enter {
+  animation: hero-enter 0.85s ease-out both;
+}
+
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter {
+    animation: none;
+  }
+}
+
+.experience-gallery-card {
+  aspect-ratio: 9 / 16;
+  border-radius: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .experience-gallery-card:not(.experience-gallery-card--video) {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+.experience-gallery-card--video {
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+
+.experience-gallery-media-frame {
+  position: relative;
+  aspect-ratio: 210 / 640;
+  width: 100%;
+  max-width: 11.5rem;
+  margin-inline: auto;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.experience-gallery-media {
+  background: var(--llano-night);
+}
+
+.experience-gallery-video {
+  transform: scale(1.04);
+  transform-origin: center center;
+}
+
+.experience-gallery-caption {
+  position: relative;
+  padding: 0.65rem 0.75rem 0.75rem;
+}
+
+.experience-gallery-caption-body {
+  min-width: 0;
+}
+
+.experience-gallery-card--featured {
+  aspect-ratio: auto;
+  max-width: 11.5rem;
+  width: fit-content;
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .experience-gallery-card--featured {
+    grid-column: span 2;
+    max-width: 12rem;
+    justify-self: center;
+  }
+}
+
+.experience-gallery-board {
+  align-items: stretch;
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+.experience-gallery-featured-slot {
+  display: flex;
+  min-height: 0;
+}
+
+.experience-gallery-featured-slot > * {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+}
+
+.experience-gallery-board .experience-gallery-card--featured {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin-inline: 0;
+}
+
+.experience-gallery-board .experience-gallery-media-frame {
+  flex: 1 1 auto;
+  min-height: 0;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: auto;
+  margin-inline: 0;
+}
+
+.experience-gallery-board .experience-gallery-caption {
+  flex-shrink: 0;
+}
+
+.gallery-video-sound-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: var(--llano-line) solid color-mix(in srgb, var(--led-amber) 35%, var(--llano-border-strong));
+  background: color-mix(in srgb, var(--llano-surface-high) 92%, var(--llano-leather));
+  color: var(--llano-cream);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.25s ease,
+    transform 0.15s ease;
+}
+
+.gallery-video-sound-toggle--caption {
+  position: absolute;
+  z-index: 2;
+  right: 0.65rem;
+  bottom: 0.65rem;
+}
+
+.gallery-video-sound-toggle:hover {
+  border-color: var(--llano-oak);
+  transform: scale(1.04);
+}
+
+.gallery-video-sound-toggle[aria-pressed="true"] {
+  border-color: color-mix(in srgb, var(--led-amber) 55%, transparent);
+  color: var(--led-amber-hot);
+  box-shadow: 0 0 12px var(--led-amber-glow-soft);
+}
+
+.gallery-video-sound-toggle .material-symbols-outlined {
+  font-size: 0.95rem !important;
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
 .section-llano {
   background: color-mix(in srgb, var(--llano-surface) 55%, transparent);
   border-block: var(--llano-line) solid var(--llano-divider);
@@ -646,8 +829,7 @@ h2.type-section-title {
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  overflow-x: visible;
-  overflow-y: clip;
+  overflow: visible;
   --nav-brand-logo-size: 5.875rem;
   --nav-brand-wordmark-size: 1.3125rem;
   --nav-brand-wordmark-weight: 900;
@@ -1094,7 +1276,7 @@ h2.type-section-title {
   background: var(--nav-flag-fill-back);
   opacity: 0.58;
   filter: blur(18px) saturate(1.18);
-  animation: nav-brand-flag-breeze-back 7s ease-in-out infinite;
+  animation: none;
 }
 
 .nav-brand-flag-sheet--front {
@@ -1102,7 +1284,7 @@ h2.type-section-title {
   background: var(--nav-flag-fill-front);
   opacity: 0.86;
   filter: blur(9px) saturate(1.22);
-  animation: nav-brand-flag-breeze-front 5.8s ease-in-out infinite;
+  animation: none;
 }
 
 .nav-brand-logo-track {
@@ -1110,20 +1292,19 @@ h2.type-section-title {
   z-index: 2;
   flex-shrink: 0;
   align-self: center;
-  width: calc(var(--nav-brand-logo-size) + var(--nav-logo-roll-max));
-  height: calc(var(--nav-brand-logo-size) + 0.5rem);
+  width: var(--nav-brand-logo-size);
+  height: var(--nav-brand-logo-size);
 }
 
 .nav-brand-content .nav-logo-wood-ring {
-  position: absolute;
-  top: 50%;
-  right: 0;
+  position: relative;
+  top: auto;
+  right: auto;
   z-index: 2;
   flex-shrink: 0;
-  transform: translateY(-50%);
-  transform-origin: center center;
-  animation: nav-logo-wheel-travel 7s ease-in-out infinite;
-  will-change: transform;
+  transform: none;
+  animation: none;
+  will-change: auto;
 }
 
 .nav-brand-wordmark {
@@ -1167,12 +1348,11 @@ h2.type-section-title {
 .nav-brand-flag-stars--front {
   z-index: 2;
   filter: none;
-  animation: nav-brand-flag-breeze-front 5.8s ease-in-out infinite;
+  animation: none;
 }
 
 .nav-brand-flag-star {
   position: absolute;
-  left: 100%;
   width: 9px;
   height: 9px;
   background: #ffffff;
@@ -1188,9 +1368,7 @@ h2.type-section-title {
     0% 38%,
     38% 38%
   );
-  animation:
-    nav-brand-flag-star-drift 16s linear infinite,
-    nav-brand-flag-star-shine 2.8s ease-in-out infinite;
+  animation: none;
 }
 
 .nav-brand-flag-star--back {
@@ -1206,8 +1384,7 @@ h2.type-section-title {
     drop-shadow(0 0 5px rgba(255, 255, 255, 1))
     drop-shadow(0 0 12px rgba(255, 255, 255, 0.75))
     drop-shadow(0 0 18px rgba(200, 220, 255, 0.45));
-  opacity: 1;
-  animation-duration: 16s, 2.4s;
+  opacity: 0.95;
 }
 
 @keyframes nav-brand-flag-star-shine {
@@ -1362,7 +1539,11 @@ h2.type-section-title {
 }
 
 .nav-brand-wordmark-line .hover-lift-letters {
-  animation: nav-wordmark-shine 3.6s ease-in-out infinite;
+  animation: none;
+  filter:
+    drop-shadow(0 1px 3px rgba(0, 0, 0, 0.92))
+    drop-shadow(0 0 10px rgba(245, 235, 224, 0.38))
+    drop-shadow(0 0 18px rgba(229, 217, 182, 0.24));
 }
 
 .nav-brand-wordmark-line .hover-lift-letters__char {
@@ -1379,14 +1560,14 @@ h2.type-section-title {
     #b5a48a 100%
   );
   background-size: 280% 100%;
-  background-position: 25% center;
+  background-position: 35% center;
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 0.35px rgba(245, 235, 224, 0.35);
   paint-order: stroke fill;
-  animation: nav-wordmark-char-shine 3.6s ease-in-out infinite;
+  animation: none;
 }
 
 .nav-brand-lockup:hover .nav-brand-wordmark-line .hover-lift-letters,
@@ -1685,7 +1866,6 @@ h2.type-section-title {
 
 .nav-brand-lockup:hover .nav-logo-wood-ring,
 .nav-brand-lockup:focus-visible .nav-logo-wood-ring {
-  animation-duration: 4.5s;
   box-shadow:
     inset 0 1px 0 rgba(220, 180, 120, 0.45),
     inset 0 -3px 8px rgba(0, 0, 0, 0.4),
@@ -1699,6 +1879,8 @@ h2.type-section-title {
   position: relative;
   width: var(--nav-brand-logo-size);
   height: var(--nav-brand-logo-size);
+  padding: 0.35rem;
+  box-sizing: border-box;
 }
 
 .nav-logo-shine::after {
@@ -1738,6 +1920,8 @@ h2.type-section-title {
 .nav-logo-image {
   transform-origin: center center;
   transition: filter 0.45s ease;
+  object-fit: contain;
+  object-position: center;
 }
 
 @keyframes nav-logo-wheel-travel {
@@ -1755,7 +1939,7 @@ h2.type-section-title {
 @media (prefers-reduced-motion: reduce) {
   .nav-brand-content .nav-logo-wood-ring {
     animation: none;
-    transform: translateY(-50%);
+    transform: none;
   }
 }
 
@@ -1771,7 +1955,13 @@ h2.type-section-title {
 
 @media (hover: none) {
   .nav-brand-lockup:active .nav-logo-wood-ring {
-    animation-duration: 3.5s;
+    box-shadow:
+      inset 0 1px 0 rgba(220, 180, 120, 0.45),
+      inset 0 -3px 8px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(26, 12, 8, 0.95),
+      0 0 26px rgba(249, 188, 80, 0.65),
+      0 0 42px rgba(229, 228, 226, 0.35),
+      0 8px 24px rgba(0, 0, 0, 0.55);
   }
 
   .site-navbar-link:active,
