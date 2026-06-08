@@ -23,20 +23,7 @@ export default function HeroWelcome() {
       </div>
       <div className="relative z-10 w-full">
         <div className="hero-enter site-container max-w-4xl py-10 text-center md:py-14">
-          <div className="hero-brand-lockup mb-6">
-            <OptimizedImage
-              src="/images/logo-eslogan-light.png"
-              alt={restaurantInfo.name}
-              width={640}
-              height={220}
-              priority
-              qualityPreset="logo"
-              sizes="(max-width: 640px) 72vw, 320px"
-              localKey="logo-eslogan-light"
-              className="hero-brand-logo mx-auto h-auto w-[min(320px,72vw)]"
-            />
-            <span className="badge-llano mt-4 inline-flex">{restaurantInfo.tagline}</span>
-          </div>
+          <span className="badge-llano mb-6 inline-flex">{restaurantInfo.tagline}</span>
           <h1 className="type-hero-title mb-6 text-on-surface">
             Entretenimiento Nocturno con{" "}
             <span className="title-accent">Energía</span>

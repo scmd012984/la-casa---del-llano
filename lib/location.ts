@@ -1,16 +1,17 @@
-import { restaurantInfo } from "@/lib/data";
+import { restaurantInfo, venueAddress, venueCoordinates } from "@/lib/data";
 import { buildWhatsAppUrl } from "@/lib/whatsapp";
 
-const mapsQuery = encodeURIComponent(
-  "La Casa del Llano 2014, Av. Urdaneta, Casco Histórico, La Guaira, Venezuela",
-);
+const mapsAddressQuery = encodeURIComponent(`${venueAddress}, Venezuela`);
+const mapsCoordsQuery = `${venueCoordinates.lat},${venueCoordinates.lng}`;
 
 export const locationLinks = {
-  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${mapsQuery}`,
-  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`,
+  /** Abre Google Maps con ruta al local (coordenadas precisas). */
+  directionsUrl: `https://www.google.com/maps/dir/?api=1&destination=${mapsCoordsQuery}`,
+  /** Abre la ficha del lugar en Google Maps. */
+  mapsUrl: `https://www.google.com/maps/search/?api=1&query=${mapsAddressQuery}`,
 } as const;
 
 export function buildWhatsAppDirectionsUrl() {
-  const message = `Hola, quisiera saber cómo llegar a ${restaurantInfo.name} en ${restaurantInfo.location}. ¿Me pueden indicar la ubicación?`;
+  const message = `Hola, quisiera saber cómo llegar a ${restaurantInfo.name} en ${venueAddress}. ¿Me pueden indicar la ubicación?`;
   return buildWhatsAppUrl(message);
 }

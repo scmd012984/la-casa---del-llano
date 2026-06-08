@@ -1,7 +1,9 @@
 import {
   eventReservationTypes,
   restaurantInfo,
+  venueAddress,
 } from "./data";
+import { locationLinks } from "./location";
 
 export type WhatsAppFunnelKey =
   | "home_default"
@@ -29,6 +31,8 @@ export type WhatsAppFunnelConfig = {
   hint?: string;
   message: string;
   formHref?: string;
+  mapsHref?: string;
+  mapsAriaLabel?: string;
 };
 
 const eventTypeLabels = Object.fromEntries(
@@ -83,8 +87,10 @@ const funnelTemplates: Record<
     shortLabel: "Ubicación",
     fabAriaLabel: "Consultar ubicación por WhatsApp",
     hint: "Cómo llegar y horarios",
+    mapsHref: locationLinks.directionsUrl,
+    mapsAriaLabel: "Abrir cómo llegar en Google Maps",
     message: [
-      `Hola, quisiera confirmar la ubicación y horarios de *${restaurantInfo.name}*.`,
+      `Hola, quisiera confirmar la ubicación (${venueAddress}) y horarios de *${restaurantInfo.name}*.`,
       "Planeo visitarlos el día *___* aproximadamente a las *___*.",
       "¿Tienen estacionamiento o alguna recomendación para llegar?",
     ].join("\n"),

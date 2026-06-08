@@ -1,4 +1,4 @@
-import { restaurantInfo, tascaHours } from "@/lib/data";
+import { restaurantInfo, tascaHours, venueCoordinates } from "@/lib/data";
 
 export default function LocalBusinessJsonLd() {
   const jsonLd = {
@@ -17,8 +17,8 @@ export default function LocalBusinessJsonLd() {
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 10.601,
-      longitude: -66.934,
+      latitude: venueCoordinates.lat,
+      longitude: venueCoordinates.lng,
     },
     openingHoursSpecification: [
       {

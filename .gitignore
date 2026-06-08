@@ -40,6 +40,9 @@ google-integration/.clasp.json
 # dev reservation log
 /data/reservations.jsonl
 
+# source video backups (web uses compressed *.mp4 without .full)
+public/videos/*.full.mp4
+
 # vercel
 .vercel
 

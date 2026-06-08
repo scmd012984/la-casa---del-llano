@@ -12,6 +12,7 @@ import {
   specialties,
   targetAudience,
 } from "@/lib/data";
+import { telHref, whatsappHref } from "@/lib/contact";
 import { images } from "@/lib/images";
 
 export const metadata: Metadata = {
@@ -162,17 +163,20 @@ export default async function ReservaPage({ searchParams }: ReservaPageProps) {
               <p className="text-sm text-on-surface-variant mb-1">
                 {restaurantInfo.address}
               </p>
-              <p className="text-sm text-on-surface-variant mb-4">
+              <a
+                href={telHref}
+                className="text-sm text-on-surface-variant hover:text-on-surface transition-colors block mb-4"
+              >
                 {restaurantInfo.phone}
-              </p>
-              <p className="text-sm text-on-surface-variant">
+              </a>
+              <p className="text-sm text-on-surface-variant mb-4">
                 {restaurantInfo.hours}
               </p>
               <a
-                href={`https://wa.me/${restaurantInfo.phone.replace(/\D/g, "")}`}
+                href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-led btn-led--sm mt-4"
+                className="btn-led btn-led--sm inline-flex items-center gap-2"
               >
                 <span className="material-symbols-outlined text-base">chat</span>
                 WhatsApp directo

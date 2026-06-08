@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import CelebrationCombos from "@/components/CelebrationCombos";
-import ClientQuoteStrip from "@/components/ClientQuoteStrip";
 import ExperienceGallery from "@/components/ExperienceGallery";
 import HeroWelcome from "@/components/HeroWelcome";
 import LocationActions from "@/components/LocationActions";
@@ -16,6 +15,7 @@ import {
   conversionCTAs,
   restaurantInfo,
 } from "@/lib/data";
+import { telHref } from "@/lib/contact";
 import { images } from "@/lib/images";
 
 const SeasonalBanner = dynamic(() => import("@/components/SeasonalBanner"), {
@@ -35,11 +35,11 @@ export default function Home() {
 
       <SeasonalBanner />
 
-      <HeroWelcome />
+      <div className="overflow-visible">
+        <HeroWelcome />
 
-      <TonightAtLaCasa />
-
-      <ClientQuoteStrip />
+        <TonightAtLaCasa />
+      </div>
 
       <ThematicNightsCalendar />
 
@@ -143,10 +143,10 @@ export default function Home() {
       {/* Ubicación */}
       <section
         id="ubicacion"
-        className="site-container scroll-mt-20 py-20 sm:py-24"
+        className="site-container scroll-mt-20 py-20 sm:py-24 pb-32 lg:pb-24"
       >
         <h2 className="type-section-title text-on-surface mb-4 text-center">
-          En el <span className="title-accent">Casco Colonial</span>
+          En el <span className="title-accent">Casco Histórico</span>
         </h2>
         <p className="text-center text-on-surface-variant mb-6 text-sm">
           {restaurantInfo.hours} · {restaurantInfo.location}
@@ -161,8 +161,14 @@ export default function Home() {
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen
           />
-          <div className="p-6 text-center bg-surface-container-high">
+          <div className="p-6 text-center bg-surface-container-high space-y-1">
             <p className="text-sm text-on-surface-variant">{restaurantInfo.address}</p>
+            <a
+              href={telHref}
+              className="text-sm text-on-surface-variant hover:text-on-surface transition-colors inline-block"
+            >
+              {restaurantInfo.phone}
+            </a>
           </div>
         </div>
       </section>

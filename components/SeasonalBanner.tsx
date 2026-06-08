@@ -1,25 +1,40 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { seasonalBanner } from "@/lib/data";
 
 const storageKey = `llano-banner-dismiss-${seasonalBanner.id}`;
 
+const bannerListeners = new Set<() => void>();
+
+function subscribe(onStoreChange: () => void) {
+  bannerListeners.add(onStoreChange);
+  return () => {
+    bannerListeners.delete(onStoreChange);
+  };
+}
+
+function notifyBannerListeners() {
+  bannerListeners.forEach((listener) => listener());
+}
+
+function getDismissedSnapshot() {
+  try {
+    return localStorage.getItem(storageKey) === "1";
+  } catch {
+    return false;
+  }
+}
+
 export default function SeasonalBanner() {
-  const [visible, setVisible] = useState(false);
+  const dismissed = useSyncExternalStore(
+    subscribe,
+    getDismissedSnapshot,
+    () => false,
+  );
 
-  useEffect(() => {
-    if (!seasonalBanner.enabled) return;
-    try {
-      const dismissed = localStorage.getItem(storageKey);
-      setVisible(dismissed !== "1");
-    } catch {
-      setVisible(true);
-    }
-  }, []);
-
-  if (!seasonalBanner.enabled || !visible) return null;
+  if (!seasonalBanner.enabled || dismissed) return null;
 
   function dismiss() {
     try {
@@ -27,7 +42,7 @@ export default function SeasonalBanner() {
     } catch {
       /* ignore */
     }
-    setVisible(false);
+    notifyBannerListeners();
   }
 
   return (

@@ -7,11 +7,11 @@ export default function TonightAtLaCasa() {
   return (
     <section
       id="esta-noche"
-      className="site-container scroll-mt-24 -mt-6 sm:-mt-8 mb-2 sm:mb-0"
+      className="site-container scroll-mt-24 relative z-20 mt-5 sm:mt-6 mb-4 sm:mb-6"
       aria-label="Programación de esta noche"
     >
       <div
-        className={`rounded-xl border px-4 py-4 sm:px-5 sm:py-5 ${
+        className={`rounded-xl border card-body-safe overflow-visible ${
           tonight.isOpen
             ? "card-wood border-outline-variant/40"
             : "bg-surface-container-low border-outline-variant/25"
@@ -19,8 +19,8 @@ export default function TonightAtLaCasa() {
       >
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
           <div className="min-w-0">
-            <p className="eyebrow-llano mb-1.5">Esta noche en La Casa</p>
-            <h2 className="font-display text-xl sm:text-2xl text-on-surface leading-snug">
+            <p className="eyebrow-llano mb-1.5 pt-0.5">Esta noche en La Casa</p>
+            <h2 className="font-display text-xl sm:text-2xl text-on-surface leading-snug pt-0.5">
               {tonight.headline}
             </h2>
             <p className="text-sm text-on-surface-variant mt-2 max-w-2xl leading-relaxed">

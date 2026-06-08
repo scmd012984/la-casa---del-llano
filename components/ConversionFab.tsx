@@ -5,14 +5,14 @@ import { Suspense } from "react";
 import { useWhatsAppFunnel } from "@/hooks/useWhatsAppFunnel";
 
 function ConversionFabContent() {
-  const { shortLabel, fabAriaLabel, hint, whatsappUrl, formHref } =
+  const { shortLabel, fabAriaLabel, hint, whatsappUrl, formHref, mapsHref, mapsAriaLabel } =
     useWhatsAppFunnel();
 
   return (
     <div
       className="conversion-fab fixed right-4 md:right-8 z-40 flex flex-col items-end gap-2"
       role="complementary"
-      aria-label="Contacto por WhatsApp"
+      aria-label="Contacto y reservas"
     >
       {formHref ? (
         <Link
@@ -25,16 +25,48 @@ function ConversionFabContent() {
       ) : null}
 
       <div className="flex items-center gap-2">
-        <span className="hidden sm:flex flex-col items-end gap-0.5 pointer-events-none">
-          <span className="conversion-fab-label card-wood text-on-surface px-3 py-1.5 rounded-full text-xs font-semibold shadow-md backdrop-blur-sm">
-            {shortLabel}
-          </span>
+        <span className="hidden sm:flex flex-col items-end gap-0.5">
+          {formHref ? (
+            <Link
+              href={formHref}
+              className="conversion-fab-label conversion-fab-action card-wood text-on-surface px-3 py-1.5 rounded-full text-xs font-semibold shadow-md backdrop-blur-sm"
+            >
+              {shortLabel}
+            </Link>
+          ) : mapsHref ? (
+            <a
+              href={mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="conversion-fab-label conversion-fab-action card-wood text-on-surface px-3 py-1.5 rounded-full text-xs font-semibold shadow-md backdrop-blur-sm"
+            >
+              {shortLabel}
+            </a>
+          ) : (
+            <span className="conversion-fab-label card-wood text-on-surface px-3 py-1.5 rounded-full text-xs font-semibold shadow-md backdrop-blur-sm">
+              {shortLabel}
+            </span>
+          )}
           {hint ? (
-            <span className="text-[10px] text-on-surface-variant/80 pr-1 max-w-[11rem] text-right leading-snug">
+            <span className="text-[10px] text-on-surface-variant/80 pr-1 max-w-[11rem] text-right leading-snug pointer-events-none">
               {hint}
             </span>
           ) : null}
         </span>
+
+        {mapsHref ? (
+          <a
+            href={mapsHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="location-fab group flex items-center justify-center rounded-full shadow-xl transition-all"
+            aria-label={mapsAriaLabel ?? "Abrir ubicación en Google Maps"}
+          >
+            <span className="material-symbols-outlined location-fab-icon" aria-hidden>
+              location_on
+            </span>
+          </a>
+        ) : null}
 
         <a
           href={whatsappUrl}

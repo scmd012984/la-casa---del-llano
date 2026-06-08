@@ -366,7 +366,7 @@ export default function ReservationForm({
               type="tel"
               required
               className={inputClass}
-              placeholder="+58 412-000-0000"
+              placeholder="+58 424-2411578"
             />
           </div>
         </div>

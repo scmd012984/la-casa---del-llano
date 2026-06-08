@@ -1,6 +1,17 @@
 import { images, type ImageKey } from "./images";
 import { stitchEventosImages } from "./stitch-images";
 
+/** Dirección oficial del local — una sola fuente para mapas, footer y SEO. */
+export const venueAddress = "Calle Bolívar, Casco Histórico, La Guaira" as const;
+
+/** Coordenadas del Casco Histórico (Google Maps / cómo llegar). */
+export const venueCoordinates = {
+  lat: 10.5992,
+  lng: -66.9339,
+} as const;
+
+const mapEmbedQuery = encodeURIComponent(`${venueAddress}, Venezuela`);
+
 export const conversionCTAs = {
   vip: {
     label: "Reservar Mesa VIP",
@@ -38,7 +49,7 @@ export const audiovisualHighlights = [
   {
     id: "karaoke-vivo",
     title: "Ubicación de La Casa del Llano",
-    subtitle: "Casco Histórico de La Guaira",
+    subtitle: venueAddress,
     thumbnail: "/videos/karaoke-vivo-poster.jpg",
     type: "video" as const,
     typeLabel: "",
@@ -214,56 +225,26 @@ export const socialProof = {
       },
       {
         src: audiovisualHighlights[0].thumbnail,
-        alt: "Rumba en la pista",
+        alt: "Mensaje de bienvenida",
       },
       {
-        src: audiovisualHighlights[3].thumbnail,
-        alt: "Experiencia VIP",
+        src: audiovisualHighlights[2].thumbnail,
+        alt: "Ubicación en el Casco Histórico",
       },
       {
-        src: stitchEventosImages.karaoke,
-        alt: "Noche de celebración",
+        src: images.rumba,
+        alt: "Rumba y pista",
       },
     ],
   },
-  googleReviews: [
-    {
-      author: "María G.",
-      rating: 5,
-      text: "Celebramos un cumpleaños increíble. Karaoke, buena música y tragos de primera. Volveremos sin duda.",
-      source: "Google Mi Negocio",
-      date: "Hace 2 semanas",
-    },
-    {
-      author: "Carlos R.",
-      rating: 5,
-      text: "El mejor ambiente nocturno de La Guaira. La zona VIP vale totalmente la pena para un grupo grande.",
-      source: "Google Mi Negocio",
-      date: "Hace 1 mes",
-    },
-    {
-      author: "Andrea P.",
-      rating: 5,
-      text: "La Noche de Damas los jueves es una locura. Buen DJ, coctelería criolla y servicio excelente.",
-      source: "Google Mi Negocio",
-      date: "Hace 3 semanas",
-    },
-    {
-      author: "Luis M.",
-      rating: 5,
-      text: "Reservamos para una despedida y todo salió perfecto: mesa, botellas y karaoke. 10/10.",
-      source: "Google Mi Negocio",
-      date: "Hace 1 mes",
-    },
-  ],
+  googleBusiness: {
+    label: "Google Maps",
+    mapsUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`La Casa del Llano 2014, ${venueAddress}, Venezuela`)}`,
+    ctaLabel: "Ver ubicación y opiniones",
+    description:
+      "Encuéntranos en Google Maps, revisa la ruta desde tu zona y deja tu opinión después de visitarnos.",
+  },
 } as const;
-
-/** Citas cortas para la franja de confianza (inicio). */
-export const clientQuotes = socialProof.googleReviews.slice(0, 3).map((review) => ({
-  text: review.text,
-  author: review.author,
-  rating: review.rating,
-}));
 
 export const reservationFaq = [
   {
@@ -306,7 +287,7 @@ export const targetAudience = {
   title: "Para todas las edades",
   subtitle: "Entretenimiento nocturno en Venezuela",
   description:
-    "Un espacio energético en La Guaira para quienes buscan rumba, buena música y celebrar fechas especiales. Ambiente vibrante, tragos de primera y la mejor vibra del Casco Colonial.",
+    "Un espacio energético en La Guaira para quienes buscan rumba, buena música y celebrar fechas especiales. Ambiente vibrante, tragos de primera y la mejor vibra del Casco Histórico.",
   familyPolicy:
     "Menores de edad bienvenidos únicamente con acompañamiento de familiar directo y responsable.",
   celebrations: [
@@ -650,7 +631,7 @@ export const celebrationCombos = [
     tier: "Íntimo",
     tagline: "Celebraciones en familia con ambiente acogedor",
     description:
-      "Para reuniones familiares, aniversarios íntimos o fechas especiales en mesa. Comida compartida, tragos selectos y karaoke opcional en un ambiente cálido del Casco Colonial.",
+      "Para reuniones familiares, aniversarios íntimos o fechas especiales en mesa. Comida compartida, tragos selectos y karaoke opcional en un ambiente cálido del Casco Histórico.",
     idealFor: [
       "Celebraciones familiares",
       "Aniversarios íntimos",
@@ -736,26 +717,26 @@ export const restaurantInfo = {
     wordmark: "LA CASA DEL LLANO 2014",
   },
   tagline: "Tasca · Disco · Karaoke",
-  location: "Casco Colonial, La Guaira, Venezuela",
-  address: "Av. Urdaneta, Casco Histórico, La Guaira 1160",
-  phone: "+58 212-355-0000",
+  location: venueAddress,
+  address: venueAddress,
+  phone: "+58 424-2411578",
   email: "reservas@lacasadelallano.com",
   hours: `Martes a domingo: ${tascaHours}`,
   description:
-    "En el Casco Colonial de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos de primera. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",
+    "En el Casco Histórico de La Guaira, Venezuela, La Casa del Llano 2014 es el punto de encuentro para quienes buscan entretenimiento nocturno con energía, buena música y tragos de primera. Celebra cumpleaños, ascensos, despedidas, bodas y fechas especiales en un ambiente vibrante con karaoke, DJs por temporadas y coctelería de autor.",
   shortDescription:
-    "Disco, karaoke y tasca en La Guaira, Venezuela. Reserva mesa VIP y eventos privados con tragos, tapas y servicio de botellas en el Casco Colonial.",
+    "Disco, karaoke y tasca en La Guaira, Venezuela. Reserva mesa VIP y eventos privados con tragos, tapas y servicio de botellas en el Casco Histórico.",
   seoKeywords: [
     "La Casa del Llano",
     "disco La Guaira",
     "karaoke La Guaira",
     "mesa VIP",
     "eventos privados",
-    "Casco Colonial",
+    "Casco Histórico",
+    "Calle Bolívar La Guaira",
     "rumba Venezuela",
   ],
-  mapEmbedUrl:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3925.8!2d-66.934!3d10.601!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c2a3b8f8f8f8f8f%3A0x0!2sLa%20Guaira%2C%20Venezuela!5e0!3m2!1ses!2sve!4v1700000000000!5m2!1ses!2sve",
+  mapEmbedUrl: `https://maps.google.com/maps?q=${mapEmbedQuery}&hl=es&z=16&output=embed`,
 } as const;
 
 export const stitchScreens = Object.fromEntries(

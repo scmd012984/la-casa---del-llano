@@ -1,26 +1,9 @@
+import Link from "next/link";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
-import { socialProof } from "@/lib/data";
-
-function StarRating({ rating }: { rating: number }) {
-  return (
-    <div className="flex gap-0.5" aria-label={`${rating} de 5 estrellas`}>
-      {Array.from({ length: 5 }).map((_, i) => (
-        <span
-          key={i}
-          className={`material-symbols-outlined text-base ${
-            i < rating ? "text-platinum-muted" : "text-on-surface-variant/30"
-          }`}
-          style={{ fontVariationSettings: "'FILL' 1" }}
-        >
-          star
-        </span>
-      ))}
-    </div>
-  );
-}
+import { socialProof, specialties } from "@/lib/data";
 
 export default function SocialProof() {
-  const { instagram, googleReviews, headline, subheadline } = socialProof;
+  const { instagram, googleBusiness, headline, subheadline } = socialProof;
 
   return (
     <section className="site-container py-16 sm:py-20 md:py-24">
@@ -47,9 +30,7 @@ export default function SocialProof() {
               <span className="font-semibold">{instagram.handle}</span>
             </a>
             <span className="text-[10px] uppercase tracking-widest text-on-surface-variant">
-              {instagram.feedMode === "gallery"
-                ? "Galería de rumbas"
-                : "Publicaciones en vivo"}
+              Galería del local
             </span>
           </div>
           <div className="grid grid-cols-3 gap-2">
@@ -78,42 +59,56 @@ export default function SocialProof() {
             ))}
           </div>
           <p className="text-xs text-on-surface-variant mt-3">
-            Síguenos en Instagram para ver las rumbas en tiempo real. Próximamente
-            publicaciones integradas automáticamente.
+            Síguenos en Instagram para ver noches temáticas, karaoke y la rumba en vivo.
           </p>
         </div>
 
-        <div>
-          <div className="flex items-center gap-2 mb-4">
-            <span className="material-symbols-outlined text-on-surface-variant">
-              reviews
-            </span>
-            <h3 className="font-display text-xl text-on-surface">
-              Opiniones en Google
-            </h3>
+        <div className="flex flex-col gap-4">
+          <div className="rounded-xl card-wood p-6">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="material-symbols-outlined text-on-surface-variant">
+                reviews
+              </span>
+              <h3 className="font-display text-xl text-on-surface">
+                Opiniones en Google
+              </h3>
+            </div>
+            <p className="text-sm text-on-surface-variant leading-relaxed mb-5">
+              {googleBusiness.description}
+            </p>
+            <a
+              href={googleBusiness.mapsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-led btn-led--md inline-flex items-center gap-2"
+            >
+              <span className="material-symbols-outlined text-lg" aria-hidden>
+                map
+              </span>
+              {googleBusiness.ctaLabel}
+            </a>
           </div>
-          <div className="space-y-4">
-            {googleReviews.map((review) => (
-              <blockquote
-                key={review.author}
-                className="rounded-xl card-wood p-5"
-              >
-                <div className="flex items-center justify-between gap-3 mb-2">
-                  <div>
-                    <cite className="not-italic font-semibold text-on-surface text-sm">
-                      {review.author}
-                    </cite>
-                    <p className="text-[10px] text-on-surface-variant mt-0.5">
-                      {review.source} · {review.date}
-                    </p>
-                  </div>
-                  <StarRating rating={review.rating} />
-                </div>
-                <p className="text-sm text-on-surface-variant leading-relaxed">
-                  &ldquo;{review.text}&rdquo;
-                </p>
-              </blockquote>
-            ))}
+
+          <div className="rounded-xl card-wood p-6">
+            <h3 className="font-display text-lg text-on-surface mb-3">
+              Por qué reservar con nosotros
+            </h3>
+            <ul className="space-y-2.5">
+              {specialties.slice(0, 4).map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-2 text-sm text-on-surface-variant"
+                >
+                  <span className="material-symbols-outlined text-base text-on-surface-variant mt-0.5 shrink-0">
+                    check_circle
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <Link href="/reserva" className="btn-led btn-led--alt btn-led--sm mt-5 inline-flex">
+              Reservar ahora
+            </Link>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ export default function LocationActions() {
   const whatsappDirections = buildWhatsAppDirectionsUrl();
 
   return (
-    <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 mt-6">
+    <div className="relative z-50 flex flex-col sm:flex-row flex-wrap justify-center gap-3 mt-6 pb-24 lg:pb-0">
       <a
         href={locationLinks.directionsUrl}
         target="_blank"

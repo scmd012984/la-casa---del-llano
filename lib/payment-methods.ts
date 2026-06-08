@@ -84,10 +84,16 @@ export const paymentMethodsModule = {
       accent: "tertiary" as const,
       brands: ["Banesco", "Mercantil", "Venezuela"],
       fields: [
-        { label: "Banco", value: "Banesco", copy: false },
-        { label: "Teléfono", value: "0412-555-0000", copy: true },
-        { label: "RIF", value: "J-501234567-8", copy: true },
-        { label: "Titular", value: "La Casa del Llano 2014 C.A.", copy: true },
+        {
+          label: "Modalidad",
+          value: "Datos bancarios confirmados por WhatsApp al cerrar tu reserva",
+          copy: false,
+        },
+        {
+          label: "Contacto pago",
+          value: "0424-2411578",
+          copy: true,
+        },
       ],
     },
     {

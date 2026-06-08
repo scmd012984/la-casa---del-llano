@@ -19,7 +19,7 @@ export const WELCOME_VIDEO_VERSION = 9;
 
 export const KARAOKE_VIDEO_VERSION = 1;
 
-export const RUMBA_PISTA_VIDEO_VERSION = 1;
+export const RUMBA_PISTA_VIDEO_VERSION = 2;
 
 export const welcomeVideo = {
   poster: "/videos/bienvenida-poster.jpg",
@@ -59,23 +59,6 @@ export const audiovisualVideoMap: Record<
   bienvenida: welcomeVideo,
   "rumba-pista": rumbaPistaVideo,
   "karaoke-vivo": karaokeVivoVideo,
-  // Cuando subas los clips reales, descomenta y ajusta el nombre del archivo:
-  // "rumba-pista": {
-  //   poster: "/images/karaoke.jpg",
-  //   sources: [{ src: "/videos/rumba-pista.mp4?v=1", type: "video/mp4" }],
-  // },
-  // "karaoke-vivo": {
-  //   poster: "/images/karaoke.jpg",
-  //   sources: [{ src: "/videos/karaoke-vivo.mp4?v=1", type: "video/mp4" }],
-  // },
-  // "dj-temporada": {
-  //   poster: "/images/rumba.jpg",
-  //   sources: [{ src: "/videos/dj-temporada.mp4?v=1", type: "video/mp4" }],
-  // },
-  // "ambiente-vip": {
-  //   poster: "/images/rumba.jpg",
-  //   sources: [{ src: "/videos/ambiente-vip.mp4?v=1", type: "video/mp4" }],
-  // },
 };
 
 export function hasVideoSources(sources: readonly VideoSource[]) {

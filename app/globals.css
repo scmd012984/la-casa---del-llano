@@ -744,8 +744,60 @@ details > summary::-webkit-details-marker {
   padding-right: 0.15rem;
 }
 
+.location-fab {
+  background: color-mix(in srgb, var(--llano-surface-high) 88%, transparent);
+  color: var(--led-amber-hot);
+  border: 1.5px solid color-mix(in srgb, var(--led-amber) 48%, transparent);
+  width: 3.25rem;
+  height: 3.25rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 190, 0.08),
+    0 4px 16px rgba(0, 0, 0, 0.28);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease,
+    background 0.25s ease;
+}
+
+.location-fab:hover,
+.location-fab:focus-visible {
+  filter: brightness(1.06);
+  background: color-mix(in srgb, var(--led-amber) 12%, var(--llano-surface-high));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 190, 0.12),
+    0 6px 20px rgba(0, 0, 0, 0.32),
+    0 0 12px var(--led-amber-glow-soft);
+  transform: translateY(-1px);
+}
+
+.location-fab-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
 .conversion-fab-label {
   animation: conversion-fab-label-in 0.35s ease-out;
+}
+
+.conversion-fab-action {
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.conversion-fab-action:hover,
+.conversion-fab-action:focus-visible {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--led-amber) 42%, var(--llano-border));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 235, 190, 0.1),
+    0 4px 14px rgba(0, 0, 0, 0.28),
+    0 0 10px var(--led-amber-glow-soft);
 }
 
 @keyframes conversion-fab-label-in {

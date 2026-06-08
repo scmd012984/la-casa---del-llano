@@ -5,6 +5,7 @@ import LocalBusinessJsonLd from "@/components/LocalBusinessJsonLd";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import Navbar from "@/components/Navbar";
 import { restaurantInfo } from "@/lib/data";
+import { siteUrl } from "@/lib/site-url";
 import { Manrope, Newsreader } from "next/font/google";
 import "./globals.css";
 
@@ -28,6 +29,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${restaurantInfo.name} · Disco y Karaoke en La Guaira`,
     template: `%s | ${restaurantInfo.name}`,

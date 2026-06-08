@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useGalleryVideoPlayback } from "@/components/GalleryVideoPlaybackContext";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import { audiovisualHighlights } from "@/lib/data";
 import type { VideoSource } from "@/lib/videos";
@@ -23,8 +24,24 @@ export default function ExperienceGalleryVideoCard({
   compact = false,
 }: ExperienceGalleryVideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const playback = useGalleryVideoPlayback();
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+
+  const stopPlayback = useCallback(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.pause();
+      video.muted = true;
+    }
+    setPlaying(false);
+    setMuted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!playback) return;
+    return playback.register(item.id, stopPlayback);
+  }, [item.id, playback, stopPlayback]);
 
   useEffect(() => {
     if (!playing) return;
@@ -39,14 +56,15 @@ export default function ExperienceGalleryVideoCard({
       video.muted = true;
       setMuted(true);
       void video.play().catch(() => {
-        setPlaying(false);
+        stopPlayback();
       });
     });
-  }, [playing]);
+  }, [playing, stopPlayback]);
 
   const startPlayback = useCallback(() => {
+    playback?.requestPlay(item.id);
     setPlaying(true);
-  }, []);
+  }, [item.id, playback]);
 
   const toggleSound = useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {

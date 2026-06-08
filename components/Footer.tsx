@@ -1,8 +1,11 @@
 import Link from "next/link";
 import PaymentMethodsPanel from "@/components/PaymentMethodsPanel";
-import { navLinks, restaurantInfo, siteArchitecture } from "@/lib/data";
+import { navLinks, restaurantInfo, siteArchitecture, socialProof } from "@/lib/data";
+import { mailtoHref, telHref, whatsappHref } from "@/lib/contact";
 
 export default function Footer() {
+  const { instagram, googleBusiness } = socialProof;
+
   return (
     <footer className="site-footer bg-surface-container-lowest py-12 site-section-divider-t wood-pattern">
       <div className="site-container grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -43,15 +46,20 @@ export default function Footer() {
 
         <div className="flex flex-col gap-2">
           <span className="eyebrow-llano mb-2 block">Contacto</span>
-          <p className="text-sm text-on-surface-variant">
-            {restaurantInfo.address}
-          </p>
-          <p className="text-sm text-on-surface-variant">
+          <p className="text-sm text-on-surface-variant">{restaurantInfo.address}</p>
+          <a
+            href={telHref}
+            className="text-sm text-on-surface-variant hover:text-on-surface transition-colors"
+          >
             {restaurantInfo.phone}
-          </p>
-          <p className="text-sm text-on-surface-variant">
-            {restaurantInfo.hours}
-          </p>
+          </a>
+          <a
+            href={mailtoHref}
+            className="text-sm text-on-surface-variant hover:text-on-surface transition-colors break-all"
+          >
+            {restaurantInfo.email}
+          </a>
+          <p className="text-sm text-on-surface-variant">{restaurantInfo.hours}</p>
           <Link
             href="/reserva"
             className="text-base text-on-surface-variant hover:text-on-surface transition-colors"
@@ -63,21 +71,23 @@ export default function Footer() {
         <div className="flex flex-col gap-2">
           <span className="eyebrow-llano mb-2 block">Redes</span>
           <a
-            href="#"
+            href={instagram.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-base text-on-surface-variant hover:text-on-surface transition-colors"
-            aria-label="Instagram (próximamente)"
           >
-            Instagram
+            Instagram {instagram.handle}
           </a>
           <a
-            href="#"
+            href={googleBusiness.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-base text-on-surface-variant hover:text-on-surface transition-colors"
-            aria-label="Facebook (próximamente)"
           >
-            Facebook
+            Google Maps
           </a>
           <a
-            href={`https://wa.me/${restaurantInfo.phone.replace(/\D/g, "")}`}
+            href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
             className="text-base text-on-surface-variant hover:text-on-surface transition-colors"
