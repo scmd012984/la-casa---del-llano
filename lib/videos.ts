@@ -17,11 +17,35 @@ export type VideoSource = {
 /** Sube este número tras recortar o reemplazar hero-bienvenida.mp4 (evita caché del navegador). */
 export const WELCOME_VIDEO_VERSION = 9;
 
+export const KARAOKE_VIDEO_VERSION = 1;
+
+export const RUMBA_PISTA_VIDEO_VERSION = 1;
+
 export const welcomeVideo = {
   poster: "/videos/bienvenida-poster.jpg",
   sources: [
     {
       src: `/videos/hero-bienvenida.mp4?v=${WELCOME_VIDEO_VERSION}`,
+      type: "video/mp4",
+    },
+  ] satisfies VideoSource[],
+} as const;
+
+export const karaokeVivoVideo = {
+  poster: "/videos/karaoke-vivo-poster.jpg",
+  sources: [
+    {
+      src: `/videos/karaoke-vivo.mp4?v=${KARAOKE_VIDEO_VERSION}`,
+      type: "video/mp4",
+    },
+  ] satisfies VideoSource[],
+} as const;
+
+export const rumbaPistaVideo = {
+  poster: "/videos/rumba-pista-poster.jpg",
+  sources: [
+    {
+      src: `/videos/rumba-pista.mp4?v=${RUMBA_PISTA_VIDEO_VERSION}`,
       type: "video/mp4",
     },
   ] satisfies VideoSource[],
@@ -33,6 +57,8 @@ export const audiovisualVideoMap: Record<
   { sources: VideoSource[]; poster?: string }
 > = {
   bienvenida: welcomeVideo,
+  "rumba-pista": rumbaPistaVideo,
+  "karaoke-vivo": karaokeVivoVideo,
   // Cuando subas los clips reales, descomenta y ajusta el nombre del archivo:
   // "rumba-pista": {
   //   poster: "/images/karaoke.jpg",

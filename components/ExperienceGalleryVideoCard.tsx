@@ -12,6 +12,7 @@ type ExperienceGalleryVideoCardProps = {
   sources: readonly VideoSource[];
   poster?: string;
   featured?: boolean;
+  compact?: boolean;
 };
 
 export default function ExperienceGalleryVideoCard({
@@ -19,6 +20,7 @@ export default function ExperienceGalleryVideoCard({
   sources,
   poster,
   featured = false,
+  compact = false,
 }: ExperienceGalleryVideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -58,6 +60,79 @@ export default function ExperienceGalleryVideoCard({
     },
     [playing],
   );
+
+  if (compact) {
+    return (
+      <article className="group relative aspect-[3/4] overflow-hidden rounded-xl card-wood interactive-card experience-gallery-card experience-gallery-card--video experience-gallery-card--compact">
+        <div className="experience-gallery-media absolute inset-0">
+          {playing ? (
+            <video
+              ref={videoRef}
+              className="experience-gallery-video h-full w-full object-cover object-center"
+              autoPlay
+              muted={muted}
+              loop
+              playsInline
+              preload="metadata"
+              poster={poster ?? item.thumbnail}
+            >
+              {sources.map((source) => (
+                <source key={source.src} src={source.src} type={source.type} />
+              ))}
+            </video>
+          ) : (
+            <OptimizedImage
+              src={poster ?? item.thumbnail}
+              alt={item.title}
+              fill
+              qualityPreset="thumb"
+              sizes={IMAGE_SIZES.gallery}
+              className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+            />
+          )}
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent pointer-events-none" />
+        {!playing ? (
+          <button
+            type="button"
+            className="absolute inset-0 flex items-center justify-center opacity-80 transition-opacity group-hover:opacity-100"
+            onClick={() => void startPlayback()}
+            aria-label={`Reproducir ${item.title}`}
+          >
+            <span className="flex h-11 w-11 items-center justify-center rounded-full bg-surface-container-highest/90 border border-outline-variant shadow-lg">
+              <span className="material-symbols-outlined ml-0.5 text-2xl text-on-surface">
+                play_arrow
+              </span>
+            </span>
+          </button>
+        ) : (
+          <button
+            type="button"
+            className="gallery-video-sound-toggle gallery-video-sound-toggle--overlay"
+            onClick={toggleSound}
+            aria-pressed={!muted}
+            aria-label={muted ? "Activar sonido del video" : "Silenciar video"}
+            title={muted ? "Activar sonido" : "Silenciar"}
+          >
+            <span className="material-symbols-outlined" aria-hidden>
+              {muted ? "volume_off" : "volume_up"}
+            </span>
+          </button>
+        )}
+        <div className="absolute bottom-0 left-0 right-0 p-3 pointer-events-none">
+          {item.typeLabel ? (
+            <span className="text-[9px] uppercase tracking-widest text-on-surface-variant font-semibold">
+              {item.typeLabel}
+            </span>
+          ) : null}
+          <h3 className="font-display text-sm text-on-surface mt-0.5 leading-snug">
+            {item.title}
+          </h3>
+          <p className="text-[11px] text-on-surface-variant leading-snug">{item.subtitle}</p>
+        </div>
+      </article>
+    );
+  }
 
   return (
     <article
@@ -111,14 +186,20 @@ export default function ExperienceGalleryVideoCard({
       </div>
 
       <div className="experience-gallery-caption">
-        <div className={playing ? "experience-gallery-caption-body pr-10" : "experience-gallery-caption-body"}>
+        <div
+          className={
+            playing ? "experience-gallery-caption-body pr-10" : "experience-gallery-caption-body"
+          }
+        >
           {featured ? (
             <p className="text-xs text-on-surface-variant leading-snug">{item.subtitle}</p>
           ) : (
             <>
-              <span className="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">
-                {item.typeLabel}
-              </span>
+              {item.typeLabel ? (
+                <span className="text-[10px] uppercase tracking-widest text-on-surface-variant font-semibold">
+                  {item.typeLabel}
+                </span>
+              ) : null}
               <h3 className="font-display text-base text-on-surface mt-0.5 leading-snug">
                 {item.title}
               </h3>

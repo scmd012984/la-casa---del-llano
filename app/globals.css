@@ -431,6 +431,13 @@ h2.type-section-title {
   bottom: 0.65rem;
 }
 
+.gallery-video-sound-toggle--overlay {
+  position: absolute;
+  z-index: 2;
+  right: 0.5rem;
+  bottom: 0.5rem;
+}
+
 .gallery-video-sound-toggle:hover {
   border-color: var(--llano-oak);
   transform: scale(1.04);

@@ -27,9 +27,11 @@ function GalleryThumbCard({ item }: { item: GalleryHighlight }) {
         </span>
       </div>
       <div className="absolute bottom-0 left-0 right-0 p-3">
-        <span className="text-[9px] uppercase tracking-widest text-on-surface-variant font-semibold">
-          {item.typeLabel}
-        </span>
+        {item.typeLabel ? (
+          <span className="text-[9px] uppercase tracking-widest text-on-surface-variant font-semibold">
+            {item.typeLabel}
+          </span>
+        ) : null}
         <h3 className="font-display text-sm text-on-surface mt-0.5 leading-snug">{item.title}</h3>
         <p className="text-[11px] text-on-surface-variant leading-snug">{item.subtitle}</p>
       </div>
@@ -37,7 +39,13 @@ function GalleryThumbCard({ item }: { item: GalleryHighlight }) {
   );
 }
 
-function GalleryVideoCard({ item }: { item: GalleryHighlight }) {
+function GalleryVideoCard({
+  item,
+  compact = false,
+}: {
+  item: GalleryHighlight;
+  compact?: boolean;
+}) {
   const video = audiovisualVideoMap[item.id];
   if (!video?.sources.length) return null;
 
@@ -47,15 +55,16 @@ function GalleryVideoCard({ item }: { item: GalleryHighlight }) {
       sources={video.sources}
       poster={video.poster ?? item.thumbnail}
       featured={Boolean("featured" in item && item.featured === true)}
+      compact={compact}
     />
   );
 }
 
-function renderGalleryItem(item: GalleryHighlight) {
+function renderGalleryItem(item: GalleryHighlight, compact = false) {
   const video = audiovisualVideoMap[item.id];
 
   if (video?.sources.length) {
-    return <GalleryVideoCard key={item.id} item={item} />;
+    return <GalleryVideoCard key={item.id} item={item} compact={compact} />;
   }
 
   return <GalleryThumbCard key={item.id} item={item} />;
@@ -97,9 +106,7 @@ export default function ExperienceGallery() {
             <GalleryVideoCard item={featuredHighlight} />
           ) : null}
         </div>
-        {sideHighlights.map((item) => (
-          <GalleryThumbCard key={item.id} item={item} />
-        ))}
+        {sideHighlights.map((item) => renderGalleryItem(item, true))}
       </div>
 
       <div className="mt-10 flex flex-col items-center gap-4">
