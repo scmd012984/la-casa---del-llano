@@ -29,7 +29,7 @@ const reservationTypeToCelebration: Record<string, string> = {
   karaoke: "Cumpleaños",
 };
 
-type SubmitStatus = "idle" | "loading" | "success" | "error" | "whatsapp_fallback";
+type SubmitStatus = "idle" | "loading" | "success";
 
 function isValidComboId(id: string | null): id is CelebrationComboId {
   return id !== null && celebrationCombos.some((combo) => combo.id === id);
@@ -83,7 +83,8 @@ export default function ReservationForm({
   const [selectedExtras, setSelectedExtras] = useState<string[]>([]);
   const [notes, setNotes] = useState("");
   const [submitStatus, setSubmitStatus] = useState<SubmitStatus>("idle");
-  const [submitError, setSubmitError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+  const [formError, setFormError] = useState("");
   const today = new Date().toISOString().split("T")[0];
 
   const selectedPackage = celebrationCombos.find((combo) => combo.id === packageId);
@@ -128,10 +129,13 @@ export default function ReservationForm({
     if (!celebrationType || !packageId || !guests) return;
 
     const payload = buildPayloadFromForm(form);
-    const message = buildQuoteMessage(payload);
 
     setSubmitStatus("loading");
-    setSubmitError("");
+    setSuccessMessage("");
+    setFormError("");
+
+    let feedback =
+      "Te abrimos WhatsApp para confirmar tu solicitud al instante.";
 
     try {
       const response = await fetch("/api/reservation", {
@@ -141,28 +145,29 @@ export default function ReservationForm({
       });
 
       const result = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string; message?: string }
+        | {
+            ok?: boolean;
+            registered?: boolean;
+            message?: string;
+            error?: string;
+          }
         | null;
 
-      if (!response.ok || !result?.ok) {
-        openWhatsAppFromForm(form);
-        setSubmitStatus("whatsapp_fallback");
-        setSubmitError(
-          result?.error ??
-            "No pudimos registrar en el sistema del local, pero abrimos WhatsApp para que confirmes directamente.",
-        );
+      if (result?.message) {
+        feedback = result.message;
+      } else if (result?.error && response.status === 400) {
+        setSubmitStatus("idle");
+        setFormError(result.error);
         return;
       }
-
-      setSubmitStatus("success");
-      window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
     } catch {
-      openWhatsAppFromForm(form);
-      setSubmitStatus("whatsapp_fallback");
-      setSubmitError(
-        "Hubo un problema de conexión. Abrimos WhatsApp para que envíes tu solicitud al instante.",
-      );
+      feedback =
+        "Hubo un problema de conexión. Te abrimos WhatsApp para enviar tu solicitud.";
     }
+
+    openWhatsAppFromForm(form);
+    setSuccessMessage(feedback);
+    setSubmitStatus("success");
   }
 
   const isSubmitting = submitStatus === "loading";
@@ -173,34 +178,22 @@ export default function ReservationForm({
         <span className="material-symbols-outlined text-on-surface-variant text-base align-middle mr-1">
           bolt
         </span>
-        Cotización inteligente: registramos tu solicitud en el sistema del local,
-        enviamos alerta al correo del administrador y te abrimos WhatsApp para
-        confirmar al instante.
+        Completa el formulario y te abrimos WhatsApp con tu cotización lista para
+        enviar. Si el sistema del local está conectado, también guardamos tu
+        solicitud automáticamente.
       </div>
 
       {submitStatus === "success" ? (
         <div
-          className="rounded-lg card-wood px-4 py-3 text-sm text-on-surface"
-          role="status"
-        >
-          <span className="material-symbols-outlined text-on-surface-variant text-base align-middle mr-1">
-            check_circle
-          </span>
-          Solicitud registrada. Si WhatsApp no se abrió, revisa el bloqueador de
-          ventanas emergentes.
-        </div>
-      ) : null}
-
-      {submitStatus === "whatsapp_fallback" ? (
-        <div
-          className="rounded-lg bg-error-container/20 border border-error/30 px-4 py-3 text-sm text-on-surface space-y-2"
+          className="rounded-lg card-wood px-4 py-3 text-sm text-on-surface space-y-2"
           role="status"
         >
           <p>
-            <span className="material-symbols-outlined text-error text-base align-middle mr-1">
-              chat
+            <span className="material-symbols-outlined text-on-surface-variant text-base align-middle mr-1">
+              check_circle
             </span>
-            {submitError}
+            {successMessage} Si WhatsApp no se abrió, revisa el bloqueador de
+            ventanas emergentes.
           </p>
           <button
             type="button"
@@ -215,7 +208,7 @@ export default function ReservationForm({
         </div>
       ) : null}
 
-      {submitStatus === "error" ? (
+      {formError ? (
         <div
           className="rounded-lg bg-error-container/20 border border-error/30 px-4 py-3 text-sm text-on-surface"
           role="alert"
@@ -223,7 +216,7 @@ export default function ReservationForm({
           <span className="material-symbols-outlined text-error text-base align-middle mr-1">
             error
           </span>
-          {submitError}
+          {formError}
         </div>
       ) : null}
 

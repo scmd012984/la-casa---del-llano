@@ -6,7 +6,9 @@ const LOG_DIR = join(process.cwd(), "data");
 const LOG_FILE = join(LOG_DIR, "reservations.jsonl");
 
 export function isDevFallbackEnabled(): boolean {
-  return process.env.RESERVATIONS_DEV_FALLBACK === "true";
+  if (process.env.RESERVATIONS_DEV_FALLBACK === "false") return false;
+  if (process.env.RESERVATIONS_DEV_FALLBACK === "true") return true;
+  return process.env.NODE_ENV === "development";
 }
 
 export function appendReservationDevLog(record: ReservationRecord): void {

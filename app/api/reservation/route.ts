@@ -30,27 +30,15 @@ export async function POST(request: Request) {
   const record = toReservationRecord(validation.data);
   const notification = await notifyReservationChannels(record);
 
-  if (!notification.ok) {
-    const errors = notification.results
-      .filter((result) => !result.ok)
-      .map((result) => result.error)
-      .filter(Boolean);
-
-    return NextResponse.json(
-      {
-        ok: false,
-        error:
-          errors[0] ??
-          "No se pudo registrar la reserva. Intenta de nuevo o usa WhatsApp.",
-        details: notification.results,
-      },
-      { status: 503 }
-    );
-  }
+  const message = notification.registered
+    ? "Reserva registrada. Te redirigimos a WhatsApp para confirmar."
+    : "Te redirigimos a WhatsApp para confirmar tu solicitud al instante.";
 
   return NextResponse.json({
     ok: true,
-    message: "Reserva registrada. Te redirigimos a WhatsApp para confirmar.",
+    registered: notification.registered,
+    handoffOnly: notification.handoffOnly,
+    message,
     channels: notification.results
       .filter((result) => result.ok)
       .map((result) => result.channel),

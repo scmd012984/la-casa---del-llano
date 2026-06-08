@@ -259,38 +259,57 @@ export function getReservationNotifyMode():
   return "none";
 }
 
-export async function notifyReservationChannels(
-  record: ReservationRecord
-): Promise<{
-  ok: boolean;
+export type ReservationNotifyOutcome = {
+  /** True when Google Sheets and/or email succeeded. */
+  registered: boolean;
+  /** True when the guest should confirm via WhatsApp (no backend channel succeeded). */
+  handoffOnly: boolean;
   results: NotifyResult[];
   restaurantName: string;
-}> {
+};
+
+function buildNotifyOutcome(
+  results: NotifyResult[],
+  restaurantName: string
+): ReservationNotifyOutcome {
+  const registered = results.some((result) => result.ok);
+
+  if (!registered && results.length > 0) {
+    console.error(
+      "[reservas] Ningún canal de notificación respondió:",
+      results
+        .filter((result) => !result.ok)
+        .map((result) => result.error)
+        .join(" | ")
+    );
+  }
+
+  return {
+    registered,
+    handoffOnly: !registered,
+    results,
+    restaurantName,
+  };
+}
+
+export async function notifyReservationChannels(
+  record: ReservationRecord
+): Promise<ReservationNotifyOutcome> {
   const mode = getReservationNotifyMode();
   const results: NotifyResult[] = [];
 
   if (mode === "none") {
     return {
-      ok: false,
-      results: [
-        {
-          channel: "google_sheets",
-          ok: false,
-          error:
-            "Integración no configurada. Ejecuta: npm run setup:google",
-        },
-      ],
+      registered: false,
+      handoffOnly: true,
+      results: [],
       restaurantName: restaurantInfo.name,
     };
   }
 
   if (mode === "dev") {
     results.push(await notifyDevFallback(record));
-    return {
-      ok: results.some((result) => result.ok),
-      results,
-      restaurantName: restaurantInfo.name,
-    };
+    return buildNotifyOutcome(results, restaurantInfo.name);
   }
 
   if (mode === "google" || mode === "both") {
@@ -307,7 +326,5 @@ export async function notifyReservationChannels(
     }
   }
 
-  const ok = results.some((result) => result.ok);
-
-  return { ok, results, restaurantName: restaurantInfo.name };
+  return buildNotifyOutcome(results, restaurantInfo.name);
 }
