@@ -11,10 +11,13 @@ const PLACEHOLDERS_FILE = join(ROOT, "lib/image-placeholders.ts");
 
 const PHOTO_MAX = 1280;
 const LOGO_MAX = 320;
+const MENU_MAX = 960;
 const PHOTO_QUALITY = 72;
+const MENU_QUALITY = 88;
 const LOGO_QUALITY = 80;
 
 const LOGO_PATTERN = /logo|eslogan|emblem|bull|icon|tasca|navbar|nav/i;
+const MENU_PATTERN = /^menu-/i;
 
 mkdirSync(OUTPUT_DIR, { recursive: true });
 
@@ -29,7 +32,9 @@ for (const file of files) {
   const base = basename(file, extname(file));
   const outputPath = join(OUTPUT_DIR, `${base}.webp`);
   const isLogo = LOGO_PATTERN.test(file);
-  const maxWidth = isLogo ? LOGO_MAX : PHOTO_MAX;
+  const isMenu = MENU_PATTERN.test(file);
+  const maxWidth = isLogo ? LOGO_MAX : isMenu ? MENU_MAX : PHOTO_MAX;
+  const quality = isLogo ? LOGO_QUALITY : isMenu ? MENU_QUALITY : PHOTO_QUALITY;
 
   const pipeline = sharp(inputPath).rotate().resize({
     width: maxWidth,
@@ -38,7 +43,7 @@ for (const file of files) {
 
   await pipeline
     .webp({
-      quality: isLogo ? LOGO_QUALITY : PHOTO_QUALITY,
+      quality,
       effort: 6,
       smartSubsample: true,
     })
@@ -56,7 +61,7 @@ for (const file of files) {
   const meta = await sharp(outputPath).metadata();
   const inputStats = await sharp(inputPath).metadata();
   console.log(
-    `✓ ${file} → opt/${base}.webp (${inputStats.width}→${meta.width}px, q${isLogo ? LOGO_QUALITY : PHOTO_QUALITY})`
+    `✓ ${file} → opt/${base}.webp (${inputStats.width}→${meta.width}px, q${quality})`
   );
 }
 

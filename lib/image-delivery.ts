@@ -3,6 +3,7 @@ export const IMAGE_QUALITY = {
   hero: 68,
   content: 72,
   thumb: 74,
+  menu: 88,
   logo: 80,
 } as const;
 
@@ -11,7 +12,7 @@ export const IMAGE_SIZES = {
   section: "(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 960px",
   card: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
   gallery: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw",
-  menuThumb: "(max-width: 768px) 33vw, 120px",
+  menuThumb: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px",
   logo: "152px",
 } as const;
 

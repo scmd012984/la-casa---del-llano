@@ -10,6 +10,8 @@ type OptimizedImageProps = Omit<ImageProps, "quality" | "placeholder"> & {
   qualityPreset?: keyof typeof IMAGE_QUALITY;
   localKey?: string;
   useBlur?: boolean;
+  /** Sirve el JPG/PNG original sin pasar por /images/opt/*.webp */
+  preferOriginal?: boolean;
 };
 
 function resolveLocalKey(src: ImageProps["src"]): string | undefined {
@@ -24,6 +26,7 @@ export default function OptimizedImage({
   qualityPreset = "content",
   localKey,
   useBlur = true,
+  preferOriginal = false,
   sizes,
   priority = false,
   className = "",
@@ -31,7 +34,9 @@ export default function OptimizedImage({
 }: OptimizedImageProps) {
   const originalSrc = typeof src === "string" ? src : src;
   const resolvedSrc =
-    typeof originalSrc === "string" ? mediaSrc(originalSrc) : originalSrc;
+    typeof originalSrc === "string" && !preferOriginal
+      ? mediaSrc(originalSrc)
+      : originalSrc;
   const key =
     localKey ??
     resolveLocalKey(typeof src === "string" ? src : "") ??
