@@ -29,7 +29,7 @@ const reservationTypeToCelebration: Record<string, string> = {
   karaoke: "Cumpleaños",
 };
 
-type SubmitStatus = "idle" | "loading" | "success" | "error";
+type SubmitStatus = "idle" | "loading" | "success" | "error" | "whatsapp_fallback";
 
 function isValidComboId(id: string | null): id is CelebrationComboId {
   return id !== null && celebrationCombos.some((combo) => combo.id === id);
@@ -145,20 +145,22 @@ export default function ReservationForm({
         | null;
 
       if (!response.ok || !result?.ok) {
-        throw new Error(
+        openWhatsAppFromForm(form);
+        setSubmitStatus("whatsapp_fallback");
+        setSubmitError(
           result?.error ??
-            "No pudimos registrar tu solicitud. Puedes enviarla por WhatsApp.",
+            "No pudimos registrar en el sistema del local, pero abrimos WhatsApp para que confirmes directamente.",
         );
+        return;
       }
 
       setSubmitStatus("success");
       window.open(buildWhatsAppUrl(message), "_blank", "noopener,noreferrer");
-    } catch (error) {
-      setSubmitStatus("error");
+    } catch {
+      openWhatsAppFromForm(form);
+      setSubmitStatus("whatsapp_fallback");
       setSubmitError(
-        error instanceof Error
-          ? error.message
-          : "Error al enviar. Intenta de nuevo.",
+        "Hubo un problema de conexión. Abrimos WhatsApp para que envíes tu solicitud al instante.",
       );
     }
   }
@@ -189,14 +191,14 @@ export default function ReservationForm({
         </div>
       ) : null}
 
-      {submitStatus === "error" ? (
+      {submitStatus === "whatsapp_fallback" ? (
         <div
-          className="rounded-lg bg-error-container/20 border border-error/30 px-4 py-3 text-sm text-on-surface space-y-3"
-          role="alert"
+          className="rounded-lg bg-error-container/20 border border-error/30 px-4 py-3 text-sm text-on-surface space-y-2"
+          role="status"
         >
           <p>
             <span className="material-symbols-outlined text-error text-base align-middle mr-1">
-              error
+              chat
             </span>
             {submitError}
           </p>
@@ -208,8 +210,20 @@ export default function ReservationForm({
             }}
             className="text-sm font-semibold text-on-surface-variant hover:text-on-surface hover:underline"
           >
-            Enviar solo por WhatsApp →
+            Abrir WhatsApp de nuevo →
           </button>
+        </div>
+      ) : null}
+
+      {submitStatus === "error" ? (
+        <div
+          className="rounded-lg bg-error-container/20 border border-error/30 px-4 py-3 text-sm text-on-surface"
+          role="alert"
+        >
+          <span className="material-symbols-outlined text-error text-base align-middle mr-1">
+            error
+          </span>
+          {submitError}
         </div>
       ) : null}
 

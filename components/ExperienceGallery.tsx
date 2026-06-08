@@ -91,11 +91,11 @@ export default function ExperienceGallery() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 sm:max-w-md sm:mx-auto lg:hidden">
+        <div className="grid grid-cols-2 gap-3 sm:max-w-md sm:mx-auto md:hidden">
           {audiovisualHighlights.map((item) => renderGalleryItem(item))}
         </div>
 
-        <div className="hidden lg:grid lg:grid-cols-3 lg:grid-rows-2 lg:gap-3 experience-gallery-board">
+        <div className="hidden md:grid md:grid-cols-3 md:grid-rows-2 md:gap-3 experience-gallery-board">
           <div className="experience-gallery-featured-slot row-span-2 col-span-1 min-h-0">
             {featuredHighlight ? (
               <GalleryVideoCard item={featuredHighlight} />

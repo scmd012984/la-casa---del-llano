@@ -59,16 +59,16 @@ export const audiovisualHighlights = [
     title: "DJs por Temporada",
     subtitle: "Sesiones exclusivas cada fin de semana",
     thumbnail: stitchEventosImages.hero,
-    type: "reel" as const,
-    typeLabel: "Clip",
+    type: "photo" as const,
+    typeLabel: "Ambiente",
   },
   {
     id: "ambiente-vip",
     title: "Experiencia VIP",
     subtitle: "Mesa selecta y servicio de botellas",
     thumbnail: stitchEventosImages.hero,
-    type: "video" as const,
-    typeLabel: "Video",
+    type: "photo" as const,
+    typeLabel: "VIP",
   },
 ] as const;
 

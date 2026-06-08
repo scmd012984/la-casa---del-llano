@@ -1,17 +1,11 @@
-/** Imagen original de cada tapa (Google Stitch) — una URL distinta por plato */
+/** Imagen de cada tapa — asset local (origen Stitch) */
 export const stitchMenuImages = {
-  empanadaCarne:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuCIUQKs2g41E64LGqGTJXUsErhkNtsbmX0O8KvrWEXu03D5yBzHf-vZWWMARKYVjsMsHgSmT0UjxXYNBgs61KaQwzRTYU0qsr34eTLQ4TDL4zSHHVm9O0XaBeWIiHnPGwUTywK9vqDRw8wFbQnKRF_4NUw1HPFCECGeZ3LGMbO5dXJbEcoPYLrip3oKEgX_YEqaNVbejp6EMGrqALLU6W4Jphia-fG1UIqa7TdV5XBS0GZwZv_05VlKBvW-x5MZT7GYO6XGAVuBzgzB=w1200",
-  tequenos:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAz-hHfroE2RQAOrNa0TFERyI6SK5mMZh-ULLQp4p_RkSWqMlKHM15smDYZYZyI3U_UQE4GAkIUfp4KDdWr_wCvXNwc6WQL2pJbWcTzplTrrFv9Xse3enIF3wPbPWgQAj7yioNUHdXUSCFtyULZNTYr-JRTL5prWjVv7aKYm0xCo5Ive6KJVskEOZVbRLO7oGpiltBFPU_ELmZuZP4mX3UIxW8mj0jcupHVzt8FCoqG9ufPD2fBnjbfVOaWM05HDrNEIPuvRT3U8nAt=w1200",
-  empanadaQueso:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuARzYpVPujKMyOBBgSyekI8tQv8KXG26kXLF7JHtSzVTqwqC7q3S2mfbYTnqlw4c0-t87H0iSMBLkTQHvjqjz_KTiunAhSicUZ6IHJk3zhNBjVEk0LgaxgMMROmVW458anXGBy_PVokJHESTnNTTeAm7M0tkmaAZmU4CjNJJ4QvPo49Do09mxcnH-7InYe5jyRXG2Yk_WV30px7Ul1ZXBP7e_ftq_hUU9rmE0Enf-xld9iEd0JJhf_A2dYx8V0Fvv3OFOVxQTT_Hr2t=w1200",
-  camarones:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuB88Fmx-71yi-XJrpdEVxsXjb1uhBIC-NBviP6oAxZkszji4r5isGbEyPxoKU21nWIrcJFF0jygA-xqzDzI1dE8dTKtuXL22GHb5P9azI1DqNNrrouNEksGNm0E3yHoulpINZPc1cRJuId1shsO-jUlqpHt5MQrbdr3020lfyvrT8DwEITRNCgn-jOppS_PLbbDWwuuLxPjKx_udi5wj-ubs7wq4hLgKg8O5bRSyEGQFiCjjznGdIDNfS3xb1LNtMs2CN954PjgoBIv=w1200",
-  carneFrita:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuDkZEACACpxW3CvqJfxmJ8fRX7xtoFmqFA92lHk-6skf-lD2LJ9RkDyVIeT9svFr9qCsPY2GlEOICOoznz0wjFoJhqMtHWofoK5Ry_1rWSMxoFFDa9cVFnsT7SqaFMVb0Z6bthUws7b9lxJDYj2xaRpL_p-a1AujYTh1bn6YaQWxPPb2pTUA10BYpBMAF-YkYMejv57NDs8lY9QFjbYc4Hkx60HnZKUQh4gPO9Pr31Gm85wXuKPR0Ug5pd1wXj9sse9KDQsRlFu6YSz=w1200",
-  cazuelitaMar:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuAx28mPxW_mYZlklRa562X-gUEZBqFVOjq5Zff-86zDq7aypxvMtwySlXKoWaa7PXxT5Dre0kwHwxAUDEqzB7GrXrqwp05Yy1RCKAlZ8GuZjH-nsLWwjq4UjiLLmBe1WysuHxBXaWdShT8FO83U18fx0vJ4vvvvnWfS3GtW7VmNg68NHXG6SkY_jfjwqVaLH7mTGhXRwZ2vP-kDuevi8ykn0SyGbFakd388CH_Gnitrgf-CxGYiZ1S-7hCmXaGufJjuB32k5rlWvP0_=w1200",
+  empanadaCarne: "/images/menu-empanada-carne.jpg",
+  tequenos: "/images/menu-tequenos.jpg",
+  empanadaQueso: "/images/menu-empanada-queso.jpg",
+  camarones: "/images/menu-camarones.jpg",
+  carneFrita: "/images/menu-carne-frita.jpg",
+  cazuelitaMar: "/images/menu-cazuelita-mar.jpg",
 } as const;
 
 export type MenuCategoryId = "botellas" | "cocteleria" | "tapas";

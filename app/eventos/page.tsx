@@ -6,7 +6,8 @@ import ExperienceGallery from "@/components/ExperienceGallery";
 import OptimizedImage, { IMAGE_SIZES } from "@/components/OptimizedImage";
 import { conversionCTAs } from "@/lib/data";
 import { images } from "@/lib/images";
-import { stitchUpcomingEvents } from "@/lib/stitch-images";
+import EventCalendarPrintButton from "@/components/EventCalendarPrintButton";
+import { getDisplayUpcomingEvents } from "@/lib/upcoming-events";
 
 const ScrollRevealCards = dynamic(
   () =>
@@ -21,6 +22,8 @@ export const metadata: Metadata = {
 };
 
 export default function EventosPage() {
+  const upcomingEvents = getDisplayUpcomingEvents();
+
   return (
     <div>
       <ScrollRevealCards />
@@ -165,9 +168,10 @@ export default function EventosPage() {
       {/* Cartelera */}
       <section
         id="cartelera"
-        className="py-24 bg-surface-container-lowest scroll-mt-20"
+        className="cartelera-print py-24 bg-surface-container-lowest scroll-mt-20"
       >
         <div className="site-container">
+          <p className="cartelera-print-brand">La Casa del Llano 2014 — Cartelera</p>
           <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
             <div>
               <h2 className="font-display text-3xl text-on-surface mb-2">
@@ -179,15 +183,25 @@ export default function EventosPage() {
                 Llano.
               </p>
             </div>
-            <button type="button" className="link-llano">
-              Descargar calendario en PDF
-            </button>
+            {upcomingEvents.length > 0 ? (
+              <EventCalendarPrintButton />
+            ) : null}
           </div>
 
           <div className="space-y-6">
-            {stitchUpcomingEvents.map((event) => (
+            {upcomingEvents.length === 0 ? (
+              <p className="text-base text-on-surface-variant card-wood rounded-xl p-6">
+                Próximamente publicaremos nuevos espectáculos. Mientras tanto,
+                revisa nuestras{" "}
+                <Link href="/#noches" className="link-llano">
+                  noches temáticas
+                </Link>{" "}
+                o reserva tu mesa.
+              </p>
+            ) : null}
+            {upcomingEvents.map((event) => (
               <div
-                key={event.title}
+                key={event.id}
                 className="group flex items-center p-6 rounded-xl card-wood hover:bg-surface-container-high transition-all"
               >
                 <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-surface-container-lowest rounded-lg border border-outline-variant/40">
@@ -196,6 +210,9 @@ export default function EventosPage() {
                   </span>
                   <span className="font-display text-2xl leading-none text-on-surface">
                     {event.day}
+                  </span>
+                  <span className="text-[10px] text-on-surface-variant mt-0.5">
+                    {event.year}
                   </span>
                 </div>
                 <div className="ml-4 md:ml-8 flex-grow min-w-0">

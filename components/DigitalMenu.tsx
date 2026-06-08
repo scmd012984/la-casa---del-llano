@@ -437,9 +437,9 @@ export default function DigitalMenu() {
                     src={item.image}
                     alt={item.name}
                     fill
+                    preferOriginal
                     qualityPreset="menu"
                     sizes={IMAGE_SIZES.menuThumb}
-                    useBlur={false}
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   {item.badge && (

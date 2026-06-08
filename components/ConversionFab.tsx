@@ -17,7 +17,7 @@ function ConversionFabContent() {
       {formHref ? (
         <Link
           href={formHref}
-          className="hidden lg:flex items-center gap-2 btn-led btn-led--ghost btn-led--sm backdrop-blur-sm"
+          className="hidden md:flex items-center gap-2 btn-led btn-led--ghost btn-led--sm backdrop-blur-sm"
         >
           <span className="material-symbols-outlined text-base">edit_note</span>
           Formulario completo

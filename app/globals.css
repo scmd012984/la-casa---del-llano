@@ -85,6 +85,9 @@
   --surface-container-highest: #3a2e24;
   --surface-container-low: var(--llano-surface);
   --surface-container-lowest: var(--llano-bg-deep);
+  --error: #ffb4ab;
+  --error-container: #93000a;
+  --on-error: #690005;
   --site-navbar-height: 8.5rem;
   --mobile-bottom-nav-height: 4.625rem;
 }
@@ -114,6 +117,9 @@
   --color-surface-container-highest: var(--surface-container-highest);
   --color-surface-container-low: var(--surface-container-low);
   --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-error: var(--error);
+  --color-error-container: var(--error-container);
+  --color-on-error: var(--on-error);
   --color-cream: var(--llano-cream);
   --color-cream-muted: var(--llano-text-muted);
   --color-llano-sand: var(--llano-sand);
@@ -675,7 +681,7 @@ details > summary::-webkit-details-marker {
   padding-bottom: var(--shell-bottom-offset);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .site-main {
     padding-bottom: 0;
   }
@@ -685,7 +691,7 @@ details > summary::-webkit-details-marker {
   padding-bottom: calc(3rem + var(--shell-bottom-offset));
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .site-footer {
     padding-bottom: 3rem;
   }
@@ -695,7 +701,7 @@ details > summary::-webkit-details-marker {
   bottom: calc(var(--shell-bottom-offset) + 0.75rem);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .conversion-fab {
     bottom: 2rem;
   }
@@ -1691,7 +1697,7 @@ details > summary::-webkit-details-marker {
   padding-bottom: 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   .site-navbar-navlinks {
     display: flex;
     flex-wrap: nowrap;
@@ -3809,4 +3815,65 @@ details > summary::-webkit-details-marker {
 .payment-strip-logo {
   width: 1.75rem;
   height: 1.75rem;
+}
+
+/* Impresión / guardar cartelera como PDF */
+.cartelera-print-brand {
+  display: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+
+  .cartelera-print,
+  .cartelera-print * {
+    visibility: visible;
+  }
+
+  .site-navbar,
+  .mobile-bottom-nav,
+  .conversion-fab,
+  .site-footer {
+    display: none !important;
+  }
+
+  body {
+    background: #fff !important;
+    color: #1a120b !important;
+  }
+
+  .cartelera-print-brand {
+    display: block;
+    font-family: var(--font-newsreader), Georgia, serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #1a120b !important;
+  }
+
+  .cartelera-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 1.5rem !important;
+    background: #fff !important;
+  }
+
+  .cartelera-print .card-wood {
+    border: 1px solid #ccc !important;
+    break-inside: avoid;
+    background: #fff !important;
+  }
+
+  .cartelera-print .title-accent,
+  .cartelera-print .text-on-surface,
+  .cartelera-print .font-display {
+    color: #1a120b !important;
+  }
+
+  .cartelera-print .text-on-surface-variant {
+    color: #444 !important;
+  }
 }
