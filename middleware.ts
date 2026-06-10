@@ -27,11 +27,20 @@ function isRateLimited(ip: string): boolean {
   return entry.count > RATE_LIMIT_MAX;
 }
 
+function shouldForceHttps(request: NextRequest): boolean {
+  if (process.env.NODE_ENV !== "production") return false;
+  if (request.headers.get("x-forwarded-proto") !== "http") return false;
+  // No redirigir POST/PUT: pierde el body y rompe /api/reservation.
+  if (request.method !== "GET" && request.method !== "HEAD") return false;
+
+  const host = request.headers.get("host") ?? "";
+  if (/^(localhost|127\.0\.0\.1)(:\d+)?$/i.test(host)) return false;
+
+  return true;
+}
+
 export function middleware(request: NextRequest) {
-  if (
-    process.env.NODE_ENV === "production" &&
-    request.headers.get("x-forwarded-proto") === "http"
-  ) {
+  if (shouldForceHttps(request)) {
     const httpsUrl = request.nextUrl.clone();
     httpsUrl.protocol = "https:";
     return NextResponse.redirect(httpsUrl, 301);

@@ -55,17 +55,16 @@ export default function Navbar() {
             <div className="nav-brand-content">
               <div className="nav-brand-logo-track">
                 <div className="nav-logo-wood-ring shrink-0">
-                  <div className="nav-logo-shine relative overflow-hidden rounded-full bg-surface-container-lowest">
+                  <div className="nav-logo-shine relative overflow-hidden rounded-full">
                     <OptimizedImage
                       src={logo.icon.src}
                       alt={logo.icon.alt}
-                      width={logo.icon.width}
-                      height={logo.icon.height}
+                      fill
                       priority
                       qualityPreset="logo"
                       sizes={IMAGE_SIZES.logo}
                       localKey="eslogan-principal"
-                      className="nav-logo-image h-full w-full object-contain object-center"
+                      className="nav-logo-image object-cover object-center"
                     />
                   </div>
                 </div>

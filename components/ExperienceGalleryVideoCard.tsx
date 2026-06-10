@@ -24,9 +24,17 @@ export default function ExperienceGalleryVideoCard({
   compact = false,
 }: ExperienceGalleryVideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLElement>(null);
+  const preferSoundRef = useRef(false);
   const playback = useGalleryVideoPlayback();
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(true);
+
+  const mutePlayback = useCallback(() => {
+    const video = videoRef.current;
+    if (video) video.muted = true;
+    setMuted(true);
+  }, []);
 
   const stopPlayback = useCallback(() => {
     const video = videoRef.current;
@@ -40,8 +48,8 @@ export default function ExperienceGalleryVideoCard({
 
   useEffect(() => {
     if (!playback) return;
-    return playback.register(item.id, stopPlayback);
-  }, [item.id, playback, stopPlayback]);
+    return playback.register(item.id, { mute: mutePlayback, stop: stopPlayback });
+  }, [item.id, playback, mutePlayback, stopPlayback]);
 
   useEffect(() => {
     if (!playing) return;
@@ -49,8 +57,11 @@ export default function ExperienceGalleryVideoCard({
     const video = videoRef.current;
     if (!video) return;
 
-    video.muted = false;
-    setMuted(false);
+    if (preferSoundRef.current) {
+      video.muted = false;
+      setMuted(false);
+      preferSoundRef.current = false;
+    }
 
     void video.play().catch(() => {
       video.muted = true;
@@ -61,8 +72,25 @@ export default function ExperienceGalleryVideoCard({
     });
   }, [playing, stopPlayback]);
 
+  useEffect(() => {
+    if (!playing || !cardRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || entry.intersectionRatio < 0.35) {
+          mutePlayback();
+        }
+      },
+      { threshold: [0, 0.35, 0.55] },
+    );
+
+    observer.observe(cardRef.current);
+    return () => observer.disconnect();
+  }, [playing, mutePlayback]);
+
   const startPlayback = useCallback(() => {
     playback?.requestPlay(item.id);
+    preferSoundRef.current = true;
     setPlaying(true);
   }, [item.id, playback]);
 
@@ -81,7 +109,10 @@ export default function ExperienceGalleryVideoCard({
 
   if (compact) {
     return (
-      <article className="group relative aspect-[3/4] overflow-hidden rounded-xl card-wood interactive-card experience-gallery-card experience-gallery-card--video experience-gallery-card--compact">
+      <article
+        ref={cardRef}
+        className="group relative aspect-[3/4] overflow-hidden rounded-xl card-wood interactive-card experience-gallery-card experience-gallery-card--video experience-gallery-card--compact"
+      >
         <div className="experience-gallery-media absolute inset-0">
           {playing ? (
             <video
@@ -154,6 +185,7 @@ export default function ExperienceGalleryVideoCard({
 
   return (
     <article
+      ref={cardRef}
       className={`group card-wood interactive-card experience-gallery-card experience-gallery-card--video ${
         featured ? "experience-gallery-card--featured" : ""
       }`}

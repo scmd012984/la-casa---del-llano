@@ -17,7 +17,7 @@ export type VideoSource = {
 /** Sube este número tras recortar o reemplazar hero-bienvenida.mp4 (evita caché del navegador). */
 export const WELCOME_VIDEO_VERSION = 9;
 
-export const KARAOKE_VIDEO_VERSION = 1;
+export const KARAOKE_VIDEO_VERSION = 2;
 
 export const RUMBA_PISTA_VIDEO_VERSION = 2;
 

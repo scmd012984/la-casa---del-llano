@@ -155,7 +155,10 @@ export default function ReservationForm({
 
       if (result?.message) {
         feedback = result.message;
-      } else if (result?.error && response.status === 400) {
+      } else if (
+        result?.error &&
+        (response.status === 400 || response.status === 429)
+      ) {
         setSubmitStatus("idle");
         setFormError(result.error);
         return;
