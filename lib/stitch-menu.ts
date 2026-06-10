@@ -142,19 +142,22 @@ export const cocteleria = [
     tag: null,
   },
   {
-    name: "Tizana con Ron",
+    name: "Cerveza Michelada",
     price: "$8.00",
-    description: "Tizana guaireña con shot de ron. Dulce, tropical y potente.",
+    description:
+      "Cerveza bien fría con limón, sal, salsa inglesa y un toque picante. Ideal para la rumba.",
     tag: null,
   },
 ] as const;
 
 export const tragosBarra = [
+  { name: "Whisky Johnnie Walker Etiqueta Negra", price: "$14.00" },
+  { name: "Whisky Buchanan's", price: "$13.00" },
   { name: "Selección de Ron Añejo", price: "$12.00" },
-  { name: "Papelón con Limón", price: "$4.00" },
-  { name: "Tizana Guaireña", price: "$6.00" },
-  { name: "Chicha con Ron", price: "$7.00" },
+  { name: "Coctel de Anís Cartujo", price: "$6.00" },
+  { name: "Cerveza", price: "$7.00" },
   { name: "Agua Mineral", price: "$2.50" },
+  { name: "Refresco", price: "$4.00" },
 ] as const;
 
 type TapaItem = {

@@ -10,6 +10,7 @@ import {
   type CelebrationComboId,
   type QuotePackageId,
 } from "@/lib/data";
+import QuoteFormSelect from "@/components/QuoteFormSelect";
 import { buildQuoteMessage, buildWhatsAppUrl } from "@/lib/whatsapp";
 
 const inputClass =
@@ -88,6 +89,35 @@ export default function ReservationForm({
   const today = new Date().toISOString().split("T")[0];
 
   const selectedPackage = celebrationCombos.find((combo) => combo.id === packageId);
+
+  const guestOptions = useMemo(
+    () => [
+      ...[10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120].map((n) => ({
+        value: `${n} personas`,
+        label: `${n} personas`,
+      })),
+      { value: "Más de 120 personas", label: "Más de 120 personas" },
+    ],
+    [],
+  );
+
+  const celebrationTypeOptions = useMemo(
+    () =>
+      celebrationCombosModule.celebrationTypes.map((type) => ({
+        value: type,
+        label: type,
+      })),
+    [],
+  );
+
+  const packageOptions = useMemo(
+    () =>
+      quotePackageOptions.map((pkg) => ({
+        value: pkg.id,
+        label: pkg.label,
+      })),
+    [],
+  );
 
   function toggleExtra(extraId: string) {
     setSelectedExtras((current) =>
@@ -244,24 +274,16 @@ export default function ReservationForm({
             <label htmlFor="guests" className={labelClass}>
               Personas estimadas <span className="text-on-surface-variant">*</span>
             </label>
-            <select
+            <QuoteFormSelect
               id="guests"
               name="guests"
               required
               value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              className={inputClass}
-            >
-              <option value="" disabled>
-                Selecciona cantidad...
-              </option>
-              {[10, 15, 20, 25, 30, 40, 50, 60, 80, 100, 120].map((n) => (
-                <option key={n} value={`${n} personas`}>
-                  {n} personas
-                </option>
-              ))}
-              <option value="Más de 120 personas">Más de 120 personas</option>
-            </select>
+              onChange={setGuests}
+              options={guestOptions}
+              placeholder="Selecciona cantidad..."
+              triggerClassName={inputClass}
+            />
           </div>
         </div>
 
@@ -269,46 +291,33 @@ export default function ReservationForm({
           <label htmlFor="celebrationType" className={labelClass}>
             Tipo de celebración <span className="text-on-surface-variant">*</span>
           </label>
-          <select
+          <QuoteFormSelect
             id="celebrationType"
             name="celebrationType"
             required
             value={celebrationType}
-            onChange={(e) => setCelebrationType(e.target.value)}
-            className={inputClass}
-          >
-            <option value="" disabled>
-              Selecciona el tipo de celebración...
-            </option>
-            {celebrationCombosModule.celebrationTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
+            onChange={setCelebrationType}
+            options={celebrationTypeOptions}
+            placeholder="Selecciona el tipo de celebración..."
+            triggerClassName={inputClass}
+          />
         </div>
 
         <div>
           <label htmlFor="packageId" className={labelClass}>
             Paquete de preferencia <span className="text-on-surface-variant">*</span>
           </label>
-          <select
+          <QuoteFormSelect
             id="packageId"
             name="packageId"
             required
             value={packageId}
-            onChange={(e) => {
-              const value = e.target.value;
+            onChange={(value) => {
               if (isValidPackageId(value)) setPackageId(value);
             }}
-            className={inputClass}
-          >
-            {quotePackageOptions.map((pkg) => (
-              <option key={pkg.id} value={pkg.id}>
-                {pkg.label}
-              </option>
-            ))}
-          </select>
+            options={packageOptions}
+            triggerClassName={inputClass}
+          />
           {selectedPackage && (
             <p className="text-sm text-on-surface-variant mt-2">
               {selectedPackage.description}

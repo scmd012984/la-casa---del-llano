@@ -144,19 +144,19 @@ export default function EventosPage() {
               </div>
               <div className="p-8 md:w-2/3 flex flex-col justify-center bg-surface-container-high/50 backdrop-blur-sm">
                 <h3 className="font-display text-2xl text-on-surface mb-2">
-                  Música en Vivo los Fines de Semana
+                  Música en Vivo por Temporadas
                 </h3>
                 <p className="text-base text-on-surface-variant mb-6">
-                  Disfruta de las mejores agrupaciones de música llanera y
-                  conjuntos locales. Una experiencia sensorial completa entre
-                  cortes de carne selecta y arpa, cuatro y maracas.
+                  Por temporadas traemos agrupaciones en vivo y conjuntos
+                  invitados. Una experiencia sensorial completa entre rumba,
+                  coctelería y el calor de la tasca.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <span className="badge-llano !text-[10px]">
                     Viernes: Rumba Tropical
                   </span>
                   <span className="badge-llano !text-[10px]">
-                    Sábado: Tarde Llanera
+                    Sábado: Ambiente Rumbero y DJ Invitado
                   </span>
                 </div>
               </div>

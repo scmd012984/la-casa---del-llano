@@ -2881,9 +2881,41 @@ details > summary::-webkit-details-marker {
     box-shadow 0.2s ease;
 }
 
-.digital-menu-card.led-thread-border:hover,
-.digital-menu-card.led-thread-border:focus-within {
-  transform: translateY(-1px);
+@media (hover: hover) {
+  .digital-menu-card.led-thread-border:hover,
+  .digital-menu-card.led-thread-border:focus-within {
+    transform: translateY(-2px);
+    background:
+      color-mix(in srgb, var(--llano-surface-high) 86%, var(--llano-leather)) padding-box,
+      linear-gradient(
+        180deg,
+        var(--led-amber-hot) 0%,
+        var(--led-amber) 42%,
+        var(--led-amber-deep) 100%
+      ) border-box;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 235, 190, 0.34),
+      0 6px 18px rgba(0, 0, 0, 0.32),
+      0 0 10px var(--led-amber-glow-soft),
+      0 0 22px color-mix(in srgb, var(--led-amber) 38%, transparent);
+  }
+
+  .digital-menu-card.led-thread-border:hover .digital-menu-item-name,
+  .digital-menu-card.led-thread-border:focus-within .digital-menu-item-name {
+    color: var(--llano-cream);
+  }
+
+  .digital-menu-card.led-thread-border:hover .digital-menu-price,
+  .digital-menu-card.led-thread-border:focus-within .digital-menu-price {
+    color: var(--led-amber-hot);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .digital-menu-card.led-thread-border:hover,
+  .digital-menu-card.led-thread-border:focus-within {
+    transform: none;
+  }
 }
 
 .digital-menu-card-header {
@@ -3412,6 +3444,90 @@ details > summary::-webkit-details-marker {
 }
 
 /* —— Cotización inteligente —— */
+.quote-form-select {
+  position: relative;
+}
+
+.quote-form-select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.quote-form-select-icon {
+  font-size: 1.25rem;
+  color: var(--led-amber);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.quote-form-select-trigger[aria-expanded="true"] .quote-form-select-icon {
+  transform: rotate(180deg);
+}
+
+.quote-form-select-list {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  right: 0;
+  max-height: 14rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.375rem;
+  list-style: none;
+  border-radius: 0.5rem;
+  border: 1px solid color-mix(in srgb, var(--outline-variant) 55%, transparent);
+  background: var(--llano-surface-high);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  scrollbar-width: thin;
+  scrollbar-color: var(--led-amber) var(--llano-surface);
+}
+
+.quote-form-select-list::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.quote-form-select-list::-webkit-scrollbar-track {
+  background: var(--llano-surface);
+  border-radius: 999px;
+}
+
+.quote-form-select-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    var(--led-amber-hot) 0%,
+    var(--led-amber) 45%,
+    var(--led-amber-deep) 100%
+  );
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--led-amber-deep) 55%, transparent);
+}
+
+.quote-form-select-list::-webkit-scrollbar-thumb:hover {
+  background: var(--led-amber-hot);
+}
+
+.quote-form-select-list li {
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
+.quote-form-select-list li:hover {
+  background: color-mix(in srgb, var(--led-amber) 14%, var(--llano-surface-high));
+}
+
+.quote-form-select-list li.is-selected {
+  background: color-mix(in srgb, var(--llano-oak) 55%, var(--llano-surface-high));
+  color: var(--llano-cream);
+}
+
 .quote-form-section {
   margin: 0;
   padding: 1.25rem;
