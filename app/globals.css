@@ -60,7 +60,6 @@
   --led-magenta: #ff6eb4;
   --led-magenta-deep: #e84898;
   --led-magenta-glow: rgba(255, 110, 180, 0.22);
-
   --background: var(--llano-night);
   --foreground: var(--llano-text);
   --surface: var(--llano-surface);
@@ -308,6 +307,76 @@ h2.type-section-title {
   .hero-enter {
     animation: none;
   }
+}
+
+.eventos-hero-header.hero-fullscreen {
+  /* La fachada a ancho completo nunca se recorta arriba ni abajo */
+  min-height: max(
+    max(520px, calc(100svh - var(--site-navbar-height) - var(--shell-bottom-offset))),
+    calc(100vw * 824 / 1024)
+  );
+}
+
+@media (min-width: 1024px) {
+  .eventos-hero-header.hero-fullscreen {
+    min-height: max(88svh, calc(100vw * 824 / 1024));
+  }
+}
+
+.eventos-hero-media {
+  background:
+    radial-gradient(
+      ellipse 120% 90% at 50% 55%,
+      color-mix(in srgb, #c9a227 18%, #14110e) 0%,
+      #0d0b09 72%
+    );
+}
+
+.eventos-hero-bg-fill {
+  object-fit: cover;
+  object-position: center top;
+  transform: scale(1.28);
+  transform-origin: center top;
+  opacity: 0.76;
+  filter: blur(32px) saturate(1.2) brightness(0.64);
+}
+
+/* Mismo ratio que fachada-negocio.jpg (1024×824): ancho 100%, letrero completo arriba */
+.eventos-hero-facade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  width: 100%;
+  aspect-ratio: 1024 / 824;
+}
+
+.eventos-hero-bg {
+  object-fit: contain;
+  object-position: center top;
+  opacity: 0.97;
+  filter: blur(1.5px) saturate(1.16) brightness(0.96) contrast(1.06);
+}
+
+/* Velos solo debajo de la fachada — no tapan el letrero */
+.eventos-hero-scrim {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: calc(100vw * 824 / 1024);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.eventos-hero-gradient-bottom {
+  background: linear-gradient(
+    to top,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 55%, transparent) 55%,
+    transparent 100%
+  );
 }
 
 .experience-gallery-card {
@@ -2882,8 +2951,18 @@ details > summary::-webkit-details-marker {
 }
 
 @media (hover: hover) {
-  .digital-menu-card.led-thread-border:hover,
-  .digital-menu-card.led-thread-border:focus-within {
+  :is(
+      .digital-menu-card,
+      .eventos-bento-card,
+      .eventos-cartelera-item,
+      .experience-gallery-card
+    ).led-thread-border:hover,
+  :is(
+      .digital-menu-card,
+      .eventos-bento-card,
+      .eventos-cartelera-item,
+      .experience-gallery-card
+    ).led-thread-border:focus-within {
     transform: translateY(-2px);
     background:
       color-mix(in srgb, var(--llano-surface-high) 86%, var(--llano-leather)) padding-box,
@@ -2912,10 +2991,37 @@ details > summary::-webkit-details-marker {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .digital-menu-card.led-thread-border:hover,
-  .digital-menu-card.led-thread-border:focus-within {
+  :is(
+      .digital-menu-card,
+      .eventos-bento-card,
+      .eventos-cartelera-item,
+      .experience-gallery-card
+    ).led-thread-border:hover,
+  :is(
+      .digital-menu-card,
+      .eventos-bento-card,
+      .eventos-cartelera-item,
+      .experience-gallery-card
+    ).led-thread-border:focus-within {
     transform: none;
   }
+}
+
+.eventos-bento-card.led-thread-border,
+.eventos-cartelera-item.led-thread-border,
+.experience-gallery-card.led-thread-border {
+  border: 1px solid transparent;
+  transition:
+    transform 0.2s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.eventos-cartelera-item.led-thread-border:hover h4,
+.eventos-cartelera-item.led-thread-border:focus-within h4,
+.experience-gallery-card.led-thread-border:hover h3,
+.experience-gallery-card.led-thread-border:focus-within h3 {
+  color: var(--llano-cream);
 }
 
 .digital-menu-card-header {

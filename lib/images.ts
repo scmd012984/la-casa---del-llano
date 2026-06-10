@@ -1,5 +1,6 @@
 export const images = {
   fachada: "/images/fachada.jpg",
+  fachadaNegocio: "/images/fachada-negocio.jpg",
   gastronomia: "/images/gastronomia.jpg",
   terraza: "/images/terraza.jpg",
   rumba: "/images/rumba.jpg",

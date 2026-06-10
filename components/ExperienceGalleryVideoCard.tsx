@@ -111,7 +111,7 @@ export default function ExperienceGalleryVideoCard({
     return (
       <article
         ref={cardRef}
-        className="group relative aspect-[3/4] overflow-hidden rounded-xl card-wood interactive-card experience-gallery-card experience-gallery-card--video experience-gallery-card--compact"
+        className="group relative aspect-[3/4] overflow-hidden rounded-xl led-thread-border experience-gallery-card experience-gallery-card--video experience-gallery-card--compact"
       >
         <div className="experience-gallery-media absolute inset-0">
           {playing ? (
@@ -186,7 +186,7 @@ export default function ExperienceGalleryVideoCard({
   return (
     <article
       ref={cardRef}
-      className={`group card-wood interactive-card experience-gallery-card experience-gallery-card--video ${
+      className={`group led-thread-border experience-gallery-card experience-gallery-card--video ${
         featured ? "experience-gallery-card--featured" : ""
       }`}
     >

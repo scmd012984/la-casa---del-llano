@@ -10,7 +10,7 @@ type GalleryHighlight = (typeof audiovisualHighlights)[number];
 
 function GalleryThumbCard({ item }: { item: GalleryHighlight }) {
   return (
-    <article className="group relative aspect-[3/4] rounded-xl overflow-hidden card-wood interactive-card experience-gallery-thumb">
+    <article className="group relative aspect-[3/4] rounded-xl overflow-hidden led-thread-border experience-gallery-card experience-gallery-thumb">
       <OptimizedImage
         src={item.thumbnail}
         alt={item.title}

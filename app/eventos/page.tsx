@@ -29,20 +29,37 @@ export default function EventosPage() {
       <ScrollRevealCards />
 
       {/* Hero */}
-      <header className="hero-fullscreen relative flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
+      <header className="eventos-hero-header hero-fullscreen relative flex items-center justify-center">
+        <div className="eventos-hero-media absolute inset-0 z-0">
           <OptimizedImage
-            src={images.fachada}
-            alt="Decoración temática de La Casa del Llano"
+            src={images.fachadaNegocio}
+            alt=""
+            aria-hidden
             fill
             priority
             qualityPreset="hero"
             sizes={IMAGE_SIZES.hero}
-            className="object-cover opacity-50 grayscale-[0.25]"
+            localKey="fachada-negocio"
+            className="eventos-hero-bg-fill"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/60" />
-          <div className="absolute inset-0 grain-texture" />
-          <div className="absolute inset-0 hero-night-veil" />
+          <div className="eventos-hero-facade">
+            <OptimizedImage
+              src={images.fachadaNegocio}
+              alt="Fachada de La Casa del Llano en el Casco Histórico de La Guaira"
+              fill
+              priority
+              qualityPreset="hero"
+              sizes="100vw"
+              localKey="fachada-negocio"
+              preferOriginal
+              className="eventos-hero-bg"
+            />
+          </div>
+          <div className="eventos-hero-scrim" aria-hidden>
+            <div className="eventos-hero-gradient-bottom absolute inset-0" />
+            <div className="absolute inset-0 grain-texture opacity-40" />
+            <div className="absolute inset-0 hero-night-veil opacity-55" />
+          </div>
         </div>
 
         <div className="site-container relative z-10 max-w-4xl py-10 text-center md:py-14">
@@ -74,7 +91,7 @@ export default function EventosPage() {
       <section className="site-container py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Karaoke */}
-          <div className="md:col-span-8 group relative overflow-hidden rounded-xl card-wood h-[400px] interactive-card">
+          <div className="md:col-span-8 group relative overflow-hidden rounded-xl led-thread-border eventos-bento-card h-[400px]">
             <OptimizedImage
               src={images.karaoke}
               alt="Noches de karaoke — escenario profesional con luces LED"
@@ -97,7 +114,7 @@ export default function EventosPage() {
           </div>
 
           {/* Pista de Baile */}
-          <div className="md:col-span-4 group relative overflow-hidden rounded-xl card-wood h-[400px] interactive-card">
+          <div className="md:col-span-4 group relative overflow-hidden rounded-xl led-thread-border eventos-bento-card h-[400px]">
             <div className="p-8 flex flex-col h-full justify-between">
               <div>
                 <div className="w-12 h-12 bg-surface-container-lowest flex items-center justify-center rounded-lg mb-6 border border-outline-variant/40">
@@ -130,7 +147,7 @@ export default function EventosPage() {
           </div>
 
           {/* Música en Vivo */}
-          <div className="md:col-span-12 group relative overflow-hidden rounded-xl card-wood h-[300px] interactive-card">
+          <div className="md:col-span-12 group relative overflow-hidden rounded-xl led-thread-border eventos-bento-card h-[300px]">
             <div className="flex flex-col md:flex-row h-full">
               <div className="relative md:w-1/3 h-48 md:h-full">
                 <OptimizedImage
@@ -202,7 +219,7 @@ export default function EventosPage() {
             {upcomingEvents.map((event) => (
               <div
                 key={event.id}
-                className="group flex items-center p-6 rounded-xl card-wood hover:bg-surface-container-high transition-all"
+                className="group flex items-center p-6 rounded-xl led-thread-border eventos-cartelera-item"
               >
                 <div className="flex flex-col items-center justify-center min-w-[80px] h-[80px] bg-surface-container-lowest rounded-lg border border-outline-variant/40">
                   <span className="text-xs text-on-surface-variant uppercase font-semibold">
